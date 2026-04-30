@@ -23,15 +23,15 @@ test.describe("/works/ - Works 一覧", () => {
 
   test("AC-02-3: 技術タグでフィルタでき URL に ?tag=... が付与される", async ({ page }) => {
     await page.goto("/works/");
-    // Astro は sample-2 と sample-4 のみで、フィルタ後に件数が確実に減る
-    await page.getByRole("button", { name: "Astro", exact: true }).click();
-    await page.waitForURL(/\?tag=Astro/);
+    // TypeScript は case-study-accounting と case-study-sales の 2 件、フィルタ後に件数が減る
+    await page.getByRole("button", { name: "TypeScript", exact: true }).click();
+    await page.waitForURL(/\?tag=TypeScript/);
     const visibleCards = page.locator('[data-testid="work-card"]:not([style*="display: none"])');
     await expect(visibleCards).toHaveCount(2, { timeout: 5000 });
   });
 
   test("AC-02-4: 「All」で絞り込み解除", async ({ page }) => {
-    await page.goto("/works/?tag=Astro");
+    await page.goto("/works/?tag=TypeScript");
     await page.getByRole("button", { name: "All", exact: true }).click();
     await expect(page).toHaveURL(/\/works\/?$/);
     const visibleCards = page.locator('[data-testid="work-card"]:not([style*="display: none"])');
@@ -41,7 +41,7 @@ test.describe("/works/ - Works 一覧", () => {
 
   test("AC-02-5: 0 件時は空メッセージ + フィルタ解除リンクを表示", async ({ page }) => {
     // 既知タグでマッチが減っても、最低 1 件あれば status は hidden
-    await page.goto("/works/?tag=Astro");
+    await page.goto("/works/?tag=TypeScript");
     await expect(
       page.locator('[data-testid="work-card"]:not([style*="display: none"])')
     ).toHaveCount(2, { timeout: 2000 });
@@ -54,7 +54,7 @@ test.describe("/works/ - Works 一覧", () => {
     const count = await page.locator('[data-testid="work-card"]').count();
     await expect(page.locator("#works-count")).toHaveText(`${count} 件中 ${count} 件を表示`);
 
-    await page.goto("/works/?tag=Astro");
+    await page.goto("/works/?tag=TypeScript");
     await expect(page.locator("#works-count")).toContainText("件中");
     await expect(page.locator("#works-count")).toContainText("件を表示");
   });
@@ -62,10 +62,16 @@ test.describe("/works/ - Works 一覧", () => {
   test("AC-02-7: 現在選択タグは aria-pressed=true、その他は false", async ({ page }) => {
     await page.goto("/works/");
     await expect(page.locator('[data-filter="all"]')).toHaveAttribute("aria-pressed", "true");
-    await expect(page.locator('[data-filter="Astro"]')).toHaveAttribute("aria-pressed", "false");
+    await expect(page.locator('[data-filter="TypeScript"]')).toHaveAttribute(
+      "aria-pressed",
+      "false"
+    );
 
-    await page.goto("/works/?tag=Astro");
-    await expect(page.locator('[data-filter="Astro"]')).toHaveAttribute("aria-pressed", "true");
+    await page.goto("/works/?tag=TypeScript");
+    await expect(page.locator('[data-filter="TypeScript"]')).toHaveAttribute(
+      "aria-pressed",
+      "true"
+    );
     await expect(page.locator('[data-filter="all"]')).toHaveAttribute("aria-pressed", "false");
   });
 

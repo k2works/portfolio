@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-const SAMPLE_SLUG = "sample-1";
+const SAMPLE_SLUG = "getting-started-tdd";
 const DETAIL_URL = `/works/${SAMPLE_SLUG}/`;
 
 test.describe("/works/[slug]/ - Works 詳細", () => {
