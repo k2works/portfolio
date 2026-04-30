@@ -1,0 +1,5389 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="ポートフォリオプロジェクトのドキュメント。戦略・要件・設計・開発・運用・記事・リファレンス・テンプレートを一元管理。">
+      
+      
+        <meta name="author" content="Project Team">
+      
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../heroku_staging_setup/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>アプリケーション開発環境セットアップ手順書 - Portfolio</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/css/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Portfolio" class="md-header__button md-logo" aria-label="Portfolio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Portfolio
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              アプリケーション開発環境セットアップ手順書
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/k2works/portfolio" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    k2works/portfolio
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../requirements/" class="md-tabs__link">
+          
+  
+  
+  要件
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../design/" class="md-tabs__link">
+          
+  
+  
+  設計
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../development/" class="md-tabs__link">
+          
+  
+  
+  開発
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  運用
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../review/" class="md-tabs__link">
+          
+  
+  
+  レビュー
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../adr/" class="md-tabs__link">
+          
+  
+  
+  ADR
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../article/" class="md-tabs__link">
+          
+  
+  
+  記事
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../reference/" class="md-tabs__link">
+          
+  
+  
+  リファレンス
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../template/" class="md-tabs__link">
+          
+  
+  
+  テンプレート
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Portfolio" class="md-nav__button md-logo" aria-label="Portfolio" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Portfolio
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/k2works/portfolio" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    k2works/portfolio
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    要件
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    要件
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../requirements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概要
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../requirements/requirements_definition/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    要件定義書
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../requirements/business_usecase/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ビジネスユースケース
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../requirements/system_usecase/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    システムユースケース
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../requirements/user_story/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ユーザーストーリー
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    設計
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    設計
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概要
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../design/architecture_backend/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    バックエンドアーキテクチャ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../design/architecture_frontend/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    フロントエンドアーキテクチャ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../design/architecture_infrastructure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    インフラストラクチャアーキテクチャ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../design/ui_design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UI 設計
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../design/tech_stack/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    技術スタック
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../design/test_strategy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    テスト戦略
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../design/non_functional/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    非機能要件
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../design/operation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    運用要件
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    開発
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    開発
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概要
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/release_plan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    リリース計画
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/iteration_plan-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    イテレーション 1 計画
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/retrospective-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    イテレーション 1 ふりかえり
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/iteration_report-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    イテレーション 1 完了報告書
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/iteration_plan-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    イテレーション 2 計画
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/retrospective-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    イテレーション 2 ふりかえり
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/iteration_report-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    イテレーション 2 完了報告書
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/iteration_plan-3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    イテレーション 3 計画
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/retrospective-3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    イテレーション 3 ふりかえり
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/iteration_report-3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    イテレーション 3 完了報告書
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/release_report-0_1_0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    v0.1 リリース完了報告書
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    運用
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    運用
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概要
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    アプリケーション開発環境セットアップ手順書
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    アプリケーション開発環境セットアップ手順書
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        概要
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 前提条件
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 前提条件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nodejs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Node.js のインストール
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-mkdocs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python のインストール（MkDocs 用）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-desktop" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Docker Desktop のインストール
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#heroku-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Heroku CLI（任意）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. プロジェクトの取得
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. プロジェクトの取得">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        リポジトリのクローン
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nodejs_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Node.js 依存パッケージのインストール
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        環境変数の設定
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. サブシステム一覧
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 技術スタック
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 技術スタック">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#astro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        フロントエンド（Astro）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#heroku" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        バックエンド（Heroku 配信レイヤー）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tech-notesmkdocs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tech Notes（MkDocs）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        開発ツール（リポジトリ共通）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. プロファイル構成
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 開発サーバーの起動
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. 開発サーバーの起動">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#astro-hmr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        日常開発（Astro HMR、推奨）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mkdocs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MkDocs ローカル確認
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#heroku-preview-express" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Heroku 本番相当の確認（preview + Express）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tdd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TDD モード（テスト自動再実行）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        アクセス確認
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-docker-mkdocs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Docker による MkDocs サーバー
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. テストの実行
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. テストの実行">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        全テスト実行
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        テストの種類（テスト戦略）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lighthouse-ci" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lighthouse CI のローカル実行
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. コード品質管理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. コード品質管理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        静的解析ツール
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        品質チェックの一括実行
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        コード品質の基準（非機能要件）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lighthouse-v01" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lighthouse 予算（v0.1 段階導入）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. ディレクトリ構造
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. 命名規則
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-git" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Git 規約
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Git 規約">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        コミットメッセージ
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        スコープ
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#git-hooksv01" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Git Hooks（v0.1 リリースまでに追加）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. セットアップの確認
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. セットアップの確認">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        アクセス確認
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-cicd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. CI/CD（参考）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        トラブルシューティング
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="トラブルシューティング">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#npm-install" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        npm install が遅い / 失敗する
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#npm-run-docsserve-8000" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        npm run docs:serve で 8000 番が使えない
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#astro-hmr_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Astro の HMR が反映されない
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-mkdocs-docker-311heroku-312" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python / MkDocs のバージョン差異（Docker は 3.11、Heroku は 3.12）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pre-commit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pre-commit フックが失敗する場合
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#env" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        .env の取り扱い
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        関連ドキュメント
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../heroku_staging_setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Heroku staging 環境セットアップ手順書
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    レビュー
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    レビュー
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../review/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概要
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../review/design_review_20260430/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    分析成果物レビュー（2026-04-30）
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ADR
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概要
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/0001-frontend-framework-astro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR-0001 フロントエンドフレームワークに Astro を採用
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/0002-hosting-heroku/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR-0002 ホスティングプラットフォームに Heroku を採用
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/0003-mkdocs-coexistence-strategy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR-0003 MkDocs を Tech Notes として共存させる
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/0004-cloudflare-front-cdn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR-0004 Cloudflare 無料プランを前段に配置
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/0005-build-pipeline-unification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR-0005 ビルド境界を GitHub Actions に一本化
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/0006-heroku-deploy-authentication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR-0006 Heroku デプロイの認証は CLI + netrc 経由
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../adr/0007-mkdocs-independent-delivery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR-0007 MkDocs を GitHub Pages へ独立配信
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    記事
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    記事
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../article/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概要
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../article/getting-start-tdd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    テスト駆動開発から始めるプログラミング入門
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../article/grokkingfp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Grokking Functional Programming
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../article/grokking-concurrency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Grokking Concurrency
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../article/functional-desgin-ppp/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    関数型デザイン - 原則、パターン、実践
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../article/practical-database-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    実践データベース設計：基幹業務システム編
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    リファレンス
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    リファレンス
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概要
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/%E3%82%88%E3%81%84%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E3%81%A8%E3%81%AF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    よいソフトウェアとは
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/%E3%83%AD%E3%82%B8%E3%82%AB%E3%83%AB%E3%82%B7%E3%83%B3%E3%82%AD%E3%83%B3%E3%82%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ロジカルシンキング
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/%E9%96%8B%E7%99%BA%E3%82%AC%E3%82%A4%E3%83%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    開発ガイド
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/%E7%B5%8C%E5%96%B6%E6%88%A6%E7%95%A5%E5%88%86%E6%9E%90%E3%82%AC%E3%82%A4%E3%83%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    経営戦略分析ガイド
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/%E3%83%93%E3%82%B8%E3%83%8D%E3%82%B9%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%81%E3%83%A3%E5%88%86%E6%9E%90%E3%82%AC%E3%82%A4%E3%83%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ビジネスアーキテクチャ分析ガイド
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/%E8%A6%81%E4%BB%B6%E5%AE%9A%E7%BE%A9%E3%82%AC%E3%82%A4%E3%83%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    要件定義ガイド
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/%E3%83%A6%E3%83%BC%E3%82%B9%E3%82%B1%E3%83%BC%E3%82%B9%E4%BD%9C%E6%88%90%E3%82%AC%E3%82%A4%E3%83%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ユースケース作成ガイド
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%81%E3%83%A3%E8%A8%AD%E8%A8%88%E3%82%AC%E3%82%A4%E3%83%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    アーキテクチャ設計ガイド
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/%E3%83%87%E3%83%BC%E3%82%BF%E3%83%A2%E3%83%87%E3%83%AB%E8%A8%AD%E8%A8%88%E3%82%AC%E3%82%A4%E3%83%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    データモデル設計ガイド
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/%E3%83%89%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%A2%E3%83%87%E3%83%AB%E8%A8%AD%E8%A8%88%E3%82%AC%E3%82%A4%E3%83%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ドメインモデル設計ガイド
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/UI%E8%A8%AD%E8%A8%88%E3%82%AC%E3%82%A4%E3%83%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UI 設計ガイド
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/%E3%83%86%E3%82%B9%E3%83%88%E6%88%A6%E7%95%A5%E3%82%AC%E3%82%A4%E3%83%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    テスト戦略ガイド
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/%E9%9D%9E%E6%A9%9F%E8%83%BD%E8%A6%81%E4%BB%B6%E5%AE%9A%E7%BE%A9%E3%82%AC%E3%82%A4%E3%83%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    非機能要件定義ガイド
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/%E9%81%8B%E7%94%A8%E8%A6%81%E4%BB%B6%E5%AE%9A%E7%BE%A9%E3%82%AC%E3%82%A4%E3%83%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    運用要件定義ガイド
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/%E3%82%A4%E3%83%B3%E3%83%95%E3%83%A9%E8%A8%AD%E8%A8%88%E3%82%AC%E3%82%A4%E3%83%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    インフラ設計ガイド
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/%E3%82%B3%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E3%81%A8%E3%83%86%E3%82%B9%E3%83%88%E3%82%AC%E3%82%A4%E3%83%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    コーディングとテストガイド
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/%E3%82%A8%E3%82%AF%E3%82%B9%E3%83%88%E3%83%AA%E3%83%BC%E3%83%A0%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    エクストリームプログラミング
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/%E3%83%AA%E3%83%AA%E3%83%BC%E3%82%B9%E3%82%AC%E3%82%A4%E3%83%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    リリースガイド
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/%E3%83%AA%E3%83%AA%E3%83%BC%E3%82%B9%E3%83%BB%E3%82%A4%E3%83%86%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E8%A8%88%E7%94%BB%E3%82%AC%E3%82%A4%E3%83%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    リリース・イテレーション計画ガイド
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/%E7%92%B0%E5%A2%83%E5%A4%89%E6%95%B0%E7%AE%A1%E7%90%86%E3%82%AC%E3%82%A4%E3%83%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    環境変数管理ガイド
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/%E8%A8%80%E8%AA%9E%E5%88%A5%E9%96%8B%E7%99%BA%E3%82%AC%E3%82%A4%E3%83%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    言語別開発ガイド
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/Java%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89%E3%82%AC%E3%82%A4%E3%83%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java アプリケーション環境構築ガイド
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/TypeScript%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89%E3%82%AC%E3%82%A4%E3%83%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TypeScript アプリケーション環境構築ガイド
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/%E9%81%8B%E7%94%A8%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E4%BD%9C%E6%88%90%E3%82%AC%E3%82%A4%E3%83%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    運用スクリプト作成ガイド
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/CodexCLIMCP%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E9%96%8B%E7%99%BA%E3%83%95%E3%83%AD%E3%83%BC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Codex CLI MCP アプリケーション開発フロー
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/CodexCLIMCP%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E8%A8%AD%E5%AE%9A%E6%89%8B%E9%A0%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Codex CLI MCP サーバー設定手順
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/SonarQube%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%AB%E7%92%B0%E5%A2%83%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97%E6%89%8B%E9%A0%86%E6%9B%B8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SonarQube ローカル環境セットアップ手順書
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/Vim%E6%93%8D%E4%BD%9C%E3%83%9E%E3%83%8B%E3%83%A5%E3%82%A2%E3%83%AB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vim 操作マニュアル
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/%E4%BC%81%E6%A5%AD%E7%B5%8C%E5%96%B6%E8%AB%96/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    企業経営論
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/%E9%81%8B%E5%96%B6%E7%AE%A1%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    運営管理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    テンプレート
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    テンプレート
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../template/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概要
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../template/%E3%81%BE%E3%81%9A%E3%81%93%E3%82%8C%E3%82%92%E8%AA%AD%E3%82%82%E3%81%86%E3%83%AA%E3%82%B9%E3%83%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    まずこれを読もうリスト
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../template/%E3%83%93%E3%82%B8%E3%83%8D%E3%82%B9%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%81%E3%83%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ビジネスアーキテクチャ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../template/%E8%A6%81%E4%BB%B6%E5%AE%9A%E7%BE%A9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    要件定義
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../template/%E5%AE%8C%E5%85%A8%E5%BD%A2%E5%BC%8F%E3%81%AE%E3%83%A6%E3%83%BC%E3%82%B9%E3%82%B1%E3%83%BC%E3%82%B9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    完全形式のユースケース
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../template/%E8%A8%AD%E8%A8%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    設計
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../template/ADR/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ADR
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../template/%E3%82%A4%E3%83%B3%E3%82%BB%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%87%E3%83%83%E3%82%AD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    インセプションデッキ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../template/%E3%82%A4%E3%83%86%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E8%A8%88%E7%94%BB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    イテレーション計画
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../template/%E3%82%A4%E3%83%86%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E5%AE%8C%E4%BA%86%E5%A0%B1%E5%91%8A%E6%9B%B8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    イテレーション完了報告書
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../template/%E3%83%AA%E3%83%AA%E3%83%BC%E3%82%B9%E8%A8%88%E7%94%BB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    リリース計画
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../template/%E3%83%AA%E3%83%AA%E3%83%BC%E3%82%B9%E5%AE%8C%E4%BA%86%E5%A0%B1%E5%91%8A%E6%9B%B8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    リリース完了報告書
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../template/%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97%E6%89%8B%E9%A0%86%E6%9B%B8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    アプリケーション開発環境セットアップ手順書
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../template/%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97%E6%89%8B%E9%A0%86%E6%9B%B8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    開発環境セットアップ手順書
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../template/AWS%E3%82%B9%E3%83%86%E3%83%BC%E3%82%B8%E3%83%B3%E3%82%B0%E7%92%B0%E5%A2%83%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97%E6%89%8B%E9%A0%86%E6%9B%B8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AWS ステージング環境セットアップ手順書
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../template/AWS%E3%83%97%E3%83%AD%E3%83%80%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E7%92%B0%E5%A2%83%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97%E6%89%8B%E9%A0%86%E6%9B%B8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AWS プロダクション環境セットアップ手順書
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../template/%E4%BC%81%E6%A5%AD%E5%88%86%E6%9E%90/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    企業分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../template/%E4%BA%8B%E4%BE%8B%E5%88%86%E6%9E%90/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    事例分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../template/README.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    README
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="_1">アプリケーション開発環境セットアップ手順書<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h2 id="_2">概要<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>本ドキュメントは、<strong>portfolio</strong>（採用・営業向け個人ポートフォリオサイト）のローカル開発環境をセットアップする手順を説明します。</p>
+<p>テスト駆動開発（TDD）のゴールは <strong>動作するきれいなコード</strong> です。それを実現するためには <a href="https://t-wada.hatenablog.jp/entry/clean-code-that-works">ソフトウェア開発の三種の神器</a> が必要です。</p>
+<blockquote>
+<p>今日のソフトウェア開発の世界において絶対になければならない 3 つの技術的な柱があります。三本柱と言ったり、三種の神器と言ったりしていますが、それらは</p>
+<ul>
+<li>バージョン管理</li>
+<li>テスティング</li>
+<li>自動化</li>
+</ul>
+<p>の 3 つです。</p>
+</blockquote>
+<hr />
+<h2 id="1">1. 前提条件<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<p>以下のツールがインストールされていることを確認してください。</p>
+<table>
+<thead>
+<tr>
+<th>ツール</th>
+<th>バージョン</th>
+<th>確認コマンド</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Node.js</td>
+<td>22.x LTS</td>
+<td><code>node -v</code></td>
+</tr>
+<tr>
+<td>npm</td>
+<td>10.x</td>
+<td><code>npm -v</code></td>
+</tr>
+<tr>
+<td>Python</td>
+<td>3.12.x</td>
+<td><code>python --version</code>（MkDocs 用）</td>
+</tr>
+<tr>
+<td>Docker Desktop</td>
+<td>最新</td>
+<td><code>docker -v</code></td>
+</tr>
+<tr>
+<td>Docker Compose</td>
+<td>v2.x</td>
+<td><code>docker compose version</code></td>
+</tr>
+<tr>
+<td>Git</td>
+<td>最新</td>
+<td><code>git -v</code></td>
+</tr>
+<tr>
+<td>Heroku CLI</td>
+<td>最新（任意）</td>
+<td><code>heroku --version</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="nodejs">Node.js のインストール<a class="headerlink" href="#nodejs" title="Permanent link">&para;</a></h3>
+<p>Node.js 22 LTS（<a href="../../adr/0005-build-pipeline-unification/">ADR-0005</a> で採用）をインストールします。バージョン管理には <strong>Volta</strong> または <strong>fnm</strong> を推奨。</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Volta（Windows / macOS）</span>
+volta<span class="w"> </span>install<span class="w"> </span>node@22
+
+<span class="c1"># fnm</span>
+fnm<span class="w"> </span>install<span class="w"> </span><span class="m">22</span>
+fnm<span class="w"> </span>use<span class="w"> </span><span class="m">22</span>
+
+<span class="c1"># バージョン確認</span>
+node<span class="w"> </span>-v<span class="w">   </span><span class="c1"># v22.x</span>
+npm<span class="w"> </span>-v<span class="w">    </span><span class="c1"># 10.x</span>
+</code></pre></div>
+<p>公式ダウンロード: https://nodejs.org/</p>
+<h3 id="python-mkdocs">Python のインストール（MkDocs 用）<a class="headerlink" href="#python-mkdocs" title="Permanent link">&para;</a></h3>
+<p>MkDocs（<a href="../../adr/0003-mkdocs-coexistence-strategy/">Tech Notes</a>）のローカルビルドに使用します。</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Windows（Scoop）</span>
+scoop<span class="w"> </span>install<span class="w"> </span>python
+
+<span class="c1"># macOS（Homebrew）</span>
+brew<span class="w"> </span>install<span class="w"> </span>python@3.12
+
+<span class="c1"># バージョン確認</span>
+python<span class="w"> </span>--version<span class="w">   </span><span class="c1"># Python 3.12.x</span>
+</code></pre></div>
+<h3 id="docker-desktop">Docker Desktop のインストール<a class="headerlink" href="#docker-desktop" title="Permanent link">&para;</a></h3>
+<p>MkDocs ローカルサーバー（<code>ops/docker/mkdoc/Dockerfile</code>）の起動に使用します。</p>
+<ul>
+<li><strong>Windows</strong>: https://docs.docker.com/desktop/install/windows-install/</li>
+<li><strong>macOS</strong>: https://docs.docker.com/desktop/install/mac-install/</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># バージョン確認</span>
+docker<span class="w"> </span>-v
+docker<span class="w"> </span>compose<span class="w"> </span>version
+</code></pre></div>
+<h3 id="heroku-cli">Heroku CLI（任意）<a class="headerlink" href="#heroku-cli" title="Permanent link">&para;</a></h3>
+<p>ローカルから Heroku の状態確認・緊急ロールバックに使用します。CI 経由デプロイが基本のため必須ではありません。</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Windows（Scoop）</span>
+scoop<span class="w"> </span>install<span class="w"> </span>heroku-cli
+
+<span class="c1"># macOS（Homebrew）</span>
+brew<span class="w"> </span>tap<span class="w"> </span>heroku/brew<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>brew<span class="w"> </span>install<span class="w"> </span>heroku
+
+<span class="c1"># 認証</span>
+heroku<span class="w"> </span>login
+</code></pre></div>
+<hr />
+<h2 id="2">2. プロジェクトの取得<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<h3 id="_3">リポジトリのクローン<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/k2works/portfolio.git
+<span class="nb">cd</span><span class="w"> </span>portfolio
+</code></pre></div>
+<h3 id="nodejs_1">Node.js 依存パッケージのインストール<a class="headerlink" href="#nodejs_1" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>npm<span class="w"> </span>install
+</code></pre></div>
+<p>ルートには gulp / dotenv 等の運用タスクの依存が含まれます。<code>apps/web/</code> は v0.1 開発時に追加します。</p>
+<h3 id="_4">環境変数の設定<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># テンプレートをコピー</span>
+cp<span class="w"> </span>.env.example<span class="w"> </span>.env
+
+<span class="c1"># .env を編集（個人開発用の値を設定）</span>
+</code></pre></div>
+<p><code>.env</code> の主な変数：</p>
+<div class="highlight"><pre><span></span><code># MkDocs ローカルサーバー
+MKDOCS_PORT=8000
+
+# 将来的に追加する変数
+# HEROKU_API_KEY=（CI 用）
+</code></pre></div>
+<p>詳細は <a href="../../reference/%E7%92%B0%E5%A2%83%E5%A4%89%E6%95%B0%E7%AE%A1%E7%90%86%E3%82%AC%E3%82%A4%E3%83%89/">環境変数管理ガイド</a> を参照。<code>.env</code> は git 管理外、共有は <code>.env.vault</code>（dotenv-vault）で行います。</p>
+<hr />
+<h2 id="3">3. サブシステム一覧<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<p>portfolio は単一の Heroku Dyno で 2 種類の成果物を配信します（<a href="../../adr/0005-build-pipeline-unification/">ADR-0005</a>）。</p>
+<table>
+<thead>
+<tr>
+<th>サブシステム</th>
+<th>ディレクトリ</th>
+<th>説明</th>
+<th>ローカルポート</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ポートフォリオ（Astro）</td>
+<td><code>apps/web/</code></td>
+<td>Astro 5 SSG + Express 5 配信</td>
+<td>4321（dev）/ 3000（preview）</td>
+</tr>
+<tr>
+<td>Tech Notes（MkDocs）</td>
+<td><code>docs/</code>（ソース）→ <code>apps/web/dist/docs/</code>（ビルド成果物）</td>
+<td>MkDocs Material</td>
+<td>8000（Docker）</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4">4. 技術スタック<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<h3 id="astro">フロントエンド（Astro）<a class="headerlink" href="#astro" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>カテゴリ</th>
+<th>技術</th>
+<th>バージョン</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>言語</td>
+<td>TypeScript</td>
+<td>5.7+</td>
+</tr>
+<tr>
+<td>フレームワーク</td>
+<td>Astro</td>
+<td>5.x</td>
+</tr>
+<tr>
+<td>Integrations</td>
+<td><code>@astrojs/check</code> / <code>@astrojs/sitemap</code> / <code>@astrojs/mdx</code> / <code>@astrojs/preact</code> / <code>astro-icon</code></td>
+<td>latest</td>
+</tr>
+<tr>
+<td>CSS</td>
+<td>Tailwind CSS</td>
+<td>4.x</td>
+</tr>
+<tr>
+<td>Vite プラグイン</td>
+<td><code>@tailwindcss/vite</code></td>
+<td>4.x</td>
+</tr>
+<tr>
+<td>バリデーション</td>
+<td>Zod</td>
+<td>3.x</td>
+</tr>
+</tbody>
+</table>
+<h3 id="heroku">バックエンド（Heroku 配信レイヤー）<a class="headerlink" href="#heroku" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>カテゴリ</th>
+<th>技術</th>
+<th>バージョン</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ランタイム</td>
+<td>Node.js</td>
+<td>22 LTS</td>
+</tr>
+<tr>
+<td>フレームワーク</td>
+<td>Express</td>
+<td>5.x</td>
+</tr>
+<tr>
+<td>セキュリティ</td>
+<td>helmet</td>
+<td>8.x</td>
+</tr>
+<tr>
+<td>ロギング</td>
+<td>morgan</td>
+<td>1.x</td>
+</tr>
+<tr>
+<td>ユニット</td>
+<td>Vitest</td>
+<td>2.x</td>
+</tr>
+<tr>
+<td>統合</td>
+<td>supertest</td>
+<td>7.x</td>
+</tr>
+<tr>
+<td>E2E</td>
+<td>Playwright</td>
+<td>1.49+</td>
+</tr>
+<tr>
+<td>Lighthouse</td>
+<td>Lighthouse CI</td>
+<td>0.14.x</td>
+</tr>
+</tbody>
+</table>
+<h3 id="tech-notesmkdocs">Tech Notes（MkDocs）<a class="headerlink" href="#tech-notesmkdocs" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>カテゴリ</th>
+<th>技術</th>
+<th>バージョン</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ランタイム</td>
+<td>Python</td>
+<td>3.12</td>
+</tr>
+<tr>
+<td>ジェネレーター</td>
+<td>MkDocs</td>
+<td>1.6.x</td>
+</tr>
+<tr>
+<td>テーマ</td>
+<td>mkdocs-material</td>
+<td>9.x</td>
+</tr>
+<tr>
+<td>拡張</td>
+<td>pymdown-extensions / plantuml-markdown</td>
+<td>latest</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_5">開発ツール（リポジトリ共通）<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>カテゴリ</th>
+<th>技術</th>
+<th>バージョン</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>タスクランナー</td>
+<td>Gulp</td>
+<td>5.x</td>
+</tr>
+<tr>
+<td>環境変数</td>
+<td>dotenv</td>
+<td>17.x</td>
+</tr>
+<tr>
+<td>環境変数共有</td>
+<td>dotenv-vault</td>
+<td>latest</td>
+</tr>
+<tr>
+<td>Lint</td>
+<td>ESLint 9（Flat Config） / Prettier 3 / markdownlint-cli2 / eslint-plugin-astro</td>
+<td>latest</td>
+</tr>
+</tbody>
+</table>
+<p>詳細は <a href="../../design/tech_stack/">技術スタック</a> を参照。</p>
+<hr />
+<h2 id="5">5. プロファイル構成<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<p>ローカル開発は素早いフィードバックを優先します。Docker は MkDocs の確認時のみ起動します。</p>
+<table>
+<thead>
+<tr>
+<th>プロファイル</th>
+<th>起動方法</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dev（推奨）</td>
+<td><code>npm run dev</code></td>
+<td>Astro dev server（HMR）。日常開発</td>
+</tr>
+<tr>
+<td>preview</td>
+<td><code>npm run build &amp;&amp; npm run preview</code></td>
+<td>本番相当の確認（SSG ビルド成果物を配信）</td>
+</tr>
+<tr>
+<td>docs</td>
+<td><code>npm run docs:serve</code></td>
+<td>MkDocs ローカル確認（Docker）</td>
+</tr>
+<tr>
+<td>full</td>
+<td>preview + docs を Express で統合</td>
+<td>Heroku 本番相当の確認</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="6">6. 開発サーバーの起動<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
+<h3 id="astro-hmr">日常開発（Astro HMR、推奨）<a class="headerlink" href="#astro-hmr" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>apps/web
+npm<span class="w"> </span>run<span class="w"> </span>dev
+<span class="c1"># http://localhost:4321 で確認</span>
+</code></pre></div>
+<h3 id="mkdocs">MkDocs ローカル確認<a class="headerlink" href="#mkdocs" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># プロジェクトルートで</span>
+npm<span class="w"> </span>run<span class="w"> </span>docs:serve
+<span class="c1"># http://localhost:8000 で確認</span>
+</code></pre></div>
+<p>停止：</p>
+<div class="highlight"><pre><span></span><code>npm<span class="w"> </span>run<span class="w"> </span>docs:stop
+</code></pre></div>
+<h3 id="heroku-preview-express">Heroku 本番相当の確認（preview + Express）<a class="headerlink" href="#heroku-preview-express" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. ビルド（CI と同じ手順）</span>
+<span class="nb">cd</span><span class="w"> </span>apps/web
+npm<span class="w"> </span>run<span class="w"> </span>build
+
+<span class="c1"># 2. MkDocs ビルドして dist/docs/ に配置</span>
+<span class="nb">cd</span><span class="w"> </span>../..
+npm<span class="w"> </span>run<span class="w"> </span>docs:build
+
+<span class="c1"># 3. Express で配信（apps/web/server.js）</span>
+<span class="nb">cd</span><span class="w"> </span>apps/web
+<span class="nv">NODE_ENV</span><span class="o">=</span>production<span class="w"> </span>node<span class="w"> </span>server.js
+<span class="c1"># http://localhost:3000 で確認</span>
+</code></pre></div>
+<h3 id="tdd">TDD モード（テスト自動再実行）<a class="headerlink" href="#tdd" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>apps/web
+npm<span class="w"> </span>run<span class="w"> </span>test:watch
+</code></pre></div>
+<h3 id="_6">アクセス確認<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>サービス</th>
+<th>URL</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Astro dev</td>
+<td>http://localhost:4321</td>
+<td>HMR 付き開発サーバー</td>
+</tr>
+<tr>
+<td>Astro preview</td>
+<td>http://localhost:3000</td>
+<td>Express + ビルド成果物</td>
+</tr>
+<tr>
+<td>MkDocs</td>
+<td>http://localhost:8000</td>
+<td>Tech Notes ローカル確認</td>
+</tr>
+<tr>
+<td>ヘルスチェック</td>
+<td>http://localhost:3000/healthz</td>
+<td>preview 起動時のみ</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="7-docker-mkdocs">7. Docker による MkDocs サーバー<a class="headerlink" href="#7-docker-mkdocs" title="Permanent link">&para;</a></h2>
+<p>ルートの <code>gulpfile.js</code> 経由で Docker Compose を起動します（<code>ops/docker/mkdoc/Dockerfile</code>）。</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 起動</span>
+npm<span class="w"> </span>run<span class="w"> </span>docs:serve
+
+<span class="c1"># 停止</span>
+npm<span class="w"> </span>run<span class="w"> </span>docs:stop
+
+<span class="c1"># ビルドのみ（成果物を ./site/ または apps/web/dist/docs/ に出力）</span>
+npm<span class="w"> </span>run<span class="w"> </span>docs:build
+
+<span class="c1"># Docker 直接コマンド</span>
+docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>mkdoc
+docker<span class="w"> </span>compose<span class="w"> </span>ps
+docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>mkdoc
+docker<span class="w"> </span>compose<span class="w"> </span>down
+</code></pre></div>
+<hr />
+<h2 id="8">8. テストの実行<a class="headerlink" href="#8" title="Permanent link">&para;</a></h2>
+<h3 id="_7">全テスト実行<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>apps/web
+
+<span class="c1"># 静的解析（ゲート）</span>
+npm<span class="w"> </span>run<span class="w"> </span>typecheck<span class="w">      </span><span class="c1"># tsc + astro check</span>
+npm<span class="w"> </span>run<span class="w"> </span>lint<span class="w">           </span><span class="c1"># ESLint</span>
+npm<span class="w"> </span>run<span class="w"> </span>format:check<span class="w">   </span><span class="c1"># Prettier</span>
+
+<span class="c1"># ユニット + 統合</span>
+npm<span class="w"> </span><span class="nb">test</span><span class="w">               </span><span class="c1"># Vitest（カバレッジ付き）</span>
+
+<span class="c1"># E2E</span>
+npm<span class="w"> </span>run<span class="w"> </span>test:e2e<span class="w">       </span><span class="c1"># Playwright</span>
+</code></pre></div>
+<h3 id="_8">テストの種類（<a href="../../design/test_strategy/">テスト戦略</a>）<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>テスト種別</th>
+<th>ツール</th>
+<th>説明</th>
+<th style="text-align: right;">配分</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>静的解析</td>
+<td>tsc / astro check / ESLint / Prettier</td>
+<td>ゲート</td>
+<td style="text-align: right;">-</td>
+</tr>
+<tr>
+<td>ユニット</td>
+<td>Vitest</td>
+<td>純関数 / Express ミドルウェア</td>
+<td style="text-align: right;">10%</td>
+</tr>
+<tr>
+<td>統合</td>
+<td>supertest / astro build</td>
+<td>ルーティング / Content Collections</td>
+<td style="text-align: right;">20%</td>
+</tr>
+<tr>
+<td>Lighthouse</td>
+<td>Lighthouse CI</td>
+<td>性能・SEO・A11y 予算</td>
+<td style="text-align: right;">15%</td>
+</tr>
+<tr>
+<td>E2E</td>
+<td>Playwright</td>
+<td>UI シナリオ E01〜E12</td>
+<td style="text-align: right;">55%</td>
+</tr>
+</tbody>
+</table>
+<h3 id="lighthouse-ci">Lighthouse CI のローカル実行<a class="headerlink" href="#lighthouse-ci" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>apps/web
+npm<span class="w"> </span>run<span class="w"> </span>lhci<span class="w">         </span><span class="c1"># apps/web/dist に対して実行</span>
+</code></pre></div>
+<hr />
+<h2 id="9">9. コード品質管理<a class="headerlink" href="#9" title="Permanent link">&para;</a></h2>
+<h3 id="_9">静的解析ツール<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>ツール</th>
+<th>目的</th>
+<th>コマンド</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TypeScript / astro check</td>
+<td>型検査</td>
+<td><code>npm run typecheck</code></td>
+</tr>
+<tr>
+<td>ESLint（Flat Config）+ eslint-plugin-astro</td>
+<td>コーディング規約</td>
+<td><code>npm run lint</code></td>
+</tr>
+<tr>
+<td>Prettier</td>
+<td>フォーマット</td>
+<td><code>npm run format</code></td>
+</tr>
+<tr>
+<td>markdownlint-cli2</td>
+<td>Markdown 検証</td>
+<td><code>npm run lint:md</code></td>
+</tr>
+<tr>
+<td>gitleaks</td>
+<td>シークレット漏洩検出</td>
+<td><code>gitleaks detect</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_10">品質チェックの一括実行<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>apps/web
+npm<span class="w"> </span>run<span class="w"> </span>check<span class="w">         </span><span class="c1"># lint + typecheck + format:check + test</span>
+</code></pre></div>
+<h3 id="_11">コード品質の基準（<a href="../../design/non_functional/">非機能要件</a>）<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>指標</th>
+<th>閾値</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TypeScript エラー</td>
+<td>0</td>
+</tr>
+<tr>
+<td>ESLint エラー</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Prettier 違反</td>
+<td>0</td>
+</tr>
+<tr>
+<td>循環的複雑度</td>
+<td>関数あたり &lt; 10</td>
+</tr>
+<tr>
+<td>ファイル長</td>
+<td>&lt; 300 行</td>
+</tr>
+<tr>
+<td>関数長</td>
+<td>&lt; 50 行</td>
+</tr>
+</tbody>
+</table>
+<h3 id="lighthouse-v01">Lighthouse 予算（v0.1 段階導入）<a class="headerlink" href="#lighthouse-v01" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>バージョン</th>
+<th style="text-align: right;">Performance</th>
+<th style="text-align: right;">SEO</th>
+<th style="text-align: right;">Accessibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>v0.1</td>
+<td style="text-align: right;">≥ 80</td>
+<td style="text-align: right;">≥ 90</td>
+<td style="text-align: right;">≥ 90</td>
+</tr>
+<tr>
+<td>v1.0</td>
+<td style="text-align: right;">≥ 90</td>
+<td style="text-align: right;">≥ 95</td>
+<td style="text-align: right;">≥ 95</td>
+</tr>
+</tbody>
+</table>
+<p>詳細は <a href="../../development/release_plan/">リリース計画</a> を参照。</p>
+<hr />
+<h2 id="10">10. ディレクトリ構造<a class="headerlink" href="#10" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>portfolio/
+├── .agents/                      # Claude Code エージェント定義
+├── .claude/                      # Claude Code 設定
+├── .devcontainer/                # Dev Container
+├── .github/                      # GitHub Actions（v0.1 で追加）
+├── .husky/                       # Git Hooks（任意・後付け）
+├── apps/
+│   └── web/                      # Astro + Express（v0.1 で作成）
+│       ├── astro.config.mjs
+│       ├── package.json
+│       ├── public/               # 静的アセット
+│       ├── src/
+│       │   ├── components/       # 再利用 UI
+│       │   ├── layouts/          # BaseLayout 等
+│       │   ├── pages/            # ファイルベースルーティング
+│       │   ├── content/          # Markdown コンテンツ
+│       │   │   ├── works/
+│       │   │   └── posts/
+│       │   ├── styles/           # Tailwind 設定 + グローバル CSS
+│       │   └── utils/
+│       ├── server.js             # Heroku 用 Express
+│       ├── lighthouserc.json
+│       ├── playwright.config.ts
+│       └── tests/
+│           ├── unit/
+│           ├── integration/
+│           └── e2e/
+├── docs/                         # ドキュメント（Markdown ソース）
+│   ├── adr/                      # ADR
+│   ├── design/                   # 設計成果物
+│   ├── requirements/             # 要件定義
+│   ├── development/              # リリース計画
+│   ├── operation/                # 運用要件・本書
+│   ├── reference/                # リファレンス
+│   ├── review/                   # レビュー結果
+│   ├── article/                  # 学習記事
+│   └── template/                 # テンプレート
+├── ops/
+│   ├── docker/mkdoc/             # MkDocs Docker
+│   ├── nix/                      # Nix flake
+│   ├── scripts/                  # gulp タスク（dotenv-vault 等）
+│   ├── runbook/                  # 運用 runbook（v0.1 で骨格作成）
+│   └── terraform/                # Heroku IaC（将来）
+├── flake.nix                     # Nix shell
+├── flake.lock
+├── docker-compose.yml            # MkDocs ローカル
+├── gulpfile.js                   # 既存運用タスク
+├── package.json                  # ルート（gulp / dotenv）
+├── mkdocs.yml                    # MkDocs 設定
+├── Procfile                      # Heroku（v0.1 で作成）
+├── runtime.txt                   # Heroku Python（廃止予定 / ADR-0005）
+└── README.md
+</code></pre></div>
+<hr />
+<h2 id="11">11. 命名規則<a class="headerlink" href="#11" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>要素</th>
+<th>規則</th>
+<th>例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ファイル名（Astro）</td>
+<td>kebab-case + 拡張子</td>
+<td><code>work-card.astro</code></td>
+</tr>
+<tr>
+<td>Astro コンポーネント</td>
+<td>PascalCase</td>
+<td><code>WorkCard</code></td>
+</tr>
+<tr>
+<td>関数 / 変数</td>
+<td>camelCase</td>
+<td><code>formatDate</code></td>
+</tr>
+<tr>
+<td>型</td>
+<td>PascalCase</td>
+<td><code>WorkSchema</code></td>
+</tr>
+<tr>
+<td>定数</td>
+<td>UPPER_SNAKE_CASE</td>
+<td><code>MAX_FEATURED_WORKS</code></td>
+</tr>
+<tr>
+<td>Markdown スラッグ</td>
+<td>kebab-case</td>
+<td><code>apps/web/src/content/works/work-a.md</code></td>
+</tr>
+<tr>
+<td>ブランチ</td>
+<td><code>feature/&lt;US-ID&gt;-&lt;短い説明&gt;</code></td>
+<td><code>feature/US-01-hero-section</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="12-git">12. Git 規約<a class="headerlink" href="#12-git" title="Permanent link">&para;</a></h2>
+<h3 id="_12">コミットメッセージ<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<p><a href="https://www.conventionalcommits.org/ja/">Conventional Commits</a> に従います。日本語で本文を書きます。</p>
+<table>
+<thead>
+<tr>
+<th>タイプ</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>feat</code></td>
+<td>新機能</td>
+</tr>
+<tr>
+<td><code>fix</code></td>
+<td>バグ修正</td>
+</tr>
+<tr>
+<td><code>docs</code></td>
+<td>ドキュメントのみ</td>
+</tr>
+<tr>
+<td><code>style</code></td>
+<td>フォーマット</td>
+</tr>
+<tr>
+<td><code>refactor</code></td>
+<td>リファクタリング</td>
+</tr>
+<tr>
+<td><code>perf</code></td>
+<td>パフォーマンス改善</td>
+</tr>
+<tr>
+<td><code>test</code></td>
+<td>テストの追加・修正</td>
+</tr>
+<tr>
+<td><code>chore</code></td>
+<td>ビルド・補助ツール</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_13">スコープ<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>スコープ</th>
+<th>対象</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>web</code></td>
+<td><code>apps/web/</code>（Astro + Express）</td>
+</tr>
+<tr>
+<td><code>docs</code></td>
+<td><code>docs/</code> 配下のドキュメント全般</td>
+</tr>
+<tr>
+<td><code>ops</code></td>
+<td><code>ops/</code> 配下の運用スクリプト・IaC</td>
+</tr>
+<tr>
+<td><code>mkdocs</code></td>
+<td><code>mkdocs.yml</code></td>
+</tr>
+<tr>
+<td><code>gitignore</code></td>
+<td><code>.gitignore</code></td>
+</tr>
+<tr>
+<td><code>adr</code></td>
+<td><code>docs/adr/</code></td>
+</tr>
+<tr>
+<td><code>requirements</code></td>
+<td><code>docs/requirements/</code></td>
+</tr>
+<tr>
+<td><code>design</code></td>
+<td><code>docs/design/</code></td>
+</tr>
+<tr>
+<td><code>review</code></td>
+<td><code>docs/review/</code></td>
+</tr>
+<tr>
+<td><code>development</code></td>
+<td><code>docs/development/</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="git-hooksv01">Git Hooks（v0.1 リリースまでに追加）<a class="headerlink" href="#git-hooksv01" title="Permanent link">&para;</a></h3>
+<p><code>apps/web/package.json</code> に husky + lint-staged を追加し、pre-commit で以下を実行：</p>
+<table>
+<thead>
+<tr>
+<th>ツール</th>
+<th>目的</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Prettier</td>
+<td>フォーマット適用（<code>--write</code>）</td>
+</tr>
+<tr>
+<td>ESLint</td>
+<td>コーディング規約検証</td>
+</tr>
+<tr>
+<td>markdownlint-cli2</td>
+<td>Markdown 検証（<code>docs/**/*.md</code> と PR に含まれる Markdown）</td>
+</tr>
+</tbody>
+</table>
+<p>緊急時のスキップ：</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>commit<span class="w"> </span>--no-verify<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;メッセージ&quot;</span>
+</code></pre></div>
+<blockquote>
+<p><strong>Warning</strong>: フックスキップは緊急時のみ。CI でも検証されるため push 後に失敗する可能性があります。</p>
+</blockquote>
+<hr />
+<h2 id="13">13. セットアップの確認<a class="headerlink" href="#13" title="Permanent link">&para;</a></h2>
+<p>すべて整ったら以下で動作確認：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. ルートの依存</span>
+npm<span class="w"> </span>install
+
+<span class="c1"># 2. apps/web セットアップ（v0.1 着手後）</span>
+<span class="nb">cd</span><span class="w"> </span>apps/web
+npm<span class="w"> </span>install
+
+<span class="c1"># 3. 静的解析</span>
+npm<span class="w"> </span>run<span class="w"> </span>check
+
+<span class="c1"># 4. テスト</span>
+npm<span class="w"> </span><span class="nb">test</span>
+
+<span class="c1"># 5. ビルド</span>
+npm<span class="w"> </span>run<span class="w"> </span>build
+
+<span class="c1"># 6. preview 起動</span>
+<span class="nv">NODE_ENV</span><span class="o">=</span>production<span class="w"> </span>node<span class="w"> </span>server.js
+<span class="c1"># 別ターミナルで MkDocs を起動</span>
+<span class="nb">cd</span><span class="w"> </span>../..
+npm<span class="w"> </span>run<span class="w"> </span>docs:serve
+</code></pre></div>
+<h3 id="_14">アクセス確認<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>サービス</th>
+<th>URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Astro dev</td>
+<td>http://localhost:4321</td>
+</tr>
+<tr>
+<td>Astro preview（Express）</td>
+<td>http://localhost:3000</td>
+</tr>
+<tr>
+<td>ヘルスチェック</td>
+<td>http://localhost:3000/healthz</td>
+</tr>
+<tr>
+<td>MkDocs</td>
+<td>http://localhost:8000</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="14-cicd">14. CI/CD（参考）<a class="headerlink" href="#14-cicd" title="Permanent link">&para;</a></h2>
+<p>CI/CD の実体は v0.1 で構築します。詳細は <a href="../heroku_staging_setup/">Heroku staging 環境セットアップ手順書</a> を参照。</p>
+<table>
+<thead>
+<tr>
+<th>ワークフロー</th>
+<th>ファイル</th>
+<th>トリガー</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Backend CI</td>
+<td><code>.github/workflows/ci.yml</code></td>
+<td>PR / push</td>
+<td>lint / typecheck / test / build / E2E / Lighthouse CI</td>
+</tr>
+<tr>
+<td>Heroku Deploy</td>
+<td><code>.github/workflows/deploy.yml</code></td>
+<td>main 経由で staging、<code>workflow_dispatch</code> で production プロモート</td>
+<td>Heroku Container Registry へ push（<a href="../../adr/0005-build-pipeline-unification/">ADR-0005</a>）</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_15">トラブルシューティング<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
+<h3 id="npm-install"><code>npm install</code> が遅い / 失敗する<a class="headerlink" href="#npm-install" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>原因</th>
+<th>対処</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ネットワーク不安定</td>
+<td><code>npm install --prefer-offline</code></td>
+</tr>
+<tr>
+<td>Node バージョン不一致</td>
+<td><code>.nvmrc</code> または <code>engines.node</code> を確認、<code>fnm use</code></td>
+</tr>
+<tr>
+<td>キャッシュ破損</td>
+<td><code>rm -rf node_modules package-lock.json &amp;&amp; npm install</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="npm-run-docsserve-8000"><code>npm run docs:serve</code> で 8000 番が使えない<a class="headerlink" href="#npm-run-docsserve-8000" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># 既存プロセスを確認</span>
+docker<span class="w"> </span>compose<span class="w"> </span>ps
+<span class="c1"># 強制終了</span>
+npm<span class="w"> </span>run<span class="w"> </span>docs:stop
+<span class="c1"># Windows: ポート使用プロセスを kill</span>
+netstat<span class="w"> </span>-ano<span class="w"> </span><span class="p">|</span><span class="w"> </span>findstr<span class="w"> </span>:8000
+</code></pre></div>
+<p>詳細は <a href="../../.claude/skills/killing-processes/SKILL.md"><code>killing-processes</code> スキル</a> を参照。</p>
+<h3 id="astro-hmr_1">Astro の HMR が反映されない<a class="headerlink" href="#astro-hmr_1" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># キャッシュクリア</span>
+rm<span class="w"> </span>-rf<span class="w"> </span>apps/web/.astro<span class="w"> </span>apps/web/dist<span class="w"> </span>apps/web/node_modules/.vite
+<span class="nb">cd</span><span class="w"> </span>apps/web
+npm<span class="w"> </span>install
+npm<span class="w"> </span>run<span class="w"> </span>dev
+</code></pre></div>
+<h3 id="python-mkdocs-docker-311heroku-312">Python / MkDocs のバージョン差異（Docker は 3.11、Heroku は 3.12）<a class="headerlink" href="#python-mkdocs-docker-311heroku-312" title="Permanent link">&para;</a></h3>
+<p>開発時は Docker（3.11-slim）を使用し、本番ビルドは GitHub Actions の Python 3.12 で実行（<a href="../../adr/0005-build-pipeline-unification/">ADR-0005</a>）。<code>requirements.txt</code> でバージョン差異を吸収します。</p>
+<h3 id="pre-commit">pre-commit フックが失敗する場合<a class="headerlink" href="#pre-commit" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>apps/web
+npm<span class="w"> </span>run<span class="w"> </span>check
+<span class="c1"># 出力されたエラーを修正してから再コミット</span>
+</code></pre></div>
+<h3 id="env"><code>.env</code> の取り扱い<a class="headerlink" href="#env" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>.env</code> は git 管理外（<code>.gitignore</code> 済み）</li>
+<li><code>.env.example</code> をテンプレートとして使用</li>
+<li>共有は <code>.env.vault</code>（dotenv-vault）。詳細は <a href="../../reference/%E7%92%B0%E5%A2%83%E5%A4%89%E6%95%B0%E7%AE%A1%E7%90%86%E3%82%AC%E3%82%A4%E3%83%89/">環境変数管理ガイド</a> と <code>npm run vault:*</code> タスク</li>
+</ul>
+<hr />
+<h2 id="_16">関連ドキュメント<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="../heroku_staging_setup/">Heroku staging 環境セットアップ手順書</a> — 次の段階</li>
+<li><a href="../../design/operation/">運用要件</a></li>
+<li><a href="../../design/non_functional/">非機能要件</a></li>
+<li><a href="../../development/release_plan/">リリース計画</a></li>
+<li><a href="../../design/tech_stack/">技術スタック</a></li>
+<li><a href="../../adr/0005-build-pipeline-unification/">ADR-0005: ビルド境界を GitHub Actions に一本化</a></li>
+<li><a href="../../reference/%E7%92%B0%E5%A2%83%E5%A4%89%E6%95%B0%E7%AE%A1%E7%90%86%E3%82%AC%E3%82%A4%E3%83%89/">環境変数管理ガイド</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/k2works/portfolio" target="_blank" rel="noopener" title="GitHub Repository/portfolio" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "toc.integrate", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+      
+        <script src="../../assets/js/extra.js"></script>
+      
+    
+  </body>
+</html>
