@@ -33,7 +33,7 @@
 
 | フェーズ | 内容 | SP | 完了 SP | 状態 |
 |---------|------|-----|---------|------|
-| v0.1 | Walking Skeleton（ホームのみ） | 16 | 16 | **完成（コード）/ 実機セットアップ待ち** |
+| v0.1 | Walking Skeleton（ホームのみ） | 16 | 16 | **リリース完了（staging 自動デプロイ成立）** |
 | v0.2 | Works 一覧・詳細 | 10 | 0 | 未着手 |
 | v0.3 | Skills / Contact / Dark | 13 | 0 | 未着手 |
 | v1.0 | A11y / Tech Notes / OGP | 10 | 0 | 未着手 |
@@ -51,8 +51,8 @@
 
 | リリース | 報告書 | 状態 |
 |---------|--------|------|
+| v0.1（Walking Skeleton） | [release_report-0_1_0.md](./release_report-0_1_0.md) | 公開（2026-04-30） |
 
 ## 補足
 
-- 現在はカテゴリ索引のみ存在します。
 - テンプレートは [template/リリース計画.md](../template/リリース計画.md)、[template/イテレーション計画.md](../template/イテレーション計画.md)、[template/イテレーション完了報告書.md](../template/イテレーション完了報告書.md)、[template/リリース完了報告書.md](../template/リリース完了報告書.md) を利用できます。
