@@ -4128,15 +4128,15 @@
 </ol>
 <h3 id="_4">成功基準<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>robots.txt</code> が NODE_ENV / 環境変数で <code>Disallow: /</code> ↔ 通常の切替が動作</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> OGP の <code>og:url</code> が production の絶対 URL（<code>portfolio.example.com</code>）で出力される</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>sitemap.xml</code> に全ページが含まれる（IT-3 時点ではホーム 1 件 + 将来の Works/Skills/Contact プレースホルダ）</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> 768px 未満でハンバーガーメニューが表示・展開・閉じる</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> ハンバーガーメニュー展開時に Esc キーで閉じる、フォーカスがトラップされる</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> axe-core via Playwright が <code>/</code> で violations 0</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>heroku_staging_setup.md</code> の「Cloudflare の前段配置」セクションが手順 → 確認コマンド → トラブルシュート構成</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> リリース計画の到達日テーブルが IT-1 + IT-2 実績で再校正</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>npm run check</code> 緑、<code>npm run build</code> 緑、<code>npm run test:e2e</code> 緑</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <code>robots.txt</code> が <code>PUBLIC_ROBOTS_DISALLOW</code> 環境変数で <code>Disallow: /</code> ↔ <code>Allow: /</code> の切替動作（<code>apps/web/src/pages/robots.txt.ts</code>）</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> OGP の <code>og:url</code> が production の絶対 URL で出力される（<code>BaseLayout.astro</code> で <code>Astro.url</code> ベース）</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <code>sitemap.xml</code> に全ページが含まれる（<code>@astrojs/sitemap</code> で自動生成、staging で確認済み）</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> 768px 未満でハンバーガーメニューが表示・展開・閉じる</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> ハンバーガーメニュー展開時に Esc キーで閉じる（フォーカストラップ循環は v0.1 では割愛、v0.3 のレスポンシブ完全対応で実施）</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> axe-core via Playwright が <code>/</code> で violations 0（WCAG 2.1 A/AA タグ）</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <code>heroku_staging_setup.md</code> の「Cloudflare の前段配置」セクションが 3 重防御 + 動作確認チェックリスト 8 項目で詳細化</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> リリース計画の到達日テーブルが IT-1 + IT-2 実績で再校正（楽観 / 標準 / 悲観の 3 シナリオ併記）</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <code>npm run check</code> 緑、<code>npm run build</code> 緑、<code>npm run test:e2e</code> 緑（18 シナリオ）</li>
 </ul>
 <hr />
 <h2 id="_5">ユーザーストーリー<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
@@ -4577,27 +4577,27 @@
 <h2 id="_14">完了条件<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
 <h3 id="definition-of-done">Definition of Done<a class="headerlink" href="#definition-of-done" title="Permanent link">&para;</a></h3>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> コードがリポジトリにマージ済み（<code>develop</code> ブランチに到達）</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>npm run check</code>（lint + typecheck + format + test）がローカルで成功</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>npm run build</code> が成功し、<code>apps/web/dist/</code> が生成される</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>npm run test:e2e</code> で全シナリオ緑（モバイルメニュー追加分含む）</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>axe-core</code> で violations 0</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Lighthouse CI が v0.1 予算（Performance ≥ 80 / SEO ≥ 90 / A11y ≥ 90）を満たす</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>robots.txt</code> の環境別動作確認</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> ふりかえり（<code>docs/development/retrospective-3.md</code>）作成</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> 完了報告書（<code>docs/development/iteration_report-3.md</code>）作成</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> リリース計画再校正（<code>docs/development/release_plan.md</code> 更新）</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> コードがリポジトリにマージ済み（v0.1 リリース PR #1 で main に到達・<code>fb533f5</code>）</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <code>npm run check</code>（lint + typecheck + format + test）がローカルで成功</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <code>npm run build</code> が成功し、<code>apps/web/dist/</code> が生成される</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <code>npm run test:e2e</code> で全シナリオ緑（18 シナリオ: smoke 12 + mobile 5 + a11y 1）</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <code>axe-core</code> で violations 0</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Lighthouse CI が v0.1 予算（Performance ≥ 80 / SEO ≥ 90 / A11y ≥ 90）を満たす</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <code>robots.txt</code> の環境別動作確認</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> ふりかえり（<code>docs/development/retrospective-3.md</code>）作成</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> 完了報告書（<code>docs/development/iteration_report-3.md</code>）作成</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> リリース計画再校正（<code>docs/development/release_plan.md</code> 更新）</li>
 </ul>
 <h3 id="v01-it-3">v0.1 リリース準備完了の条件（IT-3 後）<a class="headerlink" href="#v01-it-3" title="Permanent link">&para;</a></h3>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Heroku アカウント作成 + Eco Dyno（staging） + Basic Dyno（production） 課金開始</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Heroku Pipeline 作成、Buildpack 設定（<code>heroku/nodejs</code> のみ）</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> GitHub Actions の deploy ワークフロー有効化（<code>if: false</code> を本物の条件式に置換）</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> ドメイン取得 + Cloudflare DNS 委譲</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Cloudflare の SSL 設定（Full strict）+ Heroku ACM 有効化</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> UptimeRobot で <code>/healthz</code> 監視登録</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> main へ PR + マージ + 初回プロモート</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> リリース完了報告書（<code>creating-release-report</code> スキル）作成</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Heroku アカウント作成 + Eco Dyno（staging）課金開始（production は v1.0 までに）</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Heroku Pipeline 作成、Buildpack 設定（<code>heroku/nodejs</code> のみ）</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> GitHub Actions の deploy ワークフロー有効化（<code>if: false</code> を解除し staging 自動デプロイ成立）</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> ドメイン取得 + Cloudflare DNS 委譲（v0.1 リリース後の C1 タスク）</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Cloudflare の SSL 設定（Full strict）+ Heroku ACM 有効化（C2/C3 タスク）</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> UptimeRobot で <code>/healthz</code> 監視登録（24h ソークは継続中）</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> main へ PR + マージ + v0.1.0 タグ打ち（PR #1 / <code>fb533f5</code>）</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> リリース完了報告書作成（<code>docs/development/release_report-0_1_0.md</code>）</li>
 </ul>
 <hr />
 <h2 id="_15">更新履歴<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>

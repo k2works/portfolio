@@ -1236,10 +1236,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#it-1-it-2-2026-04-30" class="md-nav__link">
+  <a href="#it-1-it-2-it-3-2026-04-30-v01" class="md-nav__link">
     <span class="md-ellipsis">
       
-        IT-1 + IT-2 実績（2026-04-30 時点）
+        IT-1 + IT-2 + IT-3 実績（2026-04-30 時点・v0.1 リリース完了）
       
     </span>
   </a>
@@ -4072,14 +4072,18 @@
 </tr>
 </tbody>
 </table>
-<p><strong>リリース基準</strong>:</p>
-<ul>
-<li>Lighthouse Performance ≥ 80 / SEO ≥ 90 / A11y ≥ 90</li>
-<li>E2E（E01, E07, E10, E11 のうちホーム関連サブセット）が全て成功</li>
-<li>UptimeRobot で 24 時間連続 99% 以上の稼働</li>
-<li>ランブック <code>ops/runbook/{deploy,rollback,disaster-recovery,pre-interview-freeze}.md</code> のスケルトン作成済み</li>
-<li>README にサイトの開発・公開手順が記載</li>
+<p><strong>リリース基準</strong>（2026-04-30 リリース時点の達成状況）:</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Lighthouse Performance ≥ 80 / SEO ≥ 90 / A11y ≥ 90 → 達成（3 runs median、Best Practices ≥ 90 も達成）</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> E2E（E01, E07, E10, E11 のうちホーム関連サブセット）が全て成功 → 18/18 passed（smoke 12 + mobile 5 + a11y 1）</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> UptimeRobot で 24 時間連続 99% 以上の稼働 → 監視登録済、ソーク継続中（v0.1 リリース後の確認事項）</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> ランブック（deploy / rollback / disaster-recovery / pre-interview-freeze）スケルトン作成済み → 9 本完成</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> README にサイトの開発・公開手順が記載 → Quick Start + 配信レイヤー仕様を記載</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> [追加] GitHub Actions から Heroku staging への自動デプロイ成立（<a href="../../adr/0006-heroku-deploy-authentication/">ADR-0006</a>）</li>
 </ul>
+<blockquote>
+<p><strong>v0.1 は 2026-04-30 にリリース完了</strong>（PR #1 / <code>fb533f5</code> / <code>v0.1.0</code> タグ）。詳細は <a href="../release_report-0_1_0/">v0.1 リリース完了報告書</a>。</p>
+</blockquote>
 <hr />
 <h3 id="v02-works">v0.2: Works<a class="headerlink" href="#v02-works" title="Permanent link">&para;</a></h3>
 <p><strong>目的</strong>: 業務委託発注検討者・採用技術リーダーが「再現性のある成果か」を判断できるようにする。</p>
@@ -4311,7 +4315,7 @@
 <li><strong>再校正方針</strong>: 3 イテレーション完了時（IT-3 後）に再度見直し、その後は四半期ごと</li>
 <li><strong>3 シナリオ併記</strong>: 楽観 / 標準 / 悲観でリリース日見込みを併記</li>
 </ul>
-<h3 id="it-1-it-2-2026-04-30">IT-1 + IT-2 実績（2026-04-30 時点）<a class="headerlink" href="#it-1-it-2-2026-04-30" title="Permanent link">&para;</a></h3>
+<h3 id="it-1-it-2-it-3-2026-04-30-v01">IT-1 + IT-2 + IT-3 実績（2026-04-30 時点・v0.1 リリース完了）<a class="headerlink" href="#it-1-it-2-it-3-2026-04-30-v01" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -4341,18 +4345,26 @@
 <td>完了（v0.1-β）</td>
 </tr>
 <tr>
+<td>IT-3</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">11.0h</td>
+<td style="text-align: right;">約 2h</td>
+<td>完了（v0.1 RC / コード完成）</td>
+</tr>
+<tr>
 <td><strong>累計</strong></td>
-<td style="text-align: right;"><strong>12</strong></td>
-<td style="text-align: right;"><strong>12</strong></td>
-<td style="text-align: right;"><strong>26.8h</strong></td>
-<td style="text-align: right;"><strong>約 5h</strong></td>
+<td style="text-align: right;"><strong>16</strong></td>
+<td style="text-align: right;"><strong>16</strong></td>
+<td style="text-align: right;"><strong>37.8h</strong></td>
+<td style="text-align: right;"><strong>約 7h</strong></td>
 <td><strong>100%</strong></td>
 </tr>
 </tbody>
 </table>
-<p><strong>実績ベロシティ</strong>: 12 SP / 約 5h = <strong>2.4 SP/h</strong>（IT-1 単独 1.67 → IT-2 単独 ~3.5、上昇傾向）</p>
+<p><strong>実績ベロシティ</strong>: 16 SP / 約 7h = <strong>2.29 SP/h</strong>（IT-1 単独 1.67 → IT-2 単独 3.5 → IT-3 単独 2.0）</p>
 <blockquote>
-<p>高生産性の理由は「設計ドキュメントが豊富 + 手動構築の効率化 + Codex 不使用 + 個人開発の意思決定速度」。IT-3 以降は外部依存（Heroku/Cloudflare 実機セットアップ）が増えるため低下する想定。</p>
+<p>v0.1 全体での生産性は「設計ドキュメントが豊富 + 手動構築の効率化 + Codex 不使用 + 個人開発の意思決定速度」によって達成。IT-3 は外部依存（CI 認証問題で 4 回手戻り）でやや低下したが、計画 SP は完遂。v0.2 以降は標準 5 SP/週で見積もる（設計先行ボーナスが効きにくくなる想定）。</p>
 </blockquote>
 <h3 id="_7">想定イテレーション（再校正）<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <table>
@@ -4381,18 +4393,18 @@
 <td>v0.1-β ✅</td>
 </tr>
 <tr>
-<td style="text-align: right;">3（計画済み）</td>
+<td style="text-align: right;">3（実施済み）</td>
 <td>検索インデックス + ハンバーガー + axe-core + Cloudflare ガイド（IT-3）</td>
 <td style="text-align: right;">4</td>
 <td style="text-align: right;">16</td>
-<td><strong>v0.1 リリース準備</strong></td>
+<td>v0.1 RC ✅</td>
 </tr>
 <tr>
-<td style="text-align: right;">-</td>
-<td>Heroku/Cloudflare 実機セットアップ + main マージ + リリース完了報告書</td>
+<td style="text-align: right;">-（実施済み）</td>
+<td>Heroku staging 自動デプロイ成立 + main マージ + v0.1.0 タグ + リリース完了報告書</td>
 <td style="text-align: right;">-（外部依存）</td>
 <td style="text-align: right;">16</td>
-<td><strong>v0.1 リリース</strong></td>
+<td><strong>v0.1 リリース ✅（2026-04-30）</strong></td>
 </tr>
 <tr>
 <td style="text-align: right;">4</td>
@@ -4458,7 +4470,7 @@
 <tr>
 <td>楽観</td>
 <td>7 SP/週（IT-1〜IT-2 ペース継続）</td>
-<td>2026-05-04</td>
+<td>~~2026-05-04~~ → <strong>2026-04-30 実績</strong></td>
 <td>2026-05-18</td>
 <td>2026-06-08</td>
 <td>2026-06-22</td>
@@ -4466,7 +4478,7 @@
 <tr>
 <td>標準</td>
 <td>5 SP/週（IT-3 以降は実装複雑度↑で減速）</td>
-<td>2026-05-11</td>
+<td>~~2026-05-11~~ → <strong>2026-04-30 実績</strong></td>
 <td>2026-06-01</td>
 <td>2026-06-29</td>
 <td>2026-07-20</td>
@@ -4474,7 +4486,7 @@
 <tr>
 <td>悲観</td>
 <td>3 SP/週（外部依存で停滞・体調不良など）</td>
-<td>2026-05-18</td>
+<td>~~2026-05-18~~ → <strong>2026-04-30 実績</strong></td>
 <td>2026-06-29</td>
 <td>2026-08-31</td>
 <td>2026-10-19</td>
@@ -4482,7 +4494,8 @@
 </tbody>
 </table>
 <blockquote>
-<p><strong>外部依存リスク</strong>: ドメイン取得 / Cloudflare DNS 委譲伝播（最長 24h） / Heroku アカウント審査などはコード進捗と独立。v0.1 リリースは「コード完成」と「公開可能」を区別して記録する。
+<p><strong>v0.1 は楽観シナリオより 4 日早く完了</strong> した。設計先行ボーナス + 個人開発の意思決定速度 + Codex 不使用判断が効いた。v0.2 以降は同様のボーナスが効きにくいため、<strong>標準シナリオ（5 SP/週）</strong> で見積もる。</p>
+<p><strong>外部依存リスク</strong>: ドメイン取得 / Cloudflare DNS 委譲伝播（最長 24h） / Heroku production アカウント審査などはコード進捗と独立。v0.1 は「Heroku staging への自動デプロイ成立」をリリース条件とした（独自ドメイン公開は v1.0 までに完了予定）。
 | 8 | US-10 A11y 強化（axe-core / NVDA 検証） | 5 | 40 | v1.0-α |
 | 9 | US-11 Tech Notes 同居 + US-12 OGP | 5 | 45 | v1.0-β |
 | 10 | Lighthouse 90/95/95 達成 + 全体仕上げ | 5 | 50 | <strong>v1.0 リリース</strong> |</p>

@@ -4139,7 +4139,7 @@
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <code>apps/web/playwright.config.ts</code> が存在する</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> ESLint / Prettier / TypeScript いずれもエラー 0（<code>npm run check</code> 成功）</li>
 <li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <code>ops/runbook/{README,deploy,rollback}.md</code> のスケルトンが存在</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> PR を 1 本以上作成し main にマージ済み（develop ブランチ運用、PR は別途）</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> PR を 1 本以上作成し main にマージ済み（v0.1 リリース PR #1 で main へ統合済み・2026-04-30）</li>
 </ul>
 <hr />
 <h2 id="_5">ユーザーストーリー<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
@@ -4632,13 +4632,13 @@ const featuredWorks = [
 <h2 id="_14">完了条件<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
 <h3 id="definition-of-done">Definition of Done<a class="headerlink" href="#definition-of-done" title="Permanent link">&para;</a></h3>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> コードがリポジトリにマージ済み（main ブランチに到達）</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>npm run check</code>（lint + typecheck + test）がローカルで成功</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>npm run build</code> が成功し、<code>apps/web/dist/</code> が生成される</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>node apps/web/server.js</code> を手動起動し <code>/healthz</code> と <code>/</code> が応答する</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> PR テンプレートのチェックリストを満たす</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> README とランブックスケルトンが存在</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> イテレーションふりかえりで 5 つの問い（何ができた？ 何ができなかった？ 学び / 次への改善 / ベロシティ実績）を <code>docs/development/retrospective-1.md</code> に記録</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> コードがリポジトリにマージ済み（v0.1 リリース PR #1 で main に到達・<code>fb533f5</code>）</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <code>npm run check</code>（lint + typecheck + test）がローカルで成功</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <code>npm run build</code> が成功し、<code>apps/web/dist/</code> が生成される</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <code>node apps/web/server.js</code> を手動起動し <code>/healthz</code> と <code>/</code> が応答する</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> PR テンプレートのチェックリストを満たす（PR #1 で完了）</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> README とランブックスケルトンが存在（<code>ops/runbook/</code> に 9 本配置済み）</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> イテレーションふりかえりで 5 つの問い（何ができた？ 何ができなかった？ 学び / 次への改善 / ベロシティ実績）を <code>docs/development/retrospective-1.md</code> に記録</li>
 </ul>
 <blockquote>
 <p>注: テストカバレッジ 80% は IT-1 では適用しない（ロジック皆無のため）。IT-2 で Express ミドルウェアの単体テストを開始してから計測対象に。</p>

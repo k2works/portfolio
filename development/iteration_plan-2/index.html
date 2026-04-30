@@ -4161,15 +4161,15 @@
 </ol>
 <h3 id="_4">成功基準<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> BaseLayout / index.astro の <code>&lt;style&gt;</code> タグを Tailwind クラスへ置換完了</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> sm / md / lg ブレイクポイントでホームが破綻しない（375 / 768 / 1024 px で目視確認）</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>.github/workflows/ci.yml</code> が PR で起動し、lint / test / build / lighthouse の各ジョブが緑</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>.github/workflows/deploy.yml</code> のスケルトンが配置され、<code>workflow_dispatch</code> で手動実行可能（実 Heroku 連携は v0.1 リリース時に有効化）</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Playwright の E01（<code>&lt;h1&gt;</code> 表示確認）が <code>npm run test:e2e</code> でパス</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Lighthouse CI のレポートが artifact として保存される</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>tsconfig.json</code> の <code>exactOptionalPropertyTypes: true</code> 再有効化試行（不可なら明確な理由を ADR 化）</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> runbook 6 本のスケルトンが <code>ops/runbook/</code> に存在</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>npm run check</code> 緑、<code>npm run build</code> 緑</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> BaseLayout / index.astro の <code>&lt;style&gt;</code> タグを Tailwind クラスへ置換完了</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> sm / md / lg ブレイクポイントでホームが破綻しない（375 / 768 / 1024 px で目視確認）</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <code>.github/workflows/ci.yml</code> が PR で起動し、lint / test / build の各ジョブが緑（lighthouse は main 限定で発火）</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <code>.github/workflows/deploy.yml</code> が main / develop push で Heroku staging へ自動デプロイ成立（v0.1 リリース時に <code>if: false</code> を解除済み）</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Playwright の E01（<code>&lt;h1&gt;</code> 表示確認）が <code>npm run test:e2e</code> でパス（12 シナリオ）</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Lighthouse CI のレポートが artifact として保存される</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <code>tsconfig.json</code> の <code>exactOptionalPropertyTypes: true</code> 再有効化（IT-2 で <code>noUncheckedIndexedAccess: true</code> も同時に有効化）</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> runbook 6 本のスケルトンが <code>ops/runbook/</code> に存在（既存 3 本と合計 9 本）</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <code>npm run check</code> 緑、<code>npm run build</code> 緑</li>
 </ul>
 <hr />
 <h2 id="_5">ユーザーストーリー<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
@@ -4699,16 +4699,16 @@
 <h2 id="_14">完了条件<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
 <h3 id="definition-of-done">Definition of Done<a class="headerlink" href="#definition-of-done" title="Permanent link">&para;</a></h3>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> コードがリポジトリにマージ済み（<code>develop</code> ブランチに到達）</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>npm run check</code>（lint + typecheck + format + test）がローカルで成功</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>npm run build</code> が成功し、<code>apps/web/dist/</code> が生成される</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>node apps/web/server.js</code> を手動起動し <code>/healthz</code> と <code>/</code> が応答する</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Playwright の E01 シナリオが <code>npm run test:e2e</code> で緑</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Lighthouse CI が v0.1 予算（Performance ≥ 80 / SEO ≥ 90 / A11y ≥ 90）を満たす</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>.github/workflows/ci.yml</code> が PR で自動実行される</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> runbook 9 本（既存 3 + 新規 6）すべてが <code>ops/runbook/</code> に存在</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> イテレーションふりかえり（<code>docs/development/retrospective-2.md</code>）作成</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> 完了報告書（<code>docs/development/iteration_report-2.md</code>）作成</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> コードがリポジトリにマージ済み（v0.1 リリース PR #1 で main に到達・<code>fb533f5</code>）</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <code>npm run check</code>（lint + typecheck + format + test）がローカルで成功</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <code>npm run build</code> が成功し、<code>apps/web/dist/</code> が生成される</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <code>node apps/web/server.js</code> を手動起動し <code>/healthz</code> と <code>/</code> が応答する</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Playwright の E01 シナリオが <code>npm run test:e2e</code> で緑（12 シナリオ）</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Lighthouse CI が v0.1 予算（Performance ≥ 80 / SEO ≥ 90 / A11y ≥ 90）を満たす</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> <code>.github/workflows/ci.yml</code> が PR で自動実行される（PR #1 で確認済み）</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> runbook 9 本（既存 3 + 新規 6）すべてが <code>ops/runbook/</code> に存在</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> イテレーションふりかえり（<code>docs/development/retrospective-2.md</code>）作成</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> 完了報告書（<code>docs/development/iteration_report-2.md</code>）作成</li>
 </ul>
 <h3 id="_15">デモ項目<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
 <ol>
