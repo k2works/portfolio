@@ -1,0 +1,165 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const { title, description, ogImage } = Astro.props;
+
+const siteName = "Portfolio";
+const fallbackDescription =
+  "採用・営業向け個人ポートフォリオ。経歴 / 実績 / スキル / 連絡先を Markdown ベースで管理しています。";
+const finalDescription = description ?? fallbackDescription;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
+
+const navItems = [
+  { href: "/", label: "Home" },
+  { href: "/works/", label: "Works" },
+  { href: "/skills/", label: "Skills" },
+  { href: "/contact/", label: "Contact" },
+  { href: "/docs/", label: "Tech Notes ↗", external: false },
+];
+
+const currentPath = Astro.url.pathname;
+const year = new Date().getFullYear();
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={finalDescription} />
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={finalDescription} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:site_name" content={siteName} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={finalDescription} />
+  </head>
+  <body>
+    <a href="#main" class="skip-link">メインコンテンツへ移動</a>
+
+    <header>
+      <div class="header-inner">
+        <a href="/" class="logo" aria-label="ホームへ">{siteName}</a>
+        <nav aria-label="メインナビゲーション">
+          <ul>
+            {
+              navItems.map((item) => {
+                const isCurrent =
+                  item.href === "/" ? currentPath === "/" : currentPath.startsWith(item.href);
+                return (
+                  <li>
+                    <a href={item.href} aria-current={isCurrent ? "page" : undefined}>
+                      {item.label}
+                    </a>
+                  </li>
+                );
+              })
+            }
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer>
+      <p>© {year} {siteName}</p>
+      <ul aria-label="ソーシャルリンク">
+        <li>
+          <a href="https://github.com/k2works" target="_blank" rel="noopener noreferrer">GitHub ↗</a
+          >
+        </li>
+        <li>
+          <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer"
+            >LinkedIn ↗</a
+          >
+        </li>
+        <li>
+          <a href="https://github.com/k2works/portfolio" target="_blank" rel="noopener noreferrer"
+            >このサイトのソース ↗</a
+          >
+        </li>
+      </ul>
+    </footer>
+
+    <style>
+      .skip-link {
+        position: absolute;
+        left: -9999px;
+        top: 0;
+      }
+      .skip-link:focus {
+        position: static;
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        background: #ffeb3b;
+        color: #000;
+      }
+      header {
+        border-bottom: 1px solid currentColor;
+        padding: 1rem 0;
+      }
+      .header-inner {
+        max-width: 64rem;
+        margin: 0 auto;
+        padding: 0 1rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+      .logo {
+        font-weight: 700;
+        text-decoration: none;
+      }
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 1rem;
+        margin: 0;
+        padding: 0;
+        flex-wrap: wrap;
+      }
+      nav a[aria-current="page"] {
+        font-weight: 700;
+        text-decoration: underline;
+      }
+      main {
+        max-width: 64rem;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+      }
+      footer {
+        max-width: 64rem;
+        margin: 2rem auto 0;
+        padding: 1rem;
+        border-top: 1px solid currentColor;
+      }
+      footer ul {
+        list-style: none;
+        display: flex;
+        gap: 1rem;
+        margin: 0.5rem 0 0;
+        padding: 0;
+        flex-wrap: wrap;
+      }
+    </style>
+  </body>
+</html>

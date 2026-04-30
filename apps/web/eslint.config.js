@@ -26,8 +26,23 @@ export default [
   },
   {
     files: ["**/*.{js,mjs,cjs}"],
+    languageOptions: {
+      globals: {
+        process: "readonly",
+        console: "readonly",
+        Buffer: "readonly",
+        __dirname: "readonly",
+        __filename: "readonly",
+        global: "readonly",
+        setTimeout: "readonly",
+        clearTimeout: "readonly",
+        setInterval: "readonly",
+        clearInterval: "readonly",
+      },
+    },
     rules: {
       "@typescript-eslint/no-require-imports": "off",
+      "no-console": "off",
     },
   },
   {
