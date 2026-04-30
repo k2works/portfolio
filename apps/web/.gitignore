@@ -6,6 +6,10 @@ dist/
 node_modules/
 npm-debug.log*
 
+# npm workspaces ではルートの package-lock.json に集約するため、
+# サブパッケージの lock は追跡しない（--prefix での install 時に生成されることがある）
+package-lock.json
+
 # 環境変数（apps/web 固有がある場合）
 .env
 .env.local
