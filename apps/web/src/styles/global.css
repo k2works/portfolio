@@ -9,6 +9,7 @@
   --color-accent: #4f46e5;
   --color-muted: #6b7280;
   --color-border: rgba(0, 0, 0, 0.12);
+  --color-tag-bg: rgba(0, 0, 0, 0.06);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -18,6 +19,7 @@
     --color-accent: #818cf8;
     --color-muted: #9ca3af;
     --color-border: rgba(255, 255, 255, 0.16);
+    --color-tag-bg: rgba(255, 255, 255, 0.08);
   }
 }
 
