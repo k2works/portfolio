@@ -9,7 +9,7 @@
 - [開発](./development/index.md) — リリース計画とイテレーション管理の入口です。
 - [運用](./operation/index.md) — 環境構築、デプロイ、運用関連の入口です。
 - [レビュー](./review/index.md) — 分析・開発レビュー結果の記録です。
-- [ADR](./adr/index.md) — 技術的意思決定の記録（5 件）。
+- [ADR](./adr/index.md) — 技術的意思決定の記録（7 件）。
 - [記事](./article/index.md) — 学習用の記事シリーズの入口です。
 
 ## ドキュメント構成
@@ -18,10 +18,10 @@
 | :--- | :--- | :--- |
 | [要件](./requirements/index.md) | RDRA 2.0 とユースケース整理の入口 | 4 件のドキュメントを配置 |
 | [設計](./design/index.md) | アーキテクチャ、モデル、テスト、非機能の整理 | 8 件のドキュメントを配置 |
-| [開発](./development/index.md) | リリース計画、イテレーション計画、進捗管理 | 1 件（リリース計画）を配置 |
+| [開発](./development/index.md) | リリース計画、イテレーション計画、進捗管理 | リリース計画 + IT-1〜IT-3 報告書 + v0.1 リリース完了報告書を配置 |
 | [運用](./operation/index.md) | 環境構築、デプロイ、運用手順の整理 | 2 件のセットアップ手順書を配置 |
 | [レビュー](./review/index.md) | 分析・開発レビュー結果の記録 | 1 件（分析成果物レビュー）を配置 |
-| [ADR](./adr/index.md) | Architecture Decision Records の管理 | 5 件の ADR を配置 |
+| [ADR](./adr/index.md) | Architecture Decision Records の管理 | 7 件の ADR を配置 |
 | [記事](./article/index.md) | 学習用の記事シリーズ一覧 | `index.md` を整備済み |
 | [リファレンス](./reference/index.md) | 開発ガイドラインやベストプラクティス | 30 件のドキュメントを配置 |
 | [テンプレート](./template/index.md) | 各種ドキュメントの作成テンプレート | 18 件のテンプレートを配置 |
@@ -46,17 +46,21 @@
 - [非機能要件](./design/non_functional.md) — SLO 99.5%、Lighthouse 90+、WCAG 2.1 AA
 - [運用要件](./design/operation.md) — 個人運用前提の運用フロー、SEV 別対応、ランブック構成
 
-### 開発（1 件）
+### 開発
 
 - [リリース計画](./development/release_plan.md) — v0.1（Walking Skeleton）→ v1.0 の 4 段階リリース、想定 10 イテレーション
+- [v0.1 リリース完了報告書](./development/release_report-0_1_0.md) — Walking Skeleton（IT-1〜IT-3 / 16 SP / 100%・98.6% 工期短縮）
+- [IT-1〜IT-3 完了報告書](./development/index.md) — 各イテレーションの達成 SP / 品質メトリクス / 振り返り
 
-### ADR（5 件）
+### ADR（7 件）
 
 - [ADR-0001](./adr/0001-frontend-framework-astro.md) — フロントエンドフレームワークに Astro を採用
 - [ADR-0002](./adr/0002-hosting-heroku.md) — ホスティングプラットフォームに Heroku を採用
 - [ADR-0003](./adr/0003-mkdocs-coexistence-strategy.md) — MkDocs を「Tech Notes」として共存
 - [ADR-0004](./adr/0004-cloudflare-front-cdn.md) — Cloudflare 無料プランを前段に配置
-- [ADR-0005](./adr/0005-build-pipeline-unification.md) — ビルド境界を GitHub Actions に一本化
+- [ADR-0005](./adr/0005-build-pipeline-unification.md) — ビルド境界を GitHub Actions に一本化（**部分置換**: ADR-0007）
+- [ADR-0006](./adr/0006-heroku-deploy-authentication.md) — Heroku デプロイの認証は CLI + `~/.netrc` 経由
+- [ADR-0007](./adr/0007-mkdocs-independent-delivery.md) — MkDocs を CI から外し GitHub Pages へ独立配信
 
 ### レビュー（1 件）
 
