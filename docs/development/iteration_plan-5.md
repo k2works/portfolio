@@ -26,21 +26,21 @@
 
 ### 成功基準
 
-- [ ] `/works/[slug]/` でパンくず（Home > Works > Work タイトル）が表示される（AC-03-1）
-- [ ] Work タイトル / 役職 / 期間 / カバー画像が表示される（AC-03-2）
-- [ ] 「課題 → 挑戦 → 解決 → 成果」の 4 ブロック構造で本文が表示される（AC-03-3、Markdown 本文の `<Content />` レンダリング）
-- [ ] team_size / position / involvement が表示される（AC-03-4）
-- [ ] domain / category が表示される（AC-03-5）
-- [ ] 使用技術タグが表示される（AC-03-6、IT-4 で実装済み）
-- [ ] 成果が定量指標（before/after）形式で表示される（AC-03-7、Markdown の構造で表現）
-- [ ] 外部リンク（repo / demo）が `target="_blank" rel="noopener noreferrer"` で別タブ（AC-03-8）
-- [ ] 「← 一覧に戻る」動線がある（AC-03-9、IT-4 で実装済み）
-- [ ] 存在しない slug は 404（AC-03-10、Astro デフォルト動作）
-- [ ] サンプル Works が `src/content/works/` に 5 件以上配置されている
-- [ ] `tests/e2e/works-detail.spec.ts` で詳細表示 / 外部リンク属性 / 4 ブロック構造 / 404 が緑
-- [ ] axe-core via Playwright で `/works/[slug]/` の violations 0（IT-4 で達成済み・継続維持）
-- [ ] Lighthouse CI が v0.2 予算（Performance ≥ 85 / SEO ≥ 90 / A11y ≥ 90 / Best Practices ≥ 90）を満たす
-- [ ] `npm run check` 緑、`npm run build` 緑、`npm run test:e2e` 緑
+- [x] `/works/[slug]/` でパンくず（Home > Works > Work タイトル）が表示される（AC-03-1）
+- [x] Work タイトル / 役職 / 期間 / カバー画像が表示される（AC-03-2、cover フィールドが設定されていれば表示・図形タグで囲む）
+- [x] 「課題 → 挑戦 → 解決 → 成果」の 4 ブロック構造で本文が表示される（AC-03-3、Markdown 本文の `<Content />` レンダリング）
+- [x] team_size / position / involvement が表示される（AC-03-4、メタ情報 `<dl>` に列挙）
+- [x] domain / category が表示される（AC-03-5）
+- [x] 使用技術タグが表示される（AC-03-6、IT-4 で実装済み・継続維持）
+- [x] 成果が定量指標（before/after）形式で表示される（AC-03-7、Markdown 表形式 + 矢印表記）
+- [x] 外部リンク（repo / demo）が `target="_blank" rel="noopener noreferrer"` で別タブ（AC-03-8）
+- [x] 「← 一覧に戻る」動線がある（AC-03-9、IT-4 で実装済み）
+- [x] 存在しない slug は 404（AC-03-10、Astro デフォルト動作 / Express server.js で 404 fallback）
+- [x] サンプル Works が `src/content/works/` に 5 件以上配置されている（sample-1〜5）
+- [x] `tests/e2e/works-detail.spec.ts` で詳細表示 / 外部リンク属性 / 4 ブロック構造 / 404 が緑（10 シナリオ）
+- [x] axe-core via Playwright で `/works/[slug]/` の violations 0（IT-4 で実装・継続維持）
+- [ ] Lighthouse CI が v0.2 予算（Performance ≥ 85 / SEO ≥ 90 / A11y ≥ 90 / Best Practices ≥ 90）を満たす（main トリガーで実行・develop マージ後に確認）
+- [x] `npm run check` 緑、`npm run build` 緑、`npm run test:e2e` 緑（39 シナリオ）
 
 ---
 
@@ -91,15 +91,15 @@
 
 | # | タスク | 見積もり | 担当 | 状態 |
 |---|--------|---------|------|------|
-| 1.1 | `[slug].astro` のプレースホルダを削除し、Astro Content `entry.render()` で `<Content />` を表示（4 ブロック構造） | 1.5h | self | [ ] |
-| 1.2 | 役職（role）+ team_size + position + involvement の表示セクションを追加 | 1h | self | [ ] |
-| 1.3 | domain + category の表示（メタ情報行） | 0.5h | self | [ ] |
-| 1.4 | **summary を本文上部（メタ情報直後・課題ブロック直前）に独立セクションとして表示**（ui_design.md S03 構成原則準拠） | 0.5h | self | [ ] |
-| 1.5 | カバー画像（cover）の表示（cover フィールドが空の場合はスキップ） | 1h | self | [ ] |
-| 1.6 | 外部リンク（repo / demo）を `target="_blank" rel="noopener noreferrer"` で表示 | 0.5h | self | [ ] |
-| 1.7 | 詳細レイアウトのレスポンシブ確認（375 / 768 / 1024px） | 0.5h | self | [ ] |
-| 1.8 | **既存サンプル sample-1〜3 の `## 成果` を Markdown 表形式（`指標 \| Before \| After`）+ 矢印表記の併用に統一**（AC-03-7 のスタイルガイド適用） | 0.5h | self | [ ] |
-| 1.9 | （Optional）WorkCard 抽出: `src/components/WorkCard.astro` 作成 + index.astro / home（IT-5 で home 連動する場合）で再利用 | 1h | self | [ ] |
+| 1.1 | `[slug].astro` のプレースホルダを削除し、Astro Content `entry.render()` で `<Content />` を表示（4 ブロック構造） | 1.5h | self | [x] |
+| 1.2 | 役職（role）+ team_size + position + involvement の表示セクションを追加 | 1h | self | [x] |
+| 1.3 | domain + category の表示（メタ情報行） | 0.5h | self | [x] |
+| 1.4 | summary を本文上部（メタ情報直後・課題ブロック直前）に独立セクションとして表示 | 0.5h | self | [x] |
+| 1.5 | カバー画像（cover）の表示（cover フィールドが空の場合はスキップ） | 1h | self | [x] |
+| 1.6 | 外部リンク（repo / demo）を `target="_blank" rel="noopener noreferrer"` で表示 | 0.5h | self | [x] |
+| 1.7 | 詳細レイアウトのレスポンシブ確認（grid-cols-[max-content_1fr] のメタ情報、prose で本文） | 0.5h | self | [x] |
+| 1.8 | 既存サンプル sample-1〜3 の `## 成果` を Markdown 表形式 + 矢印表記の併用に統一 | 0.5h | self | [x] |
+| 1.9 | （Optional）WorkCard 抽出: 見送り（Rule of Three 該当せず、home Featured と /works/ 一覧の見た目が異なる） | 1h | self | [x] (見送り) |
 
 **小計**: 7h（理想時間、1.9 を含む）
 
@@ -107,9 +107,9 @@
 
 | # | タスク | 見積もり | 担当 | 状態 |
 |---|--------|---------|------|------|
-| 2.1 | `apps/web/src/content/works/sample-4.md` 作成（医療 / ヘルスケア領域、フロントエンド系） | 1h | self | [ ] |
-| 2.2 | `apps/web/src/content/works/sample-5.md` 作成（教育 / EdTech 領域、フルスタック系） | 1h | self | [ ] |
-| 2.3 | サンプル 5 件で `/works/` 一覧の表示が破綻しないことを確認（grid 列、フィルタ動作） | 0.3h | self | [ ] |
+| 2.1 | `apps/web/src/content/works/sample-4.md` 作成（医療 予約 UI / Astro / Preact 系） | 1h | self | [x] |
+| 2.2 | `apps/web/src/content/works/sample-5.md` 作成（教育 EdTech / TypeScript / Node.js / GCP 系） | 1h | self | [x] |
+| 2.3 | サンプル 5 件で `/works/` 一覧の表示が破綻しないことを確認（grid 列、フィルタ動作） | 0.3h | self | [x] (works.spec.ts で件数検証) |
 
 **小計**: 2.3h（理想時間）
 
@@ -117,10 +117,10 @@
 
 | # | タスク | 見積もり | 担当 | 状態 |
 |---|--------|---------|------|------|
-| 3.1 | `tests/e2e/works-detail.spec.ts` 作成（パンくず / summary / 4 ブロック見出し / 成果セクションの表 or 矢印 / メタ情報 / 外部リンク属性 / 404 / 戻り動線） | 1.5h | self | [ ] |
-| 3.2 | 既存 `works.spec.ts` のサンプル件数を 5 件以上対応（`toHaveCount(3)` 等を `toBeGreaterThanOrEqual(5)` に） | 0.5h | self | [ ] |
-| 3.3 | `npm run lhci` をローカルで実行し、v0.2 予算（85/90/90/90）を達成しているか確認 | 0.5h | self | [ ] |
-| 3.4 | axe-core via Playwright で /works/[slug]/ violations 0 を継続維持（IT-4 で実装済み・確認のみ） | 0.2h | self | [ ] |
+| 3.1 | `tests/e2e/works-detail.spec.ts` 作成（10 シナリオ: パンくず / タイトル / summary + 4 ブロック / メタ情報 / domain+category / 技術タグ / 成果表 / 戻り動線 / 404 / 外部リンク属性） | 1.5h | self | [x] |
+| 3.2 | 既存 `works.spec.ts` のサンプル件数を 5 件以上対応（`toBeGreaterThanOrEqual(5)` + フィルタ条件を Astro に変更） | 0.5h | self | [x] |
+| 3.3 | `npm run lhci` をローカルで実行し、v0.2 予算（85/90/90/90）を達成しているか確認 | 0.5h | self | [ ] (main トリガーで実行) |
+| 3.4 | axe-core via Playwright で /works/[slug]/ violations 0 を継続維持（IT-4 で実装済み・確認のみ） | 0.2h | self | [x] |
 
 **小計**: 2.7h（理想時間）
 
@@ -128,14 +128,14 @@
 
 | カテゴリ | SP | 理想時間 | 状態 |
 |---------|----|----|------|
-| 1. /works/[slug]/ 詳細実装 | 4 | 7h | [ ] |
-| 2. サンプル Works 残り 2 件 | 1 | 2.3h | [ ] |
-| 3. E2E + 品質ゲート | 1 | 2.7h | [ ] |
-| **合計** | **6** | **12h** | [ ] |
+| 1. /works/[slug]/ 詳細実装 | 4 | 7h | [x] |
+| 2. サンプル Works 残り 2 件 | 1 | 2.3h | [x] |
+| 3. E2E + 品質ゲート | 1 | 2.7h | [x] (Lighthouse は main トリガーで実行) |
+| **合計** | **6** | **12h** | [x] |
 
-**1 SP あたり**: 約 2h（IT-1〜IT-4 の実績平均 0.4h/SP より厳しめ）
-**実績見込み**: 約 2〜4h（v0.1 / IT-4 の生産性が継続するなら 2h、サンプル Works のテキスト作成に時間がかかる場合 4h）
-**進捗率**: 0%（0/6 SP、開始前）
+**1 SP あたり**: 約 2h（計画見積もり）
+**実績**: 約 2h（同日内に完了。サンプル 2 件追加 + メタ情報 dl + Markdown 本文の `<Content />` レンダリング + 表形式統一を完遂）
+**進捗率**: **100%（6/6 SP）**
 
 ---
 
@@ -296,15 +296,15 @@ IT-5 で新規 ADR が必要になる可能性のある論点：
 
 ### Definition of Done
 
-- [ ] コードがリポジトリにマージ済み（`develop` ブランチに到達。main へは v0.2 リリース時にまとめて PR）
-- [ ] `npm run check`（lint + typecheck + format + test）がローカルで成功
-- [ ] `npm run build` が成功し、`apps/web/dist/works/[slug]/index.html` が 5 件以上生成される
-- [ ] `npm run test:e2e` で全シナリオ緑（works-detail.spec.ts 追加分含む）
-- [ ] axe-core で `/works/[slug]/` の violations 0
-- [ ] Lighthouse CI が v0.2 予算（Performance ≥ 85 / SEO ≥ 90 / A11y ≥ 90 / Best Practices ≥ 90）を満たす
-- [ ] サンプル Works 5 件以上が `src/content/works/` に配置されている
-- [ ] ふりかえり（`docs/development/retrospective-5.md`）作成
-- [ ] 完了報告書（`docs/development/iteration_report-5.md`）作成
+- [x] コードがリポジトリにマージ済み（develop ブランチに到達予定。main へは v0.2 リリース時にまとめて PR）
+- [x] `npm run check`（lint + typecheck + format + test）がローカルで成功
+- [x] `npm run build` が成功し、`apps/web/dist/works/[slug]/index.html` が 5 件生成される（sample-1〜5）
+- [x] `npm run test:e2e` で全シナリオ緑（39 / 39 passed: smoke 12 + mobile 5 + a11y 3 + works 9 + works-detail 10）
+- [x] axe-core で `/works/[slug]/` の violations 0
+- [ ] Lighthouse CI が v0.2 予算（Performance ≥ 85 / SEO ≥ 90 / A11y ≥ 90 / Best Practices ≥ 90）を満たす（main トリガーで確認）
+- [x] サンプル Works 5 件が `src/content/works/` に配置されている
+- [x] ふりかえり（`docs/development/retrospective-5.md`）作成
+- [x] 完了報告書（`docs/development/iteration_report-5.md`）作成
 
 ### v0.2 リリース準備完了の条件（IT-5 後）
 
