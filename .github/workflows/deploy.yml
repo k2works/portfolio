@@ -2,7 +2,7 @@ name: Deploy
 
 on:
   push:
-    branches: [main]
+    branches: [main, develop]
   workflow_dispatch:
     inputs:
       target:
@@ -21,10 +21,8 @@ jobs:
   deploy-staging:
     name: Deploy to Heroku staging
     runs-on: ubuntu-latest
-    # secrets（HEROKU_API_KEY 等）が設定されるまではスキップ。
-    # v0.1 リリース時に下記の if を以下に置き換え:
-    #   if: github.event_name == 'push' || github.event.inputs.target == 'staging'
-    if: false
+    # main / develop への push、または workflow_dispatch（target=staging）で起動
+    if: github.event_name == 'push' || github.event.inputs.target == 'staging'
     steps:
       - uses: actions/checkout@v4
       - name: Setup Node.js
