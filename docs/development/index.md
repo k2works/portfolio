@@ -16,7 +16,8 @@
 |---------------|------|-----------|-----------|------|
 | IT-1 | [iteration_plan-1.md](./iteration_plan-1.md) | [retrospective-1.md](./retrospective-1.md) | [iteration_report-1.md](./iteration_report-1.md) | 完了（5/5 SP・100%） |
 | IT-2 | [iteration_plan-2.md](./iteration_plan-2.md) | [retrospective-2.md](./retrospective-2.md) | [iteration_report-2.md](./iteration_report-2.md) | 完了（7/7 SP・100%） |
-| IT-3 | [iteration_plan-3.md](./iteration_plan-3.md) | [retrospective-3.md](./retrospective-3.md) | [iteration_report-3.md](./iteration_report-3.md) | 完了（4/4 SP・100%・v0.1 リリース準備完了） |
+| IT-3 | [iteration_plan-3.md](./iteration_plan-3.md) | [retrospective-3.md](./retrospective-3.md) | [iteration_report-3.md](./iteration_report-3.md) | 完了（4/4 SP・100%・v0.1 リリース完了） |
+| IT-4 | [iteration_plan-4.md](./iteration_plan-4.md) | （計画中） | （計画中） | 計画策定済み（0/7 SP・v0.2-α / Works 一覧 + Content Collections） |
 
 イテレーション開始時に行を追加します。
 
@@ -27,7 +28,8 @@
 | IT-1 | 5 | 5 | 100% |
 | IT-2 | 7 | 7 | 100% |
 | IT-3 | 4 | 4 | 100% |
-| **累計** | **16** | **16** | **100%** |
+| IT-4 | 7 | 0 | 0%（着手前） |
+| **累計** | **23** | **16** | **70%** |
 
 ### フェーズ進捗
 
@@ -46,6 +48,7 @@
 | IT-1 | [iteration_report-1.md](./iteration_report-1.md) | 公開 |
 | IT-2 | [iteration_report-2.md](./iteration_report-2.md) | 公開 |
 | IT-3 | [iteration_report-3.md](./iteration_report-3.md) | 公開 |
+| IT-4 | （IT-4 完了時に作成） | 計画中 |
 
 ### リリース完了報告書
 
