@@ -26,15 +26,15 @@
 
 ### 成功基準
 
-- [ ] BaseLayout / index.astro の `<style>` タグを Tailwind クラスへ置換完了
-- [ ] sm / md / lg ブレイクポイントでホームが破綻しない（375 / 768 / 1024 px で目視確認）
-- [ ] `.github/workflows/ci.yml` が PR で起動し、lint / test / build / lighthouse の各ジョブが緑
-- [ ] `.github/workflows/deploy.yml` のスケルトンが配置され、`workflow_dispatch` で手動実行可能（実 Heroku 連携は v0.1 リリース時に有効化）
-- [ ] Playwright の E01（`<h1>` 表示確認）が `npm run test:e2e` でパス
-- [ ] Lighthouse CI のレポートが artifact として保存される
-- [ ] `tsconfig.json` の `exactOptionalPropertyTypes: true` 再有効化試行（不可なら明確な理由を ADR 化）
-- [ ] runbook 6 本のスケルトンが `ops/runbook/` に存在
-- [ ] `npm run check` 緑、`npm run build` 緑
+- [x] BaseLayout / index.astro の `<style>` タグを Tailwind クラスへ置換完了
+- [x] sm / md / lg ブレイクポイントでホームが破綻しない（375 / 768 / 1024 px で目視確認）
+- [x] `.github/workflows/ci.yml` が PR で起動し、lint / test / build の各ジョブが緑（lighthouse は main 限定で発火）
+- [x] `.github/workflows/deploy.yml` が main / develop push で Heroku staging へ自動デプロイ成立（v0.1 リリース時に `if: false` を解除済み）
+- [x] Playwright の E01（`<h1>` 表示確認）が `npm run test:e2e` でパス（12 シナリオ）
+- [x] Lighthouse CI のレポートが artifact として保存される
+- [x] `tsconfig.json` の `exactOptionalPropertyTypes: true` 再有効化（IT-2 で `noUncheckedIndexedAccess: true` も同時に有効化）
+- [x] runbook 6 本のスケルトンが `ops/runbook/` に存在（既存 3 本と合計 9 本）
+- [x] `npm run check` 緑、`npm run build` 緑
 
 ---
 
@@ -276,16 +276,16 @@ IT-2 で新規 ADR が必要になる可能性のある論点：
 
 ### Definition of Done
 
-- [ ] コードがリポジトリにマージ済み（`develop` ブランチに到達）
-- [ ] `npm run check`（lint + typecheck + format + test）がローカルで成功
-- [ ] `npm run build` が成功し、`apps/web/dist/` が生成される
-- [ ] `node apps/web/server.js` を手動起動し `/healthz` と `/` が応答する
-- [ ] Playwright の E01 シナリオが `npm run test:e2e` で緑
-- [ ] Lighthouse CI が v0.1 予算（Performance ≥ 80 / SEO ≥ 90 / A11y ≥ 90）を満たす
-- [ ] `.github/workflows/ci.yml` が PR で自動実行される
-- [ ] runbook 9 本（既存 3 + 新規 6）すべてが `ops/runbook/` に存在
-- [ ] イテレーションふりかえり（`docs/development/retrospective-2.md`）作成
-- [ ] 完了報告書（`docs/development/iteration_report-2.md`）作成
+- [x] コードがリポジトリにマージ済み（v0.1 リリース PR #1 で main に到達・`fb533f5`）
+- [x] `npm run check`（lint + typecheck + format + test）がローカルで成功
+- [x] `npm run build` が成功し、`apps/web/dist/` が生成される
+- [x] `node apps/web/server.js` を手動起動し `/healthz` と `/` が応答する
+- [x] Playwright の E01 シナリオが `npm run test:e2e` で緑（12 シナリオ）
+- [x] Lighthouse CI が v0.1 予算（Performance ≥ 80 / SEO ≥ 90 / A11y ≥ 90）を満たす
+- [x] `.github/workflows/ci.yml` が PR で自動実行される（PR #1 で確認済み）
+- [x] runbook 9 本（既存 3 + 新規 6）すべてが `ops/runbook/` に存在
+- [x] イテレーションふりかえり（`docs/development/retrospective-2.md`）作成
+- [x] 完了報告書（`docs/development/iteration_report-2.md`）作成
 
 ### デモ項目
 
