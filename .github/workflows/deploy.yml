@@ -36,6 +36,8 @@ jobs:
         run: npm ci
       - name: Build Astro (CI チェック・Heroku 側でも再ビルドされる)
         run: npm run --workspace @portfolio/web build
+      - name: Install Heroku CLI
+        run: curl https://cli-assets.heroku.com/install.sh | sh
       - name: Deploy to Heroku staging via git push
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
@@ -44,10 +46,10 @@ jobs:
         run: |
           git config --global user.email "$HEROKU_EMAIL"
           git config --global user.name "GitHub Actions"
-          # Heroku の git push は HTTP Basic 認証。ユーザー名は任意、
-          # API Key だけが認証要素のため "x" を使う。secrets は GitHub Actions
-          # が自動マスクするためログに露出しない。
-          git remote add heroku "https://x:${HEROKU_API_KEY}@git.heroku.com/${HEROKU_APP}.git"
+          # Heroku は HTTP Basic 認証（URL 埋め込み）を 2024 年に非推奨化したため、
+          # Heroku CLI が ~/.netrc を自動生成する経路で認証する。
+          # HEROKU_API_KEY 環境変数を CLI が拾い、git push heroku で透過的に使う。
+          heroku git:remote -a "$HEROKU_APP"
           git push heroku HEAD:main --force
 
   promote-to-production:
