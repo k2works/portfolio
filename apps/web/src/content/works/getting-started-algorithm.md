@@ -16,7 +16,7 @@ team_size: 1
 position: "オーナー / 単独開発者"
 involvement: "lead"
 repo: "https://github.com/k2works/getting-started-algorithm"
-demo: "https://k2works.github.io/getting-started-algorithm/slide/%E3%82%B9%E3%83%A9%E3%82%A4%E3%83%89.html"
+demo: "https://k2works.github.io/getting-started-algorithm/"
 featured: false
 ---
 
@@ -31,6 +31,11 @@ featured: false
 ## 解決
 
 `gulp spec` で写経の進捗管理、`gulp mkdocs:serve` でローカル教材プレビュー、`gulp journal:generate` で写経ジャーナル自動化を統合。`package.json` の `claude:yolo` / `copilot:yolo` / `codex:yolo` / `gemini:yolo` で 4 ツールを同条件で起動できる。短期間（約 3 週間）で集中的に教材を整備し、20 PR をマージした。
+
+### 公開先
+
+- <a href="https://k2works.github.io/getting-started-algorithm/" target="_blank" rel="noopener noreferrer">ドキュメント（教材本体）↗</a>
+- <a href="https://k2works.github.io/getting-started-algorithm/slide/%E3%82%B9%E3%83%A9%E3%82%A4%E3%83%89.html" target="_blank" rel="noopener noreferrer">スライド ↗</a>
 
 ## 成果
 
