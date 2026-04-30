@@ -32,6 +32,11 @@ featured: true
 
 各言語ごとに 12 章 × 4 部の構造（環境構築 → 基礎 → OOP/型クラス → 関数型）を共通化し、言語別の差異だけを章内で表現する設計を採用。GitHub Codespaces を 1 クリック起動できるよう `.devcontainer` を整備し、`gh codespace create --repo k2works/getting-started-tdd --branch sandbox` で写経環境がブラウザだけで起動する。`package.json` に `claude:yolo` / `copilot:yolo` / `codex:yolo` / `gemini:yolo` を仕込み、AI とのペアプログラミングを摩擦なく始められるようにした。教材本体は MkDocs + GitHub Pages で配信し、スライドも同時公開している。
 
+### 公開先
+
+- <a href="https://k2works.github.io/getting-started-tdd/article/" target="_blank" rel="noopener noreferrer">教材記事（写経の本体）↗</a>
+- <a href="https://k2works.github.io/getting-started-tdd/slide/%E3%82%B9%E3%83%A9%E3%82%A4%E3%83%89.html" target="_blank" rel="noopener noreferrer">スライド ↗</a>
+
 ## 成果
 
 | 指標          | Before                     | After                                               |
