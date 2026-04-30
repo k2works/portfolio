@@ -8,7 +8,7 @@
 
 | ドキュメント | 説明 |
 |-------------|------|
-| リリース計画 | リリース全体のスコープ、スケジュール、ベロシティ、バッファ戦略 |
+| [リリース計画](./release_plan.md) | v0.1（Walking Skeleton）→ v0.2（Works）→ v0.3（Skills/Contact/Dark）→ v1.0（A11y/Tech Notes/OGP）の 4 段階リリース、想定 10 イテレーション、Lighthouse 予算の段階導入 |
 
 ### イテレーション計画
 
