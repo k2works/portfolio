@@ -72,6 +72,7 @@
 - AC-02-5: 0 件時は「該当する Work がありません + フィルタ解除」を表示
 - AC-02-6: 件数表示（「N 件中 M 件を表示」）がフィルタ近傍にある
 - AC-02-7: Tab で各タグへ移動、Enter で適用、現在選択は `aria-pressed="true"`
+- AC-02-8: 不明タグでアクセスされた場合は「All」状態で全件表示 + URL を `/works/` に正規化（[ui_design.md S02](../design/ui_design.md#s02-成果物一覧) 参照）
 
 #### US-13（IT-4・残 2 SP）: Content Collections + Zod スキーマ
 
@@ -108,10 +109,11 @@
 | 2.4 | 「All」での絞り込み解除リンク + URL パラメータと整合 | 0.5h | self | [ ] |
 | 2.5 | 件数表示「N 件中 M 件を表示」をフィルタ近傍に配置 | 0.3h | self | [ ] |
 | 2.6 | 0 件時メッセージ + フィルタ解除リンク | 0.5h | self | [ ] |
-| 2.7 | `BaseLayout.astro` のナビゲーションに Works を追加（Home / Works / About / Contact のうち Home / Works を有効化） | 0.5h | self | [ ] |
-| 2.8 | レスポンシブ確認（375 / 768 / 1024px でカードグリッドが破綻しない） | 0.5h | self | [ ] |
+| 2.7 | 不明タグの URL 正規化（不明な `?tag=...` で訪問された場合は「All」状態にして URL を `/works/` に書き換える、JS で `history.replaceState` を使用） | 0.5h | self | [ ] |
+| 2.8 | `BaseLayout.astro` のナビゲーションに Works を追加（Home / Works / About / Contact のうち Home / Works を有効化） | 0.5h | self | [ ] |
+| 2.9 | レスポンシブ確認（375 / 768 / 1024px でカードグリッドが破綻しない） | 0.5h | self | [ ] |
 
-**小計**: 6.8h（理想時間）
+**小計**: 7.3h（理想時間、タスク 2.7 = 不明タグ正規化を追加）
 
 #### 3. /works/[slug]/ 動的ルーティング土台（0.5 SP）
 
@@ -138,10 +140,10 @@
 | カテゴリ | SP | 理想時間 | 状態 |
 |---------|----|----|------|
 | 1. Content Collections + Zod スキーマ | 2 | 3.3h | [ ] |
-| 2. /works/ 一覧画面 | 4 | 6.8h | [ ] |
+| 2. /works/ 一覧画面 | 4 | 7.3h | [ ] |
 | 3. /works/[slug]/ 動的ルーティング土台 | 0.5 | 1.7h | [ ] |
 | 4. E2E + axe-core | 0.5 | 3h | [ ] |
-| **合計** | **7** | **14.8h** | [ ] |
+| **合計** | **7** | **15.3h** | [ ] |
 
 **1 SP あたり**: 約 2.1h（IT-1〜IT-3 の実績 0.4〜0.6h/SP より厳しめ）
 **実績見込み**: 約 3〜5h（v0.1 ほどの設計先行ボーナスは薄れるが、TDD と既存スキャフォールドの再利用で短縮可能）
@@ -280,6 +282,14 @@ IT-4 で新規 ADR が必要になる可能性のある論点：
 - Works タグフィルタを「クライアント JS」「`<a>` リンクで再読み込み」「`getStaticPaths` で全パターン生成」のどれで実装するか（タグ数が爆発した場合の方針）
 - Works のスキーマフィールド（`involvement` の enum 値など）を後方互換のために変更する場合のマイグレーション方針
 
+### 設計ドキュメントへの反映が必要な変更点
+
+整合性検証（`validating-iteration-plan` スキル）で発見した、IT-4 完了時に既存の設計ドキュメントへ反映する変更：
+
+| 対象ドキュメント | 変更箇所 | 変更内容 |
+|---|---|---|
+| `docs/design/architecture_frontend.md`（line 82-99 の Content Collections スキーマ例） | works スキーマ | IT-4 で確定する拡張スキーマ（`summary.max(200)` / `tech.min(1)` / `domain` / `category` / `team_size` / `position` / `involvement` / `demo` / `featured` を含む）で上書きする。理由: US-03 の AC-03-2〜7 を満たし、レビュー指摘 [M02](../review/design_review_20260430.md)（`team_size` / `position` / `involvement`）と [L06](../review/design_review_20260430.md)（`featured` フィールド）を反映するため |
+
 ---
 
 ## リスクと対策
@@ -305,6 +315,7 @@ IT-4 で新規 ADR が必要になる可能性のある論点：
 - [ ] `axe-core` で `/works/` の violations 0
 - [ ] Lighthouse CI が v0.2 予算（Performance ≥ 85 / SEO ≥ 90 / A11y ≥ 90 / Best Practices ≥ 90）を満たす
 - [ ] サンプル Works 3 件以上が `src/content/works/` に配置されている
+- [ ] `docs/design/architecture_frontend.md` の Content Collections スキーマ例を IT-4 確定版で上書き（整合性検証の指摘）
 - [ ] ふりかえり（`docs/development/retrospective-4.md`）作成
 - [ ] 完了報告書（`docs/development/iteration_report-4.md`）作成
 
