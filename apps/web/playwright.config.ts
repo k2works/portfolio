@@ -7,7 +7,7 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: isCI,
   retries: isCI ? 2 : 0,
-  workers: isCI ? 2 : undefined,
+  ...(isCI ? { workers: 2 } : {}),
   reporter: isCI ? [["github"], ["html"]] : "list",
   timeout: 30_000,
   expect: {
@@ -27,12 +27,14 @@ export default defineConfig({
     // { name: "firefox", use: { ...devices["Desktop Firefox"] } },
     // { name: "webkit", use: { ...devices["Desktop Safari"] } },
   ],
-  webServer: process.env.PLAYWRIGHT_BASE_URL
-    ? undefined
+  ...(process.env.PLAYWRIGHT_BASE_URL
+    ? {}
     : {
-        command: "npm run dev",
-        url: "http://localhost:4321",
-        reuseExistingServer: !isCI,
-        timeout: 60_000,
-      },
+        webServer: {
+          command: "npm run dev",
+          url: "http://localhost:4321",
+          reuseExistingServer: !isCI,
+          timeout: 60_000,
+        },
+      }),
 });
