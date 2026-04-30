@@ -183,6 +183,8 @@ heroku info -a portfolio-staging
 
 `heroku-22` 以前の場合は `heroku stack:set heroku-24 -a portfolio-staging` で更新。
 
+> **実機メモ（2026-04-30 時点）**: 新規 `heroku apps:create` で生成される URL はハッシュ付き形式（例: `<app>-<hash>.herokuapp.com`）。カスタムドメインを設定するまではこの URL を使う。
+
 ### 1.4 Buildpack の設定
 
 ```bash
@@ -203,6 +205,8 @@ heroku ps:scale web=1 -a portfolio-staging
 ```
 
 > **コスト**: Eco Dyno はスリープ込みで $5/月。30 分アイドルでスリープし、再リクエスト時に 5〜10 秒のコールドスタートが発生します（staging では許容）。
+
+> **実機メモ**: アプリ作成直後（デプロイ前）に `heroku ps:type eco` を実行すると `Error: No process types on <app>. Upload a Procfile to add process types.` が返る。これは **Procfile が反映されていないだけ**で、初回デプロイ後に再実行すれば成功する。
 
 ---
 
@@ -747,20 +751,24 @@ curl -I https://staging.portfolio.example.com/healthz
 4. デプロイ完了を Actions タブで確認
 5. `https://staging.portfolio.example.com/healthz` にブラウザでアクセス
 
-### 7.2 手動デプロイ（緊急時）
+### 7.2 手動デプロイ（緊急時 / 初回動作確認）
 
 ```bash
 # Heroku のリモートを追加
 heroku git:remote -a portfolio-staging
 
-# main ブランチを push
+# main ブランチを push（develop ブランチ運用なら develop:main で送る）
 git push heroku main
+# または
+git push heroku develop:main
 
 # ログを追跡
 heroku logs --tail -a portfolio-staging
 ```
 
-> 通常運用では CI 経由デプロイを優先。手動 push は緊急時のみ。
+> 通常運用では CI 経由デプロイを優先。手動 push は緊急時、または GitHub Actions secrets 設定前の初回動作確認時のみ。
+
+> **実機メモ**: Heroku Node.js Buildpack はデフォルトで「devDependencies もインストールしてビルド後に prune」する挙動のため、`NPM_CONFIG_PRODUCTION` を設定しなくても `astro build` が動く。実測では Astro v5 + Tailwind v4 + 全 devDependencies のインストール＋ビルドで Slug サイズ 134 MB、ビルド時間約 25 秒、デプロイ完了まで合計約 1〜2 分。
 
 ---
 
@@ -781,8 +789,10 @@ curl -I https://staging.portfolio.example.com/healthz
 |---|---|---|
 | ホーム | `https://staging.portfolio.example.com/` | Basic 認証ダイアログ → 認証後にホーム表示 |
 | MkDocs | `https://staging.portfolio.example.com/docs/` | Tech Notes 表示 |
-| 404 | `https://staging.portfolio.example.com/nonexistent` | 404 ページ |
+| 404 | `https://staging.portfolio.example.com/nonexistent` | 404 ページ（Basic 認証要） |
 | robots.txt | `https://staging.portfolio.example.com/robots.txt` | `Disallow: /` |
+
+> **実機メモ**: Express の Basic 認証ミドルウェアは `/healthz` のみを除外しているため、staging では `/robots.txt` や `/sitemap-index.xml` も Basic 認証で守られる。これは staging の検索除けとして**意図通り**の挙動（クローラもアクセスできない）。production では Basic 認証を設定しないため公開アクセス可能。
 
 ### 8.3 セキュリティヘッダ確認
 
