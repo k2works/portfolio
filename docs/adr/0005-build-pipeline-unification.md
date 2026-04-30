@@ -6,7 +6,9 @@
 
 ## ステータス
 
-2026-04-30 承認
+2026-04-30 承認 / 2026-04-30 **部分置換（MkDocs ビルド統合の部分のみ [ADR-0007](./0007-mkdocs-independent-delivery.md) で置換）**
+
+> 「Astro + MkDocs を CI で統合ビルドする」という構成のうち、MkDocs ビルドの部分は ADR-0007 で「GitHub Pages への独立配信」へ分離された。本 ADR の **Astro 部分の「ビルド境界 = GitHub Actions / Heroku は Slug 受領のみ」の決定は維持** する。
 
 ## コンテキスト
 
@@ -80,9 +82,9 @@
 
 - `app.json` または `Procfile` 周辺で `buildpacks` が `heroku/nodejs` のみを参照していることを CI でチェック。
 - GitHub Actions のワークフローで `npm prune --production` の実行を必須化。
-- `mkdocs build` が CI のみで実行され、Heroku 側で実行されないことを `app.json`/`scripts` セクションで担保。
+- `mkdocs build` が Heroku 側で実行されないことを `app.json`/`scripts` セクションで担保。
 - ローカル `git push heroku main` を禁止する旨を `ops/runbook/deploy.md` に明記。
-- CI で `apps/web/dist/docs/index.html` の存在をデプロイ前に検証（MkDocs ビルド漏れ防止）。
+- ~~CI で `apps/web/dist/docs/index.html` の存在をデプロイ前に検証（MkDocs ビルド漏れ防止）。~~ **[ADR-0007](./0007-mkdocs-independent-delivery.md) で MkDocs を独立配信に分離したため無効化。**
 
 ## 備考
 
