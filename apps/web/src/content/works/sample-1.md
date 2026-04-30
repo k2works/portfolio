@@ -16,6 +16,8 @@ category: "バックエンド API"
 team_size: 5
 position: "テックリード"
 involvement: "lead"
+repo: "https://github.com/example/finance-api-rebuild"
+demo: "https://example.com/finance-api-demo"
 featured: true
 ---
 
@@ -32,6 +34,14 @@ featured: true
 境界付けられたコンテキストを 4 つに分解し、メッセージブローカー経由の非同期処理に切り替えた。CI/CD と監視を整備し、ステージング → カナリア → 本番の段階リリースを確立。
 
 ## 成果
+
+| 指標                 | Before  | After             |
+| -------------------- | ------- | ----------------- |
+| p95 レスポンスタイム | 850ms   | 340ms（60% 改善） |
+| デプロイ頻度         | 月 1 回 | 週 3 回           |
+| インシデント MTTR    | 4 時間  | 30 分             |
+
+主要数値の要約：
 
 - p95 レスポンスタイム: 850ms → 340ms（60% 改善）
 - デプロイ頻度: 月 1 回 → 週 3 回
