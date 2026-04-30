@@ -18,6 +18,7 @@ team_size: 1
 position: "オーナー / 単独執筆者"
 involvement: "lead"
 repo: "https://github.com/k2works/practical-database-design"
+demo: "https://k2works.github.io/practical-database-design/"
 featured: true
 ---
 
@@ -31,7 +32,13 @@ featured: true
 
 ## 解決
 
-PostgreSQL 16 + Flyway でマイグレーションを管理、Schemaspy で ER 図と DB ドキュメントを自動生成（`gulp schemaspy:sms:generate` + `:fas` + `:pms`）。Docker Compose で 3 業務領域の DB を独立起動、MkDocs + PlantUML で業務フロー図と ER 図を統合配信。Spring Boot 4 + MyBatis 4 + JUnit 5 + TestContainers でテストも自動化。
+PostgreSQL 16 + Flyway でマイグレーションを管理、Schemaspy で ER 図と DB ドキュメントを自動生成（`gulp schemaspy:sms:generate` + `:fas` + `:pms`）。Docker Compose で 3 業務領域の DB を独立起動、MkDocs + PlantUML で業務フロー図と ER 図を統合配信。Spring Boot 4 + MyBatis 4 + JUnit 5 + TestContainers でテストも自動化。3 業務領域それぞれを Heroku 上にデプロイし、ライブデモとして公開している。
+
+### ライブデモ
+
+- <a href="https://deploy-demo-sms-b33828d678a9.herokuapp.com/" target="_blank" rel="noopener noreferrer">販売管理システムデモ ↗</a>
+- <a href="https://deploy-demo-fas-6d8f7fd49278.herokuapp.com/" target="_blank" rel="noopener noreferrer">財務会計システムデモ ↗</a>
+- <a href="https://deploy-demo-pms-40869571939f.herokuapp.com/" target="_blank" rel="noopener noreferrer">生産管理システムデモ ↗</a>
 
 ## 成果
 
