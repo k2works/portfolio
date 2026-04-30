@@ -1,8 +1,8 @@
-site_name: Site Name
-site_description: Site Description
+site_name: Portfolio
+site_description: ポートフォリオプロジェクトのドキュメント。戦略・要件・設計・開発・運用・記事・リファレンス・テンプレートを一元管理。
 site_author: Project Team
-repo_url: https://github.com/k2works/claude-code-booster
-repo_name: claude-code-booster
+repo_url: https://github.com/k2works/portfolio
+repo_name: k2works/portfolio
 
 theme:
   name: material
@@ -52,8 +52,8 @@ extra:
   plantuml_url: http://www.plantuml.com/plantuml
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/k2works
-      name: GitHub Repository/claude-code-booster
+      link: https://github.com/k2works/portfolio
+      name: GitHub Repository/portfolio
 
 plugins:
   - search
