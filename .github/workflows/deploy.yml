@@ -47,8 +47,18 @@ jobs:
           git config --global user.email "$HEROKU_EMAIL"
           git config --global user.name "GitHub Actions"
           # Heroku は HTTP Basic 認証（URL 埋め込み）を 2024 年に非推奨化したため、
-          # Heroku CLI が ~/.netrc を自動生成する経路で認証する。
-          # HEROKU_API_KEY 環境変数を CLI が拾い、git push heroku で透過的に使う。
+          # ~/.netrc を経由した git credentials で認証する。
+          # `heroku git:remote` は remote URL を追加するだけで netrc を書かない
+          # （netrc は通常 `heroku login` が書く）ので、ここで明示的に作成する。
+          cat > "$HOME/.netrc" <<EOF
+          machine git.heroku.com
+            login $HEROKU_EMAIL
+            password $HEROKU_API_KEY
+          machine api.heroku.com
+            login $HEROKU_EMAIL
+            password $HEROKU_API_KEY
+          EOF
+          chmod 600 "$HOME/.netrc"
           heroku git:remote -a "$HEROKU_APP"
           git push heroku HEAD:main --force
 
