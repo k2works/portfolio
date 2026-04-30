@@ -1,0 +1,30 @@
+# gitleaks 設定
+# 公式: https://github.com/gitleaks/gitleaks
+
+[extend]
+# デフォルトルールを継承
+useDefault = true
+
+# プロジェクト固有の許可パターン
+[[allowlist]]
+description = "ドキュメント内のサンプル / プレースホルダーは除外"
+paths = [
+  '''docs/.*\.md$''',
+  '''ops/runbook/.*\.md$''',
+  '''README\.md$''',
+  '''\.env\.example$''',
+]
+
+[[allowlist]]
+description = "lock ファイルとビルド成果物は除外"
+paths = [
+  '''package-lock\.json$''',
+  '''apps/.*/dist/.*''',
+]
+
+# プロジェクト固有のシークレット名検出ルール（任意・必要に応じて追加）
+[[rules]]
+id = "heroku-api-key"
+description = "Heroku API Key（UUID 形式）"
+regex = '''(?i)heroku[_-]?api[_-]?key[\s:='"]+([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})'''
+keywords = ["heroku"]

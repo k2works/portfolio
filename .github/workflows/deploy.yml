@@ -1,0 +1,71 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      target:
+        description: "Deploy target"
+        required: true
+        default: staging
+        type: choice
+        options:
+          - staging
+          - production-promote
+
+permissions:
+  contents: read
+
+jobs:
+  deploy-staging:
+    name: Deploy to Heroku staging
+    runs-on: ubuntu-latest
+    # secrets（HEROKU_API_KEY 等）が設定されるまではスキップ。
+    # v0.1 リリース時に下記の if を以下に置き換え:
+    #   if: github.event_name == 'push' || github.event.inputs.target == 'staging'
+    if: false
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: npm ci
+      - name: Install MkDocs
+        run: pip install mkdocs mkdocs-material pymdown-extensions plantuml-markdown
+      - name: Build Astro
+        run: npm run --workspace @portfolio/web build
+      - name: Build MkDocs
+        run: mkdocs build -d apps/web/dist/docs
+      - name: Deploy to Heroku staging
+        uses: akhileshns/heroku-deploy@v3.13.15
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: ${{ secrets.HEROKU_APP_STAGING }}
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}
+          buildpack: heroku/nodejs
+
+  promote-to-production:
+    name: Promote staging to production
+    runs-on: ubuntu-latest
+    # secrets が設定されるまではスキップ。
+    # v0.1 リリース時に下記の if を以下に置き換え:
+    #   if: github.event.inputs.target == 'production-promote'
+    if: false
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Heroku CLI
+        run: curl https://cli-assets.heroku.com/install.sh | sh
+      - name: Promote staging to production
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: |
+          heroku pipelines:promote -a ${{ secrets.HEROKU_APP_STAGING }} \
+            --to ${{ secrets.HEROKU_APP_PRODUCTION }}
