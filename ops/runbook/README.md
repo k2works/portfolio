@@ -11,13 +11,13 @@
 | [README.md](./README.md) | 入口・目次（本ファイル） | 整備済み |
 | [deploy.md](./deploy.md) | 通常リリース手順（main マージ → staging → 手動 promote） | スケルトン（IT-1） |
 | [rollback.md](./rollback.md) | Slug ロールバック手順 | スケルトン（IT-1） |
-| hotfix.md | SEV-1 緊急修正フロー | 未作成（IT-2） |
-| disaster-recovery.md | Heroku 全停止時の GitHub Pages 退避 | 未作成（IT-2） |
-| handover.md | チーム化 / 引継ぎ資料 | 未作成（IT-2 以降） |
-| on-call.md | オンコール時の初動チェックリスト | 未作成（IT-2） |
-| secret-rotation.md | 90 日ごとのシークレットローテーション手順 | 未作成（IT-3） |
-| domain-renewal.md | ドメイン更新手順 | 未作成（v1.0 後） |
-| pre-interview-freeze.md | 面接前後の merge freeze ルール | 未作成（IT-2） |
+| [hotfix.md](./hotfix.md) | SEV-1 緊急修正フロー | スケルトン（IT-2） |
+| [disaster-recovery.md](./disaster-recovery.md) | Heroku 全停止時の GitHub Pages 退避 | スケルトン（IT-2） |
+| [on-call.md](./on-call.md) | オンコール時の初動チェックリスト | スケルトン（IT-2） |
+| [secret-rotation.md](./secret-rotation.md) | 90 日ごとのシークレットローテーション手順 | スケルトン（IT-2） |
+| [domain-renewal.md](./domain-renewal.md) | ドメイン更新手順 | スケルトン（IT-2） |
+| [pre-interview-freeze.md](./pre-interview-freeze.md) | 面接前後の merge freeze ルール | スケルトン（IT-2） |
+| handover.md | チーム化 / 引継ぎ資料 | 未作成（必要時） |
 | [postmortem/](./postmortem/) | SEV-1 / SEV-2 障害事後報告（YYYY-MM-DD-slug.md） | ディレクトリのみ |
 
 ## 利用ガイド
