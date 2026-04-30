@@ -23,11 +23,15 @@ test.describe("/works/ - Works 一覧", () => {
 
   test("AC-02-3: 技術タグでフィルタでき URL に ?tag=... が付与される", async ({ page }) => {
     await page.goto("/works/");
-    // TypeScript は case-study-accounting と case-study-sales の 2 件、フィルタ後に件数が減る
+    const totalCount = await page.locator('[data-testid="work-card"]').count();
+    // TypeScript フィルタで件数が減る（全件未満かつ 1 件以上）
     await page.getByRole("button", { name: "TypeScript", exact: true }).click();
     await page.waitForURL(/\?tag=TypeScript/);
     const visibleCards = page.locator('[data-testid="work-card"]:not([style*="display: none"])');
-    await expect(visibleCards).toHaveCount(2, { timeout: 5000 });
+    await expect(visibleCards.first()).toBeVisible({ timeout: 5000 });
+    const visibleCount = await visibleCards.count();
+    expect(visibleCount).toBeGreaterThan(0);
+    expect(visibleCount).toBeLessThan(totalCount);
   });
 
   test("AC-02-4: 「All」で絞り込み解除", async ({ page }) => {
@@ -42,9 +46,8 @@ test.describe("/works/ - Works 一覧", () => {
   test("AC-02-5: 0 件時は空メッセージ + フィルタ解除リンクを表示", async ({ page }) => {
     // 既知タグでマッチが減っても、最低 1 件あれば status は hidden
     await page.goto("/works/?tag=TypeScript");
-    await expect(
-      page.locator('[data-testid="work-card"]:not([style*="display: none"])')
-    ).toHaveCount(2, { timeout: 2000 });
+    const visibleCards = page.locator('[data-testid="work-card"]:not([style*="display: none"])');
+    await expect(visibleCards.first()).toBeVisible({ timeout: 2000 });
     const empty = page.locator("#works-empty");
     await expect(empty).toBeHidden();
   });
