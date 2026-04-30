@@ -17,6 +17,7 @@ team_size: 1
 position: "オーナー / 単独開発者"
 involvement: "lead"
 repo: "https://github.com/k2works/case-study-mrs"
+demo: "https://case-study-mrs.vercel.app/"
 featured: false
 ---
 
