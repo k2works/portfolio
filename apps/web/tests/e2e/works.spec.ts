@@ -5,7 +5,9 @@ test.describe("/works/ - Works 一覧", () => {
     await page.goto("/works/");
     await expect(page.getByRole("heading", { level: 1, name: "Works" })).toBeVisible();
     const cards = page.locator('[data-testid="work-card"]');
-    await expect(cards).toHaveCount(3);
+    // v0.2 リリース時は 5 件以上揃える方針
+    const count = await cards.count();
+    expect(count).toBeGreaterThanOrEqual(5);
   });
 
   test("AC-02-2: 各カードに title / period / summary / 技術タグ / 詳細ボタンが含まれる", async ({
@@ -21,24 +23,25 @@ test.describe("/works/ - Works 一覧", () => {
 
   test("AC-02-3: 技術タグでフィルタでき URL に ?tag=... が付与される", async ({ page }) => {
     await page.goto("/works/");
-    await page.getByRole("button", { name: "TypeScript", exact: true }).click();
-    await page.waitForURL(/\?tag=TypeScript/);
-    // sample-1 と sample-2 のみが TypeScript を tech に含む（sample-3 は含まない）
+    // Astro は sample-2 と sample-4 のみで、フィルタ後に件数が確実に減る
+    await page.getByRole("button", { name: "Astro", exact: true }).click();
+    await page.waitForURL(/\?tag=Astro/);
     const visibleCards = page.locator('[data-testid="work-card"]:not([style*="display: none"])');
     await expect(visibleCards).toHaveCount(2, { timeout: 5000 });
   });
 
   test("AC-02-4: 「All」で絞り込み解除", async ({ page }) => {
-    await page.goto("/works/?tag=TypeScript");
+    await page.goto("/works/?tag=Astro");
     await page.getByRole("button", { name: "All", exact: true }).click();
     await expect(page).toHaveURL(/\/works\/?$/);
     const visibleCards = page.locator('[data-testid="work-card"]:not([style*="display: none"])');
-    await expect(visibleCards).toHaveCount(3);
+    const count = await visibleCards.count();
+    expect(count).toBeGreaterThanOrEqual(5);
   });
 
   test("AC-02-5: 0 件時は空メッセージ + フィルタ解除リンクを表示", async ({ page }) => {
     // 既知タグでマッチが減っても、最低 1 件あれば status は hidden
-    await page.goto("/works/?tag=TypeScript");
+    await page.goto("/works/?tag=Astro");
     await expect(
       page.locator('[data-testid="work-card"]:not([style*="display: none"])')
     ).toHaveCount(2, { timeout: 2000 });
@@ -48,8 +51,10 @@ test.describe("/works/ - Works 一覧", () => {
 
   test("AC-02-6: 件数表示「N 件中 M 件を表示」が表示される", async ({ page }) => {
     await page.goto("/works/");
-    await expect(page.locator("#works-count")).toHaveText("3 件中 3 件を表示");
-    await page.goto("/works/?tag=TypeScript");
+    const count = await page.locator('[data-testid="work-card"]').count();
+    await expect(page.locator("#works-count")).toHaveText(`${count} 件中 ${count} 件を表示`);
+
+    await page.goto("/works/?tag=Astro");
     await expect(page.locator("#works-count")).toContainText("件中");
     await expect(page.locator("#works-count")).toContainText("件を表示");
   });
@@ -57,16 +62,10 @@ test.describe("/works/ - Works 一覧", () => {
   test("AC-02-7: 現在選択タグは aria-pressed=true、その他は false", async ({ page }) => {
     await page.goto("/works/");
     await expect(page.locator('[data-filter="all"]')).toHaveAttribute("aria-pressed", "true");
-    await expect(page.locator('[data-filter="TypeScript"]')).toHaveAttribute(
-      "aria-pressed",
-      "false"
-    );
+    await expect(page.locator('[data-filter="Astro"]')).toHaveAttribute("aria-pressed", "false");
 
-    await page.goto("/works/?tag=TypeScript");
-    await expect(page.locator('[data-filter="TypeScript"]')).toHaveAttribute(
-      "aria-pressed",
-      "true"
-    );
+    await page.goto("/works/?tag=Astro");
+    await expect(page.locator('[data-filter="Astro"]')).toHaveAttribute("aria-pressed", "true");
     await expect(page.locator('[data-filter="all"]')).toHaveAttribute("aria-pressed", "false");
   });
 
@@ -77,7 +76,9 @@ test.describe("/works/ - Works 一覧", () => {
     // history.replaceState で URL から ?tag=... が削除される
     await expect(page).toHaveURL(/\/works\/?$/);
     // 全件表示
-    await expect(page.locator('[data-testid="work-card"]:visible')).toHaveCount(3);
+    const visibleCards = page.locator('[data-testid="work-card"]:not([style*="display: none"])');
+    const count = await visibleCards.count();
+    expect(count).toBeGreaterThanOrEqual(5);
     // All が aria-pressed=true
     await expect(page.locator('[data-filter="all"]')).toHaveAttribute("aria-pressed", "true");
   });
