@@ -1,0 +1,148 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+type Work = CollectionEntry<"works">;
+
+const allWorks = await getCollection("works");
+const works = allWorks.sort((a: Work, b: Work) =>
+  b.data.period.from.localeCompare(a.data.period.from)
+);
+const techSet = new Set<string>();
+works.forEach((w: Work) => {
+  (w.data.tech as string[]).forEach((t) => techSet.add(t));
+});
+const allTechs: string[] = Array.from(techSet).sort();
+---
+
+<BaseLayout
+  title="Works | Portfolio"
+  description="採用・営業向けポートフォリオの実績一覧。技術タグで絞り込み可能です。"
+>
+  <section>
+    <h1 class="text-2xl font-bold sm:text-3xl">Works</h1>
+    <p class="mt-2 text-[color:var(--color-muted)]">
+      これまで関わった案件の一覧です。技術タグで絞り込めます。
+    </p>
+
+    <nav class="mt-6 flex flex-wrap items-center gap-2" aria-label="技術タグでフィルタ">
+      <a
+        href="/works/"
+        role="button"
+        data-filter="all"
+        aria-pressed="true"
+        class="inline-flex items-center rounded border border-[color:var(--color-border)] px-3 py-1 text-sm no-underline transition hover:border-[color:var(--color-accent)] aria-[pressed=true]:border-[color:var(--color-accent)] aria-[pressed=true]:bg-[color:var(--color-accent)] aria-[pressed=true]:text-white"
+      >
+        All
+      </a>
+      {
+        allTechs.map((tech) => (
+          <a
+            href={`/works/?tag=${encodeURIComponent(tech)}`}
+            role="button"
+            data-filter={tech}
+            aria-pressed="false"
+            class="inline-flex items-center rounded border border-[color:var(--color-border)] px-3 py-1 text-sm no-underline transition hover:border-[color:var(--color-accent)] aria-[pressed=true]:border-[color:var(--color-accent)] aria-[pressed=true]:bg-[color:var(--color-accent)] aria-[pressed=true]:text-white"
+          >
+            {tech}
+          </a>
+        ))
+      }
+    </nav>
+
+    <p
+      id="works-count"
+      class="mt-4 text-sm text-[color:var(--color-muted)]"
+      data-total={works.length}
+    >
+      {works.length} 件中 {works.length} 件を表示
+    </p>
+
+    <ul class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-2" data-testid="works-list">
+      {
+        works.map((work: Work) => {
+          const periodLabel = work.data.period.to
+            ? `${work.data.period.from} 〜 ${work.data.period.to}`
+            : `${work.data.period.from} 〜 現在`;
+          const techs: string[] = work.data.tech as string[];
+          return (
+            <li
+              data-testid="work-card"
+              data-tech={techs.join(",")}
+              class="flex flex-col rounded border border-[color:var(--color-border)] p-4 transition hover:border-[color:var(--color-accent)]"
+            >
+              <h2 class="text-lg font-semibold">{work.data.title}</h2>
+              <p class="mt-1 text-sm text-[color:var(--color-muted)]">{periodLabel}</p>
+              <p class="mt-2 text-[color:var(--color-fg)]">{work.data.summary}</p>
+              <ul class="mt-3 flex flex-wrap gap-2" aria-label="使用技術">
+                {techs.map((t: string) => (
+                  <li class="rounded bg-[color:var(--color-tag-bg)] px-2 py-1 text-xs">{t}</li>
+                ))}
+              </ul>
+              <a
+                href={`/works/${work.slug}/`}
+                class="mt-4 inline-block text-sm font-medium text-[color:var(--color-accent)] no-underline hover:underline focus-visible:underline"
+              >
+                詳細を見る →
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+
+    <p
+      id="works-empty"
+      class="mt-6 hidden rounded border border-dashed border-[color:var(--color-border)] p-6 text-center"
+      role="status"
+    >
+      該当する Work がありません。
+      <a href="/works/" class="ml-2 text-[color:var(--color-accent)] underline"> フィルタを解除 </a>
+    </p>
+  </section>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const requestedTag = params.get("tag");
+
+    const filterButtons = document.querySelectorAll<HTMLAnchorElement>("[data-filter]");
+    const cards = document.querySelectorAll<HTMLLIElement>('[data-testid="work-card"]');
+    const countEl = document.getElementById("works-count");
+    const emptyEl = document.getElementById("works-empty");
+    const total = Number(countEl?.dataset.total ?? "0");
+
+    const knownTags = Array.from(filterButtons)
+      .map((b) => b.dataset.filter)
+      .filter((t): t is string => Boolean(t) && t !== "all");
+
+    const isUnknownTag = requestedTag !== null && !knownTags.includes(requestedTag);
+    if (isUnknownTag) {
+      const url = new URL(window.location.href);
+      url.searchParams.delete("tag");
+      window.history.replaceState({}, "", url.toString());
+    }
+
+    const activeTag = isUnknownTag ? null : requestedTag;
+    let visibleCount = 0;
+    cards.forEach((card) => {
+      const techs = (card.dataset.tech ?? "").split(",").filter(Boolean);
+      const visible = activeTag === null || techs.includes(activeTag);
+      card.style.display = visible ? "" : "none";
+      if (visible) visibleCount++;
+    });
+
+    filterButtons.forEach((btn) => {
+      const filter = btn.dataset.filter;
+      const isActive =
+        (activeTag === null && filter === "all") || (activeTag !== null && filter === activeTag);
+      btn.setAttribute("aria-pressed", String(isActive));
+    });
+
+    if (countEl) {
+      countEl.textContent = `${total} 件中 ${visibleCount} 件を表示`;
+    }
+    if (emptyEl) {
+      emptyEl.classList.toggle("hidden", visibleCount > 0);
+    }
+  </script>
+</BaseLayout>

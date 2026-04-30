@@ -1,0 +1,64 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+type Work = CollectionEntry<"works">;
+
+export async function getStaticPaths() {
+  const works = await getCollection("works");
+  return works.map((work: Work) => ({
+    params: { slug: work.slug },
+    props: { work },
+  }));
+}
+
+interface Props {
+  work: Work;
+}
+
+const { work } = Astro.props as Props;
+const periodLabel = work.data.period.to
+  ? `${work.data.period.from} 〜 ${work.data.period.to}`
+  : `${work.data.period.from} 〜 現在`;
+const techs: string[] = work.data.tech as string[];
+---
+
+<BaseLayout title={`${work.data.title} | Works | Portfolio`} description={work.data.summary}>
+  <nav aria-label="パンくずリスト" class="text-sm text-[color:var(--color-muted)]">
+    <ol class="flex flex-wrap gap-1">
+      <li>
+        <a href="/" class="hover:underline">Home</a>
+      </li>
+      <li aria-hidden="true">›</li>
+      <li>
+        <a href="/works/" class="hover:underline">Works</a>
+      </li>
+      <li aria-hidden="true">›</li>
+      <li aria-current="page">{work.data.title}</li>
+    </ol>
+  </nav>
+
+  <article class="mt-6">
+    <h1 class="text-2xl font-bold sm:text-3xl">{work.data.title}</h1>
+    <p class="mt-2 text-[color:var(--color-muted)]">{periodLabel}</p>
+
+    <ul class="mt-4 flex flex-wrap gap-2" aria-label="使用技術">
+      {
+        techs.map((t: string) => (
+          <li class="rounded bg-[color:var(--color-tag-bg)] px-2 py-1 text-xs">{t}</li>
+        ))
+      }
+    </ul>
+
+    <p
+      class="mt-6 rounded border border-dashed border-[color:var(--color-border)] p-4 text-sm text-[color:var(--color-muted)]"
+    >
+      詳細ページの本文（課題 → 挑戦 → 解決 → 成果）は IT-5
+      で実装予定です。現在はプレースホルダ表示です。
+    </p>
+
+    <p class="mt-6">
+      <a href="/works/" class="text-[color:var(--color-accent)] hover:underline"> ← 一覧に戻る </a>
+    </p>
+  </article>
+</BaseLayout>
