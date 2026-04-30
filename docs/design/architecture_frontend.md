@@ -80,23 +80,41 @@ apps/web/
 `src/content/` で Astro Content Collections を利用し、Markdown のフロントマターをスキーマ検証する。これにより、未入力フィールドや型違いをビルド時に検出できる。
 
 ```ts
-// src/content/config.ts（イメージ）
+// src/content/config.ts（IT-4 で確定した実装）
 import { defineCollection, z } from "astro:content";
 
 const works = defineCollection({
+  type: "content",
   schema: z.object({
     title: z.string(),
-    summary: z.string(),
+    summary: z.string().max(200),
     role: z.string(),
-    period: z.object({ from: z.string(), to: z.string().optional() }),
-    tech: z.array(z.string()),
+    period: z.object({
+      from: z.string(),
+      to: z.string().optional(),
+    }),
+    tech: z.array(z.string()).min(1),
+    domain: z.string().optional(),
+    category: z.string().optional(),
+    team_size: z.number().int().positive().optional(),
+    position: z.string().optional(),
+    involvement: z.enum(["lead", "core", "member", "advisor"]).optional(),
     repo: z.string().url().optional(),
+    demo: z.string().url().optional(),
     cover: z.string().optional(),
+    featured: z.boolean().default(false),
   }),
 });
 
 export const collections = { works };
 ```
+
+スキーマ拡張の根拠：
+
+- `summary.max(200)` / `tech.min(1)`: 入力品質を機械的に担保
+- `domain` / `category` / `team_size` / `position` / `involvement`: US-03 の AC-03-2〜7 とレビュー指摘 [M02](../review/design_review_20260430.md) を反映
+- `demo`: ライブデモ URL（GitHub repo に加えて提供する場合）
+- `featured`: ホームの Featured Works に表示するかのフラグ。レビュー指摘 [L06](../review/design_review_20260430.md) を反映
 
 ## アクセシビリティ・SEO
 
