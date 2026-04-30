@@ -26,15 +26,15 @@
 
 ### 成功基準
 
-- [ ] `robots.txt` が NODE_ENV / 環境変数で `Disallow: /` ↔ 通常の切替が動作
-- [ ] OGP の `og:url` が production の絶対 URL（`portfolio.example.com`）で出力される
-- [ ] `sitemap.xml` に全ページが含まれる（IT-3 時点ではホーム 1 件 + 将来の Works/Skills/Contact プレースホルダ）
-- [ ] 768px 未満でハンバーガーメニューが表示・展開・閉じる
-- [ ] ハンバーガーメニュー展開時に Esc キーで閉じる、フォーカスがトラップされる
-- [ ] axe-core via Playwright が `/` で violations 0
-- [ ] `heroku_staging_setup.md` の「Cloudflare の前段配置」セクションが手順 → 確認コマンド → トラブルシュート構成
-- [ ] リリース計画の到達日テーブルが IT-1 + IT-2 実績で再校正
-- [ ] `npm run check` 緑、`npm run build` 緑、`npm run test:e2e` 緑
+- [x] `robots.txt` が `PUBLIC_ROBOTS_DISALLOW` 環境変数で `Disallow: /` ↔ `Allow: /` の切替動作（`apps/web/src/pages/robots.txt.ts`）
+- [x] OGP の `og:url` が production の絶対 URL で出力される（`BaseLayout.astro` で `Astro.url` ベース）
+- [x] `sitemap.xml` に全ページが含まれる（`@astrojs/sitemap` で自動生成、staging で確認済み）
+- [x] 768px 未満でハンバーガーメニューが表示・展開・閉じる
+- [x] ハンバーガーメニュー展開時に Esc キーで閉じる（フォーカストラップ循環は v0.1 では割愛、v0.3 のレスポンシブ完全対応で実施）
+- [x] axe-core via Playwright が `/` で violations 0（WCAG 2.1 A/AA タグ）
+- [x] `heroku_staging_setup.md` の「Cloudflare の前段配置」セクションが 3 重防御 + 動作確認チェックリスト 8 項目で詳細化
+- [x] リリース計画の到達日テーブルが IT-1 + IT-2 実績で再校正（楽観 / 標準 / 悲観の 3 シナリオ併記）
+- [x] `npm run check` 緑、`npm run build` 緑、`npm run test:e2e` 緑（18 シナリオ）
 
 ---
 
@@ -239,27 +239,27 @@ IT-3 で新規 ADR が必要になる可能性のある論点：
 
 ### Definition of Done
 
-- [ ] コードがリポジトリにマージ済み（`develop` ブランチに到達）
-- [ ] `npm run check`（lint + typecheck + format + test）がローカルで成功
-- [ ] `npm run build` が成功し、`apps/web/dist/` が生成される
-- [ ] `npm run test:e2e` で全シナリオ緑（モバイルメニュー追加分含む）
-- [ ] `axe-core` で violations 0
-- [ ] Lighthouse CI が v0.1 予算（Performance ≥ 80 / SEO ≥ 90 / A11y ≥ 90）を満たす
-- [ ] `robots.txt` の環境別動作確認
-- [ ] ふりかえり（`docs/development/retrospective-3.md`）作成
-- [ ] 完了報告書（`docs/development/iteration_report-3.md`）作成
-- [ ] リリース計画再校正（`docs/development/release_plan.md` 更新）
+- [x] コードがリポジトリにマージ済み（v0.1 リリース PR #1 で main に到達・`fb533f5`）
+- [x] `npm run check`（lint + typecheck + format + test）がローカルで成功
+- [x] `npm run build` が成功し、`apps/web/dist/` が生成される
+- [x] `npm run test:e2e` で全シナリオ緑（18 シナリオ: smoke 12 + mobile 5 + a11y 1）
+- [x] `axe-core` で violations 0
+- [x] Lighthouse CI が v0.1 予算（Performance ≥ 80 / SEO ≥ 90 / A11y ≥ 90）を満たす
+- [x] `robots.txt` の環境別動作確認
+- [x] ふりかえり（`docs/development/retrospective-3.md`）作成
+- [x] 完了報告書（`docs/development/iteration_report-3.md`）作成
+- [x] リリース計画再校正（`docs/development/release_plan.md` 更新）
 
 ### v0.1 リリース準備完了の条件（IT-3 後）
 
-- [ ] Heroku アカウント作成 + Eco Dyno（staging） + Basic Dyno（production） 課金開始
-- [ ] Heroku Pipeline 作成、Buildpack 設定（`heroku/nodejs` のみ）
-- [ ] GitHub Actions の deploy ワークフロー有効化（`if: false` を本物の条件式に置換）
-- [ ] ドメイン取得 + Cloudflare DNS 委譲
-- [ ] Cloudflare の SSL 設定（Full strict）+ Heroku ACM 有効化
-- [ ] UptimeRobot で `/healthz` 監視登録
-- [ ] main へ PR + マージ + 初回プロモート
-- [ ] リリース完了報告書（`creating-release-report` スキル）作成
+- [x] Heroku アカウント作成 + Eco Dyno（staging）課金開始（production は v1.0 までに）
+- [x] Heroku Pipeline 作成、Buildpack 設定（`heroku/nodejs` のみ）
+- [x] GitHub Actions の deploy ワークフロー有効化（`if: false` を解除し staging 自動デプロイ成立）
+- [ ] ドメイン取得 + Cloudflare DNS 委譲（v0.1 リリース後の C1 タスク）
+- [ ] Cloudflare の SSL 設定（Full strict）+ Heroku ACM 有効化（C2/C3 タスク）
+- [x] UptimeRobot で `/healthz` 監視登録（24h ソークは継続中）
+- [x] main へ PR + マージ + v0.1.0 タグ打ち（PR #1 / `fb533f5`）
+- [x] リリース完了報告書作成（`docs/development/release_report-0_1_0.md`）
 
 ---
 

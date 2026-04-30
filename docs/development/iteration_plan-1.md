@@ -37,7 +37,7 @@
 - [x] `apps/web/playwright.config.ts` が存在する
 - [x] ESLint / Prettier / TypeScript いずれもエラー 0（`npm run check` 成功）
 - [x] `ops/runbook/{README,deploy,rollback}.md` のスケルトンが存在
-- [ ] PR を 1 本以上作成し main にマージ済み（develop ブランチ運用、PR は別途）
+- [x] PR を 1 本以上作成し main にマージ済み（v0.1 リリース PR #1 で main へ統合済み・2026-04-30）
 
 ---
 
@@ -301,13 +301,13 @@ const featuredWorks = [
 
 ### Definition of Done
 
-- [ ] コードがリポジトリにマージ済み（main ブランチに到達）
-- [ ] `npm run check`（lint + typecheck + test）がローカルで成功
-- [ ] `npm run build` が成功し、`apps/web/dist/` が生成される
-- [ ] `node apps/web/server.js` を手動起動し `/healthz` と `/` が応答する
-- [ ] PR テンプレートのチェックリストを満たす
-- [ ] README とランブックスケルトンが存在
-- [ ] イテレーションふりかえりで 5 つの問い（何ができた？ 何ができなかった？ 学び / 次への改善 / ベロシティ実績）を `docs/development/retrospective-1.md` に記録
+- [x] コードがリポジトリにマージ済み（v0.1 リリース PR #1 で main に到達・`fb533f5`）
+- [x] `npm run check`（lint + typecheck + test）がローカルで成功
+- [x] `npm run build` が成功し、`apps/web/dist/` が生成される
+- [x] `node apps/web/server.js` を手動起動し `/healthz` と `/` が応答する
+- [x] PR テンプレートのチェックリストを満たす（PR #1 で完了）
+- [x] README とランブックスケルトンが存在（`ops/runbook/` に 9 本配置済み）
+- [x] イテレーションふりかえりで 5 つの問い（何ができた？ 何ができなかった？ 学び / 次への改善 / ベロシティ実績）を `docs/development/retrospective-1.md` に記録
 
 > 注: テストカバレッジ 80% は IT-1 では適用しない（ロジック皆無のため）。IT-2 で Express ミドルウェアの単体テストを開始してから計測対象に。
 
