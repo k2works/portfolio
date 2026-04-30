@@ -24,8 +24,53 @@
 ### Quick Start
 
 ```bash
+# 依存パッケージのインストール（npm workspaces で apps/web も同時取得）
 npm install
-npm start
+
+# Astro dev server 起動（http://localhost:4321）
+npm run dev
+
+# 本番相当ビルド
+npm run build
+
+# Vitest（ユニットテスト）
+npm test
+
+# 全品質チェック（typecheck + lint + format + test）
+npm run check
+```
+
+詳細は [docs/operation/local_setup.md](./docs/operation/local_setup.md)（アプリケーション開発環境セットアップ手順書）を参照。
+
+### ドキュメント
+
+- [docs/index.md](./docs/index.md) — ドキュメント全体の入口
+- [docs/requirements/](./docs/requirements/) — 要件定義・ユースケース・ユーザーストーリー
+- [docs/design/](./docs/design/) — アーキテクチャ・UI・テスト戦略・非機能・運用要件
+- [docs/development/release_plan.md](./docs/development/release_plan.md) — リリース計画（v0.1〜v1.0）
+- [docs/adr/](./docs/adr/) — 技術的意思決定の記録
+- [docs/operation/](./docs/operation/) — 環境構築手順書（ローカル / Heroku staging）
+- [ops/runbook/](./ops/runbook/) — 運用 runbook（deploy / rollback ほか）
+
+### プロジェクト構造
+
+```text
+portfolio/
+├── apps/web/                 # Astro SSG + Express 配信レイヤー（v0.1〜）
+│   ├── astro.config.mjs
+│   ├── package.json
+│   ├── public/
+│   ├── src/
+│   ├── server.js（タスク 2.3 で追加予定）
+│   └── tests/
+├── docs/                     # ドキュメント（Markdown ソース）
+├── ops/
+│   ├── docker/mkdoc/         # MkDocs Docker
+│   ├── runbook/              # 運用 runbook
+│   └── scripts/              # gulp タスク
+├── Procfile                  # Heroku web プロセス定義
+├── package.json              # ルート（npm workspaces）
+└── mkdocs.yml                # MkDocs 設定（Tech Notes）
 ```
 
 ### 構築

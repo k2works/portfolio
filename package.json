@@ -1,9 +1,25 @@
 {
-  "name": "",
+  "name": "portfolio",
   "version": "0.0.0",
-  "main": "index.js",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22 <23",
+    "npm": ">=10"
+  },
+  "workspaces": [
+    "apps/*"
+  ],
   "scripts": {
-    "start": "gulp spec",
+    "start": "npm run --workspace @portfolio/web dev",
+    "dev": "npm run --workspace @portfolio/web dev",
+    "build": "npm run --workspace @portfolio/web build",
+    "preview": "npm run --workspace @portfolio/web preview",
+    "test": "npm run --workspace @portfolio/web test",
+    "test:e2e": "npm run --workspace @portfolio/web test:e2e",
+    "lint": "npm run --workspace @portfolio/web lint",
+    "format": "npm run --workspace @portfolio/web format",
+    "check": "npm run --workspace @portfolio/web check",
     "journal": "gulp journal:generate",
     "docs:serve": "gulp mkdocs:serve",
     "docs:stop": "gulp mkdocs:stop",
@@ -19,20 +35,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/k2works/{project_name}.git"
+    "url": "git+https://github.com/k2works/portfolio.git"
   },
   "keywords": [
-    "ai",
-    "programming",
-    "learning"
+    "portfolio",
+    "astro",
+    "ssg",
+    "heroku"
   ],
-  "author": "",
+  "author": "k2works",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/k2works/{project_name}/issues"
+    "url": "https://github.com/k2works/portfolio/issues"
   },
-  "homepage": "https://github.com/k2works/{project_name}#readme",
-  "type": "module",
+  "homepage": "https://github.com/k2works/portfolio#readme",
   "dependencies": {
     "dotenv": "^17.2.3",
     "gulp": "^5.0.0"

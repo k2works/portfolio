@@ -1,0 +1,122 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const profile = {
+  name: "k2works",
+  role: "Software Engineer",
+  catchCopy: "ドメインを段階的に解きほぐすバックエンド主軸のエンジニア",
+  specialties: ["Backend", "DDD", "TDD", "AWS", "Java", "TypeScript", "Astro"],
+  highlight: "経験 10 年 / 受託・自社プロダクトで 12 案件",
+};
+
+const featuredWorks = [
+  {
+    title: "Work A（サンプル）",
+    period: "2024-04 〜 2025-03",
+    summary: "金融系バックエンド API のドメインモデル再構築（DDD / TDD 浸透）。",
+    tech: ["TypeScript", "AWS", "Terraform"],
+  },
+  {
+    title: "Work B（サンプル）",
+    period: "2023-04 〜 2024-03",
+    summary: "管理画面のフロントエンド刷新。React + Tailwind で UX を改善。",
+    tech: ["React", "TypeScript", "Tailwind"],
+  },
+  {
+    title: "Work C（サンプル）",
+    period: "2022-10 〜 2023-09",
+    summary: "ポートフォリオサイト本体（本リポジトリ）。Astro SSG + Heroku 配信。",
+    tech: ["Astro", "Cloudflare", "Heroku"],
+  },
+];
+
+const skillsHighlights = [
+  {
+    category: "Backend",
+    items: ["Java / Spring", "TypeScript / Node.js", "Python"],
+  },
+  { category: "Frontend", items: ["React", "Astro", "Tailwind CSS"] },
+  {
+    category: "Infrastructure",
+    items: ["AWS", "Docker / Kubernetes", "Terraform"],
+  },
+];
+---
+
+<BaseLayout
+  title={`${profile.name} | ${profile.role}`}
+  description={`${profile.catchCopy} ${profile.highlight}`}
+>
+  <section class="mb-12">
+    <h1 class="m-0 text-4xl font-bold tracking-tight sm:text-5xl">{profile.name}</h1>
+    <p class="mt-1 text-lg text-[color:var(--color-muted)]">{profile.role}</p>
+    <p class="mt-3 text-xl"><strong>{profile.catchCopy}</strong></p>
+    <ul class="mt-3 flex flex-wrap gap-2" aria-label="得意領域">
+      {
+        profile.specialties.map((s) => (
+          <li class="rounded-full border border-[color:var(--color-border)] px-3 py-1 text-sm">
+            {s}
+          </li>
+        ))
+      }
+    </ul>
+    <p class="mt-3 font-semibold">{profile.highlight}</p>
+    <p class="mt-5 flex flex-wrap gap-3">
+      <a
+        href="/works/"
+        class="rounded border border-[color:var(--color-border)] px-4 py-2 no-underline transition-opacity hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+      >
+        Works を見る →
+      </a>
+      <a
+        href="/contact/"
+        class="rounded border border-[color:var(--color-border)] px-4 py-2 no-underline transition-opacity hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+      >
+        Contact
+      </a>
+    </p>
+  </section>
+
+  <section class="mb-12" aria-labelledby="featured-heading">
+    <h2 id="featured-heading" class="text-2xl font-bold">Featured Works</h2>
+    <ul class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        featuredWorks.map((work) => (
+          <li class="m-0 list-none">
+            <article
+              data-testid="work-card"
+              class="h-full rounded-lg border border-[color:var(--color-border)] p-4 transition-shadow hover:shadow-md"
+            >
+              <h3 class="m-0 text-lg font-semibold">{work.title}</h3>
+              <p class="mt-1 text-sm text-[color:var(--color-muted)]">{work.period}</p>
+              <p class="mt-2 text-sm">{work.summary}</p>
+              <ul class="mt-3 flex flex-wrap gap-1" aria-label="使用技術">
+                {work.tech.map((t) => (
+                  <li class="rounded bg-black/5 px-2 py-0.5 text-xs dark:bg-white/10">{t}</li>
+                ))}
+              </ul>
+            </article>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section aria-labelledby="skills-heading">
+    <h2 id="skills-heading" class="text-2xl font-bold">Skills Highlights</h2>
+    <div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        skillsHighlights.map((group) => (
+          <div class="rounded-lg border border-[color:var(--color-border)] p-4">
+            <h3 class="m-0 text-base font-semibold">{group.category}</h3>
+            <ul class="mt-2 list-disc pl-5 text-sm">
+              {group.items.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

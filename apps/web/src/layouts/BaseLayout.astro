@@ -1,0 +1,231 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const { title, description, ogImage } = Astro.props;
+
+const siteName = "Portfolio";
+const fallbackDescription =
+  "採用・営業向け個人ポートフォリオ。経歴 / 実績 / スキル / 連絡先を Markdown ベースで管理しています。";
+const finalDescription = description ?? fallbackDescription;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
+
+const navItems = [
+  { href: "/", label: "Home" },
+  { href: "/works/", label: "Works" },
+  { href: "/skills/", label: "Skills" },
+  { href: "/contact/", label: "Contact" },
+  { href: "/docs/", label: "Tech Notes ↗" },
+];
+
+const currentPath = Astro.url.pathname;
+const year = new Date().getFullYear();
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={finalDescription} />
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={finalDescription} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:site_name" content={siteName} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={finalDescription} />
+  </head>
+  <body>
+    <a href="#main" class="skip-link">メインコンテンツへ移動</a>
+
+    <header
+      class="sticky top-0 z-10 border-b border-[color:var(--color-border)] bg-bg/95 backdrop-blur"
+    >
+      <div class="mx-auto flex max-w-prose flex-wrap items-center gap-4 px-4 py-3">
+        <a href="/" class="font-bold no-underline" aria-label="ホームへ">{siteName}</a>
+
+        <!-- モバイルナビトリガー（< 768px で表示） -->
+        <button
+          id="mobile-nav-toggle"
+          type="button"
+          class="ml-auto inline-flex h-12 w-12 items-center justify-center rounded border border-[color:var(--color-border)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:hidden"
+          aria-expanded="false"
+          aria-controls="primary-navigation"
+          aria-label="メニューを開く"
+        >
+          <svg
+            class="h-6 w-6"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            data-icon="menu"
+          >
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+          <svg
+            class="hidden h-6 w-6"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            data-icon="close"
+          >
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+
+        <nav
+          id="primary-navigation"
+          class="hidden w-full md:ml-auto md:flex md:w-auto"
+          aria-label="メインナビゲーション"
+        >
+          <ul class="flex flex-col gap-3 py-3 md:flex-row md:gap-4 md:py-0">
+            {
+              navItems.map((item) => {
+                const isCurrent =
+                  item.href === "/" ? currentPath === "/" : currentPath.startsWith(item.href);
+                return (
+                  <li>
+                    <a
+                      href={item.href}
+                      aria-current={isCurrent ? "page" : undefined}
+                      class={
+                        "block py-1 no-underline transition-opacity hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent" +
+                        (isCurrent ? " font-bold underline" : "")
+                      }
+                    >
+                      {item.label}
+                    </a>
+                  </li>
+                );
+              })
+            }
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="mx-auto max-w-prose px-4 py-8 sm:py-10 lg:py-12">
+      <slot />
+    </main>
+
+    <footer
+      class="mx-auto mt-16 max-w-prose border-t border-[color:var(--color-border)] px-4 py-6 text-sm text-[color:var(--color-muted)]"
+    >
+      <p class="m-0">© {year} {siteName}</p>
+      <ul class="mt-2 flex flex-wrap gap-4" aria-label="ソーシャルリンク">
+        <li>
+          <a
+            href="https://github.com/k2works"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+          >
+            GitHub ↗
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://www.linkedin.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+          >
+            LinkedIn ↗
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://github.com/k2works/portfolio"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+          >
+            このサイトのソース ↗
+          </a>
+        </li>
+      </ul>
+    </footer>
+
+    <script>
+      const toggle = document.getElementById("mobile-nav-toggle");
+      const nav = document.getElementById("primary-navigation");
+      const menuIcon = toggle?.querySelector('[data-icon="menu"]');
+      const closeIcon = toggle?.querySelector('[data-icon="close"]');
+
+      const isMobile = () => window.matchMedia("(max-width: 767px)").matches;
+
+      const setOpen = (open: boolean) => {
+        if (!toggle || !nav) return;
+        toggle.setAttribute("aria-expanded", String(open));
+        toggle.setAttribute("aria-label", open ? "メニューを閉じる" : "メニューを開く");
+        if (open) {
+          nav.classList.remove("hidden");
+          menuIcon?.classList.add("hidden");
+          closeIcon?.classList.remove("hidden");
+          document.body.style.overflow = "hidden";
+        } else {
+          if (isMobile()) nav.classList.add("hidden");
+          menuIcon?.classList.remove("hidden");
+          closeIcon?.classList.add("hidden");
+          document.body.style.overflow = "";
+        }
+      };
+
+      toggle?.addEventListener("click", () => {
+        const expanded = toggle.getAttribute("aria-expanded") === "true";
+        setOpen(!expanded);
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && toggle?.getAttribute("aria-expanded") === "true") {
+          setOpen(false);
+          (toggle as HTMLButtonElement).focus();
+        }
+      });
+
+      // 768px 以上に拡大した場合は body スクロール抑止を解除
+      window.matchMedia("(min-width: 768px)").addEventListener("change", (event) => {
+        if (event.matches) {
+          if (toggle) toggle.setAttribute("aria-expanded", "false");
+          menuIcon?.classList.remove("hidden");
+          closeIcon?.classList.add("hidden");
+          document.body.style.overflow = "";
+        }
+      });
+
+      // ナビ内リンククリックで閉じる（モバイル時のみ）
+      nav?.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          if (isMobile()) setOpen(false);
+        });
+      });
+    </script>
+  </body>
+</html>
