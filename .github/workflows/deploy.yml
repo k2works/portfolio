@@ -42,18 +42,12 @@ jobs:
           HEROKU_APP: ${{ secrets.HEROKU_APP_STAGING }}
           HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
         run: |
-          {
-            echo "machine git.heroku.com"
-            echo "login $HEROKU_EMAIL"
-            echo "password $HEROKU_API_KEY"
-            echo "machine api.heroku.com"
-            echo "login $HEROKU_EMAIL"
-            echo "password $HEROKU_API_KEY"
-          } > "$HOME/.netrc"
-          chmod 600 "$HOME/.netrc"
           git config --global user.email "$HEROKU_EMAIL"
           git config --global user.name "GitHub Actions"
-          git remote add heroku "https://git.heroku.com/$HEROKU_APP.git"
+          # Heroku の git push は HTTP Basic 認証。ユーザー名は任意、
+          # API Key だけが認証要素のため "x" を使う。secrets は GitHub Actions
+          # が自動マスクするためログに露出しない。
+          git remote add heroku "https://x:${HEROKU_API_KEY}@git.heroku.com/${HEROKU_APP}.git"
           git push heroku HEAD:main --force
 
   promote-to-production:
