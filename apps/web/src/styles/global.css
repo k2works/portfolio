@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+/*
+ * グローバル CSS のエントリポイント。
+ * ベースリセットとテーマトークンは IT-2 以降で追加。
+ */
+
+:root {
+  --color-bg: #ffffff;
+  --color-fg: #1a1a1a;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #0f1115;
+    --color-fg: #f5f5f5;
+  }
+}
+
+html {
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+}

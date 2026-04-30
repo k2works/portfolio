@@ -1,0 +1,26 @@
+# Astro
+dist/
+.astro/
+
+# Node
+node_modules/
+npm-debug.log*
+
+# 環境変数（apps/web 固有がある場合）
+.env
+.env.local
+
+# Playwright
+test-results/
+playwright-report/
+.playwright/
+
+# Lighthouse CI
+.lighthouseci/
+
+# Vitest
+coverage/
+
+# OS / IDE（ルートでも除外しているが念のため）
+.DS_Store
+Thumbs.db
