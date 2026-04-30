@@ -635,11 +635,105 @@ Cloudflare ダッシュボード → Rules → Page Rules（Free は 3 個まで
 
 production では別途キャッシュ戦略を設定（[次の手順書](./heroku_production_setup.md)）。
 
-### 6.5 検索エンジンからの隠蔽
+### 6.5 検索エンジンからの隠蔽（staging のみ）
 
-staging アプリの応答に `X-Robots-Tag: noindex,nofollow` を付与（Astro / Express で自動付与）するか、Cloudflare の Transform Rules で常に付与。
+staging では検索インデックスを完全に拒否する。3 重防御：
 
-加えて、Astro ビルド時に環境変数 `ROBOTS_DISALLOW=true` で `robots.txt` を `Disallow: /` にする。
+#### A. `robots.txt` を `Disallow: /` で出力（Astro endpoint）
+
+`apps/web/src/pages/robots.txt.ts` が `PUBLIC_ROBOTS_DISALLOW` 環境変数で挙動を切替（IT-3 タスク 1.1 で実装）：
+
+```bash
+# staging 用に Disallow 付きでビルド
+PUBLIC_ROBOTS_DISALLOW=true npm --prefix apps/web run build
+
+# 出力（apps/web/dist/robots.txt）:
+# User-agent: *
+# Disallow: /
+```
+
+GitHub Actions のビルドジョブで `env: PUBLIC_ROBOTS_DISALLOW: "true"` を staging デプロイ時のみ設定。production デプロイ時は未設定（または "false"）にすることで `Allow: /` + Sitemap が出力される。
+
+#### B. `X-Robots-Tag: noindex,nofollow` ヘッダ（Cloudflare Transform Rules）
+
+Cloudflare ダッシュボード → Rules → Transform Rules → Modify Response Header で：
+
+| 条件 | アクション |
+|---|---|
+| Hostname equals `staging.portfolio.example.com` | Set static `X-Robots-Tag: noindex, nofollow` |
+
+これにより Cloudflare エッジで全レスポンスにヘッダが付与される。Express 側に処理を持たせず一元管理。
+
+#### C. MkDocs（`/docs/`）の `<meta robots>` 注入
+
+[ADR-0003](../adr/0003-mkdocs-coexistence-strategy.md) で「初期は `noindex`」を決定。MkDocs ビルド成果物の各 HTML に `<meta name="robots" content="noindex,nofollow">` を含める：
+
+`docs/overrides/main.html` を作成（IT-3 タスク 1.4）：
+
+```html
+{% extends "base.html" %}
+{% block extrahead %}
+<meta name="robots" content="noindex,nofollow">
+{% endblock %}
+```
+
+`mkdocs.yml` に以下を追加：
+
+```yaml
+theme:
+  name: material
+  custom_dir: docs/overrides
+```
+
+> **注意**: `production` 公開時に `noindex` を解除するかは ADR-0003 の再評価トリガーに従う。少なくとも v0.1 リリース時点では noindex 維持。
+
+#### 動作確認
+
+```bash
+# robots.txt（staging）
+curl -fsS https://staging.portfolio.example.com/robots.txt
+# 期待値: User-agent: *\nDisallow: /
+
+# X-Robots-Tag（staging）
+curl -I https://staging.portfolio.example.com/ | grep -i robots
+# 期待値: X-Robots-Tag: noindex, nofollow
+
+# MkDocs の meta（staging / production 両方）
+curl -fsS https://staging.portfolio.example.com/docs/ | grep -i 'name="robots"'
+# 期待値: <meta name="robots" content="noindex,nofollow">
+```
+
+### 6.6 Cloudflare 動作確認チェックリスト
+
+DNS 委譲 + Page Rules 設定後の確認：
+
+```bash
+# 1. DNS が Cloudflare 経由か
+dig staging.portfolio.example.com +short
+# 期待値: Cloudflare の IP（104.21.x.x や 172.67.x.x）
+
+# 2. Cloudflare のヘッダが付与されるか
+curl -I https://staging.portfolio.example.com/ | grep -i 'cf-\|server'
+# 期待値: server: cloudflare、cf-ray: ...
+
+# 3. SSL/TLS が「Full (strict)」で動作
+curl -I https://staging.portfolio.example.com/healthz
+# 期待値: HTTP/2 200、cf-cache-status: BYPASS（staging は cache bypass）
+
+# 4. Heroku への直接アクセスを遮断（任意）
+# Cloudflare ダッシュボード → SSL/TLS → Edge Certificates → Authenticated Origin Pulls を有効化
+```
+
+| 項目 | 確認 |
+|---|---|
+| DNS は Cloudflare 経由 | [ ] |
+| `server: cloudflare` ヘッダ付与 | [ ] |
+| SSL は「Full (strict)」 | [ ] |
+| Heroku ACM が有効 | [ ] |
+| `robots.txt` が `Disallow: /` | [ ] |
+| `X-Robots-Tag: noindex, nofollow` 付与 | [ ] |
+| `/docs/` の HTML に `<meta robots noindex>` | [ ] |
+| Page Rules でキャッシュ Bypass（staging） | [ ] |
 
 ---
 
