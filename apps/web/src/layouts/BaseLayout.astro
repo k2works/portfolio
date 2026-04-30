@@ -21,7 +21,7 @@ const navItems = [
   { href: "/works/", label: "Works" },
   { href: "/skills/", label: "Skills" },
   { href: "/contact/", label: "Contact" },
-  { href: "/docs/", label: "Tech Notes ↗", external: false },
+  { href: "/docs/", label: "Tech Notes ↗" },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -49,21 +49,30 @@ const year = new Date().getFullYear();
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={finalDescription} />
   </head>
-  <body>
+  <body class="font-sans">
     <a href="#main" class="skip-link">メインコンテンツへ移動</a>
 
-    <header>
-      <div class="header-inner">
-        <a href="/" class="logo" aria-label="ホームへ">{siteName}</a>
-        <nav aria-label="メインナビゲーション">
-          <ul>
+    <header
+      class="sticky top-0 z-10 border-b border-[color:var(--color-border)] bg-bg/95 backdrop-blur"
+    >
+      <div class="mx-auto flex max-w-prose flex-wrap items-center gap-4 px-4 py-3">
+        <a href="/" class="font-bold no-underline" aria-label="ホームへ">{siteName}</a>
+        <nav class="ml-auto" aria-label="メインナビゲーション">
+          <ul class="flex flex-wrap gap-3 sm:gap-4">
             {
               navItems.map((item) => {
                 const isCurrent =
                   item.href === "/" ? currentPath === "/" : currentPath.startsWith(item.href);
                 return (
                   <li>
-                    <a href={item.href} aria-current={isCurrent ? "page" : undefined}>
+                    <a
+                      href={item.href}
+                      aria-current={isCurrent ? "page" : undefined}
+                      class={
+                        "no-underline transition-opacity hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent" +
+                        (isCurrent ? " font-bold underline" : "")
+                      }
+                    >
                       {item.label}
                     </a>
                   </li>
@@ -75,91 +84,46 @@ const year = new Date().getFullYear();
       </div>
     </header>
 
-    <main id="main">
+    <main id="main" class="mx-auto max-w-prose px-4 py-8 sm:py-10 lg:py-12">
       <slot />
     </main>
 
-    <footer>
-      <p>© {year} {siteName}</p>
-      <ul aria-label="ソーシャルリンク">
+    <footer
+      class="mx-auto mt-16 max-w-prose border-t border-[color:var(--color-border)] px-4 py-6 text-sm text-[color:var(--color-muted)]"
+    >
+      <p class="m-0">© {year} {siteName}</p>
+      <ul class="mt-2 flex flex-wrap gap-4" aria-label="ソーシャルリンク">
         <li>
-          <a href="https://github.com/k2works" target="_blank" rel="noopener noreferrer">GitHub ↗</a
+          <a
+            href="https://github.com/k2works"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
           >
+            GitHub ↗
+          </a>
         </li>
         <li>
-          <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer"
-            >LinkedIn ↗</a
+          <a
+            href="https://www.linkedin.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
           >
+            LinkedIn ↗
+          </a>
         </li>
         <li>
-          <a href="https://github.com/k2works/portfolio" target="_blank" rel="noopener noreferrer"
-            >このサイトのソース ↗</a
+          <a
+            href="https://github.com/k2works/portfolio"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
           >
+            このサイトのソース ↗
+          </a>
         </li>
       </ul>
     </footer>
-
-    <style>
-      .skip-link {
-        position: absolute;
-        left: -9999px;
-        top: 0;
-      }
-      .skip-link:focus {
-        position: static;
-        display: inline-block;
-        padding: 0.5rem 1rem;
-        background: #ffeb3b;
-        color: #000;
-      }
-      header {
-        border-bottom: 1px solid currentColor;
-        padding: 1rem 0;
-      }
-      .header-inner {
-        max-width: 64rem;
-        margin: 0 auto;
-        padding: 0 1rem;
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        flex-wrap: wrap;
-      }
-      .logo {
-        font-weight: 700;
-        text-decoration: none;
-      }
-      nav ul {
-        list-style: none;
-        display: flex;
-        gap: 1rem;
-        margin: 0;
-        padding: 0;
-        flex-wrap: wrap;
-      }
-      nav a[aria-current="page"] {
-        font-weight: 700;
-        text-decoration: underline;
-      }
-      main {
-        max-width: 64rem;
-        margin: 0 auto;
-        padding: 2rem 1rem;
-      }
-      footer {
-        max-width: 64rem;
-        margin: 2rem auto 0;
-        padding: 1rem;
-        border-top: 1px solid currentColor;
-      }
-      footer ul {
-        list-style: none;
-        display: flex;
-        gap: 1rem;
-        margin: 0.5rem 0 0;
-        padding: 0;
-        flex-wrap: wrap;
-      }
-    </style>
   </body>
 </html>

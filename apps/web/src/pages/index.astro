@@ -47,33 +47,52 @@ const skillsHighlights = [
   title={`${profile.name} | ${profile.role}`}
   description={`${profile.catchCopy} ${profile.highlight}`}
 >
-  <section class="hero">
-    <h1>{profile.name}</h1>
-    <p class="role">{profile.role}</p>
-    <p class="catch-copy"><strong>{profile.catchCopy}</strong></p>
-    <ul class="specialties" aria-label="得意領域">
-      {profile.specialties.map((s) => <li>{s}</li>)}
+  <section class="mb-12">
+    <h1 class="m-0 text-4xl font-bold tracking-tight sm:text-5xl">{profile.name}</h1>
+    <p class="mt-1 text-lg text-[color:var(--color-muted)]">{profile.role}</p>
+    <p class="mt-3 text-xl"><strong>{profile.catchCopy}</strong></p>
+    <ul class="mt-3 flex flex-wrap gap-2" aria-label="得意領域">
+      {
+        profile.specialties.map((s) => (
+          <li class="rounded-full border border-[color:var(--color-border)] px-3 py-1 text-sm">
+            {s}
+          </li>
+        ))
+      }
     </ul>
-    <p class="highlight">{profile.highlight}</p>
-    <p class="cta">
-      <a href="/works/">Works を見る →</a>
-      <a href="/contact/">Contact</a>
+    <p class="mt-3 font-semibold">{profile.highlight}</p>
+    <p class="mt-5 flex flex-wrap gap-3">
+      <a
+        href="/works/"
+        class="rounded border border-[color:var(--color-border)] px-4 py-2 no-underline transition-opacity hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+      >
+        Works を見る →
+      </a>
+      <a
+        href="/contact/"
+        class="rounded border border-[color:var(--color-border)] px-4 py-2 no-underline transition-opacity hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+      >
+        Contact
+      </a>
     </p>
   </section>
 
-  <section class="featured" aria-labelledby="featured-heading">
-    <h2 id="featured-heading">Featured Works</h2>
-    <ul class="works-grid">
+  <section class="mb-12" aria-labelledby="featured-heading">
+    <h2 id="featured-heading" class="text-2xl font-bold">Featured Works</h2>
+    <ul class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {
         featuredWorks.map((work) => (
-          <li>
-            <article data-testid="work-card">
-              <h3>{work.title}</h3>
-              <p class="meta">{work.period}</p>
-              <p>{work.summary}</p>
-              <ul class="tech-tags" aria-label="使用技術">
+          <li class="m-0 list-none">
+            <article
+              data-testid="work-card"
+              class="h-full rounded-lg border border-[color:var(--color-border)] p-4 transition-shadow hover:shadow-md"
+            >
+              <h3 class="m-0 text-lg font-semibold">{work.title}</h3>
+              <p class="mt-1 text-sm text-[color:var(--color-muted)]">{work.period}</p>
+              <p class="mt-2 text-sm">{work.summary}</p>
+              <ul class="mt-3 flex flex-wrap gap-1" aria-label="使用技術">
                 {work.tech.map((t) => (
-                  <li>{t}</li>
+                  <li class="rounded bg-black/5 px-2 py-0.5 text-xs dark:bg-white/10">{t}</li>
                 ))}
               </ul>
             </article>
@@ -83,14 +102,14 @@ const skillsHighlights = [
     </ul>
   </section>
 
-  <section class="skills" aria-labelledby="skills-heading">
-    <h2 id="skills-heading">Skills Highlights</h2>
-    <div class="skills-grid">
+  <section aria-labelledby="skills-heading">
+    <h2 id="skills-heading" class="text-2xl font-bold">Skills Highlights</h2>
+    <div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {
         skillsHighlights.map((group) => (
-          <div>
-            <h3>{group.category}</h3>
-            <ul>
+          <div class="rounded-lg border border-[color:var(--color-border)] p-4">
+            <h3 class="m-0 text-base font-semibold">{group.category}</h3>
+            <ul class="mt-2 list-disc pl-5 text-sm">
               {group.items.map((item) => (
                 <li>{item}</li>
               ))}
@@ -101,106 +120,3 @@ const skillsHighlights = [
     </div>
   </section>
 </BaseLayout>
-
-<style>
-  .hero {
-    margin-bottom: 3rem;
-  }
-  .hero h1 {
-    margin-bottom: 0.25rem;
-  }
-  .role {
-    font-size: 1.125rem;
-    color: gray;
-    margin: 0 0 0.5rem;
-  }
-  .catch-copy {
-    font-size: 1.25rem;
-    margin: 0.75rem 0;
-  }
-  .specialties {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin: 0.75rem 0;
-  }
-  .specialties li {
-    border: 1px solid currentColor;
-    padding: 0.25rem 0.75rem;
-    border-radius: 999px;
-    font-size: 0.875rem;
-  }
-  .highlight {
-    font-weight: 600;
-  }
-  .cta {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-  .cta a {
-    border: 1px solid currentColor;
-    padding: 0.5rem 1rem;
-    text-decoration: none;
-    border-radius: 0.25rem;
-  }
-  .featured {
-    margin-bottom: 3rem;
-  }
-  .works-grid {
-    list-style: none;
-    padding: 0;
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: 1fr;
-  }
-  @media (min-width: 768px) {
-    .works-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-  .works-grid article {
-    border: 1px solid currentColor;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    height: 100%;
-  }
-  .works-grid h3 {
-    margin: 0 0 0.25rem;
-  }
-  .meta {
-    color: gray;
-    font-size: 0.875rem;
-    margin: 0 0 0.5rem;
-  }
-  .tech-tags {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.25rem;
-    margin: 0.5rem 0 0;
-  }
-  .tech-tags li {
-    background: rgba(125, 125, 125, 0.15);
-    padding: 0.125rem 0.5rem;
-    font-size: 0.75rem;
-    border-radius: 0.25rem;
-  }
-  .skills-grid {
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: 1fr;
-  }
-  @media (min-width: 768px) {
-    .skills-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-  .skills-grid ul {
-    list-style: disc;
-    padding-left: 1.25rem;
-  }
-</style>
