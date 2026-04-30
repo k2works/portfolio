@@ -18,7 +18,7 @@ team_size: 1
 position: "オーナー / 単独開発者"
 involvement: "lead"
 repo: "https://github.com/k2works/case-study-accounting"
-demo: "https://case-study-accounting-frontend-2cb4e7e16f2f.herokuapp.com/login"
+demo: "https://k2works.github.io/case-study-accounting/"
 featured: false
 ---
 
@@ -33,6 +33,11 @@ featured: false
 ## 解決
 
 `apps/backend` と `apps/frontend` の monorepo 構成で、Backend CI / Frontend CI / Backend Deploy / Frontend Deploy / MkDocs / Backend SonarQube / Frontend SonarQube の 7 ジョブを GitHub Actions で並列運用。Heroku 上のデモは `admin / Password123!` で誰でも確認できる。MkDocs で要件定義 → 設計 → 実装の流れを文書化し、ケーススタディとしての再利用性を担保した。
+
+### 公開先
+
+- <a href="https://k2works.github.io/case-study-accounting/" target="_blank" rel="noopener noreferrer">ドキュメント（ケーススタディ本体）↗</a>
+- <a href="https://case-study-accounting-frontend-2cb4e7e16f2f.herokuapp.com/login" target="_blank" rel="noopener noreferrer">アプリデモ（会計画面 / `admin` / `Password123!`）↗</a>
 
 ## 成果
 
