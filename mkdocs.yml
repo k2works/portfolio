@@ -84,6 +84,8 @@ nav:
       - リリース計画: development/release_plan.md
   - 運用:
       - 概要: operation/index.md
+      - アプリケーション開発環境セットアップ手順書: operation/local_setup.md
+      - Heroku staging 環境セットアップ手順書: operation/heroku_staging_setup.md
   - レビュー:
       - 概要: review/index.md
       - 分析成果物レビュー（2026-04-30）: review/design_review_20260430.md

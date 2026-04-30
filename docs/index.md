@@ -19,7 +19,7 @@
 | [要件](./requirements/index.md) | RDRA 2.0 とユースケース整理の入口 | 4 件のドキュメントを配置 |
 | [設計](./design/index.md) | アーキテクチャ、モデル、テスト、非機能の整理 | 8 件のドキュメントを配置 |
 | [開発](./development/index.md) | リリース計画、イテレーション計画、進捗管理 | 1 件（リリース計画）を配置 |
-| [運用](./operation/index.md) | 環境構築、デプロイ、運用手順の整理 | `index.md` を整備済み |
+| [運用](./operation/index.md) | 環境構築、デプロイ、運用手順の整理 | 2 件のセットアップ手順書を配置 |
 | [レビュー](./review/index.md) | 分析・開発レビュー結果の記録 | 1 件（分析成果物レビュー）を配置 |
 | [ADR](./adr/index.md) | Architecture Decision Records の管理 | 5 件の ADR を配置 |
 | [記事](./article/index.md) | 学習用の記事シリーズ一覧 | `index.md` を整備済み |
@@ -64,6 +64,6 @@
 
 ## 補足
 
-- `operation/` は現時点ではカテゴリ索引のみです（実ドキュメント未作成）。
+- `operation/` には現在 2 件のセットアップ手順書を配置（`local_setup.md` と `heroku_staging_setup.md`）。production 手順書は v1.0 直前に作成予定です。
 - `journal/` は作業ログ用の予約ディレクトリです。
 - `assets/` は MkDocs 用のスタイル・スクリプトを格納しています。
