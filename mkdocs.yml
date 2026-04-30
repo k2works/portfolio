@@ -63,20 +63,37 @@ exclude_docs: |
 
 nav:
   - Home: index.md
-  - 戦略:
-      - 概要: strategy/index.md
   - 要件:
       - 概要: requirements/index.md
+      - 要件定義書: requirements/requirements_definition.md
+      - ビジネスユースケース: requirements/business_usecase.md
+      - システムユースケース: requirements/system_usecase.md
+      - ユーザーストーリー: requirements/user_story.md
   - 設計:
       - 概要: design/index.md
+      - バックエンドアーキテクチャ: design/architecture_backend.md
+      - フロントエンドアーキテクチャ: design/architecture_frontend.md
+      - インフラストラクチャアーキテクチャ: design/architecture_infrastructure.md
+      - UI 設計: design/ui_design.md
+      - 技術スタック: design/tech_stack.md
+      - テスト戦略: design/test_strategy.md
+      - 非機能要件: design/non_functional.md
+      - 運用要件: design/operation.md
   - 開発:
       - 概要: development/index.md
+      - リリース計画: development/release_plan.md
   - 運用:
       - 概要: operation/index.md
   - レビュー:
       - 概要: review/index.md
+      - 分析成果物レビュー（2026-04-30）: review/design_review_20260430.md
   - ADR:
       - 概要: adr/index.md
+      - ADR-0001 フロントエンドフレームワークに Astro を採用: adr/0001-frontend-framework-astro.md
+      - ADR-0002 ホスティングプラットフォームに Heroku を採用: adr/0002-hosting-heroku.md
+      - ADR-0003 MkDocs を Tech Notes として共存させる: adr/0003-mkdocs-coexistence-strategy.md
+      - ADR-0004 Cloudflare 無料プランを前段に配置: adr/0004-cloudflare-front-cdn.md
+      - ADR-0005 ビルド境界を GitHub Actions に一本化: adr/0005-build-pipeline-unification.md
   - 記事:
       - 概要: article/index.md
       - テスト駆動開発から始めるプログラミング入門: article/getting-start-tdd/index.md
