@@ -50,6 +50,10 @@ result-*
 .cursor/
 .windsurf/
 
+# Claude Code エージェントの個人ローカル記憶
+# （MEMORY.md 等は各エージェントが自動生成するセッション記憶のため除外）
+.claude/agent-memory/
+
 # OS
 .DS_Store
 Thumbs.db
