@@ -42,14 +42,14 @@ jobs:
           HEROKU_APP: ${{ secrets.HEROKU_APP_STAGING }}
           HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
         run: |
-          cat > "$HOME/.netrc" <<NETRC
-          machine git.heroku.com
-            login $HEROKU_EMAIL
-            password $HEROKU_API_KEY
-          machine api.heroku.com
-            login $HEROKU_EMAIL
-            password $HEROKU_API_KEY
-          NETRC
+          {
+            echo "machine git.heroku.com"
+            echo "login $HEROKU_EMAIL"
+            echo "password $HEROKU_API_KEY"
+            echo "machine api.heroku.com"
+            echo "login $HEROKU_EMAIL"
+            echo "password $HEROKU_API_KEY"
+          } > "$HOME/.netrc"
           chmod 600 "$HOME/.netrc"
           git config --global user.email "$HEROKU_EMAIL"
           git config --global user.name "GitHub Actions"
