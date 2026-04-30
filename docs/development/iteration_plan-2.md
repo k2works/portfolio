@@ -153,15 +153,15 @@
 
 | カテゴリ | SP | 理想時間 | 状態 |
 |---------|----|----|------|
-| 1. Tailwind 仕上げ | 2 | 5h | [ ] |
-| 2. GitHub Actions CI/CD | 1 | 3h | [ ] |
-| 3. runbook 残り 6 本 | 2 | 3.3h | [ ] |
-| 4. A11y + Lighthouse + Playwright | 2 | 3.8h | [ ] |
-| **合計** | **7** | **15.1h** | |
+| 1. Tailwind 仕上げ | 2 | 5h | [x] |
+| 2. GitHub Actions CI/CD | 1 | 3h | [x] |
+| 3. runbook 残り 6 本 | 2 | 3.3h | [x] |
+| 4. A11y + Lighthouse + Playwright | 2 | 3.8h | [x]（axe-core は IT-3 へ） |
+| **合計** | **7** | **15.1h** | [x] |
 
 **1 SP あたり**: 約 2.2h（IT-1 の実績 0.6h/SP より厳しめに見積もり）
-
-**進捗率**: 0%（0/7 SP）
+**実績**: 約 2h（IT-1 同様に手動構築の効率化で短縮）
+**進捗率**: 100%（7/7 SP、axe-core を IT-3 に押し出し）
 
 ---
 
