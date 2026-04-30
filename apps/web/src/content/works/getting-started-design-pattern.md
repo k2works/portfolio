@@ -16,7 +16,7 @@ team_size: 1
 position: "オーナー / 単独開発者"
 involvement: "lead"
 repo: "https://github.com/k2works/getting-started-design-pattern"
-demo: "https://k2works.github.io/getting-started-design-pattern/slide/%E3%82%B9%E3%83%A9%E3%82%A4%E3%83%89.html"
+demo: "https://k2works.github.io/getting-started-design-pattern/"
 featured: false
 ---
 
@@ -31,6 +31,11 @@ GoF のデザインパターンや SOLID などの原理原則は古典として
 ## 解決
 
 `sandbox` ブランチで写経用の作業環境を分離し、`main` で教材本体を管理。Codespaces で `gh codespace create --branch sandbox` を打つだけで写経環境がブラウザに立ち上がる。教材本体は MkDocs で配信し、スライドも GitHub Pages で同時公開。AI 4 ツール（Claude / Copilot / Codex / Gemini）の YOLO モードで快適に写経できる。
+
+### 公開先
+
+- <a href="https://k2works.github.io/getting-started-design-pattern/" target="_blank" rel="noopener noreferrer">ドキュメント（教材本体）↗</a>
+- <a href="https://k2works.github.io/getting-started-design-pattern/slide/%E3%82%B9%E3%83%A9%E3%82%A4%E3%83%89.html" target="_blank" rel="noopener noreferrer">スライド ↗</a>
 
 ## 成果
 
