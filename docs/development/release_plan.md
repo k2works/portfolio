@@ -94,6 +94,9 @@ v1_0 --> [*]
 - E03, E04 が全て成功
 - 公開時に Works が **5 件以上**揃っている（[レビュー指摘](../review/design_review_20260430.md) User Rep）
 - Featured フラグの選定基準が `Profile.featured_works[]` で明文化されている
+  - 実装上は **`Work.featured: boolean`**（[フロントエンドアーキテクチャ - Featured Work の選定基準](../design/architecture_frontend.md#featured-work-の選定基準)）で実現する
+  - v0.2 リリース時点では「選定基準の明文化」までを範囲とし、現在の暫定 featured 設定（11 件中 3 件: case-study-sales / getting-started-tdd / practical-database-design）を維持する
+  - ホームの Featured Works は v0.3 home 再設計時に Content Collection 連動と合わせて再評価する
 
 ---
 

@@ -1,0 +1,225 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+type Work = CollectionEntry<"works">;
+
+export async function getStaticPaths() {
+  const works = await getCollection("works");
+  return works.map((work: Work) => ({
+    params: { slug: work.slug },
+    props: { work },
+  }));
+}
+
+interface Props {
+  work: Work;
+}
+
+const { work } = Astro.props as Props;
+const { Content } = await work.render();
+
+const periodLabel = work.data.period.to
+  ? `${work.data.period.from} 〜 ${work.data.period.to}`
+  : `${work.data.period.from} 〜 現在`;
+const techs: string[] = work.data.tech as string[];
+
+const involvementLabels: Record<string, string> = {
+  lead: "リード（設計から運用まで主導）",
+  core: "コアメンバー（主要設計と実装）",
+  member: "メンバー（実装と検証）",
+  advisor: "アドバイザー（技術助言）",
+};
+const involvementLabel = work.data.involvement ? involvementLabels[work.data.involvement] : null;
+---
+
+<BaseLayout title={`${work.data.title} | Works | Portfolio`} description={work.data.summary}>
+  <nav aria-label="パンくずリスト" class="text-sm text-[color:var(--color-muted)]">
+    <ol class="flex flex-wrap gap-1">
+      <li>
+        <a href="/" class="hover:underline">Home</a>
+      </li>
+      <li aria-hidden="true">›</li>
+      <li>
+        <a href="/works/" class="hover:underline">Works</a>
+      </li>
+      <li aria-hidden="true">›</li>
+      <li aria-current="page">{work.data.title}</li>
+    </ol>
+  </nav>
+
+  <article class="mt-6">
+    <header>
+      <h1 class="text-2xl font-bold sm:text-3xl">{work.data.title}</h1>
+      <p class="mt-2 text-[color:var(--color-muted)]">
+        <span>{work.data.role}</span>
+        <span aria-hidden="true"> / </span>
+        <span>{periodLabel}</span>
+      </p>
+
+      {
+        work.data.cover && (
+          <figure class="mt-4">
+            <img
+              src={work.data.cover}
+              alt={`${work.data.title} のカバー画像`}
+              class="w-full rounded border border-[color:var(--color-border)]"
+              loading="lazy"
+            />
+          </figure>
+        )
+      }
+
+      <dl
+        class="mt-4 grid grid-cols-[max-content_1fr] gap-x-4 gap-y-1 rounded border border-[color:var(--color-border)] p-4 text-sm"
+        aria-label="案件メタ情報"
+      >
+        {
+          work.data.domain && (
+            <>
+              <dt class="font-medium text-[color:var(--color-muted)]">業種</dt>
+              <dd>{work.data.domain}</dd>
+            </>
+          )
+        }
+        {
+          work.data.category && (
+            <>
+              <dt class="font-medium text-[color:var(--color-muted)]">機能領域</dt>
+              <dd>{work.data.category}</dd>
+            </>
+          )
+        }
+        {
+          work.data.team_size && (
+            <>
+              <dt class="font-medium text-[color:var(--color-muted)]">チーム規模</dt>
+              <dd>{work.data.team_size} 名</dd>
+            </>
+          )
+        }
+        {
+          work.data.position && (
+            <>
+              <dt class="font-medium text-[color:var(--color-muted)]">ポジション</dt>
+              <dd>{work.data.position}</dd>
+            </>
+          )
+        }
+        {
+          involvementLabel && (
+            <>
+              <dt class="font-medium text-[color:var(--color-muted)]">関与の深さ</dt>
+              <dd>{involvementLabel}</dd>
+            </>
+          )
+        }
+      </dl>
+
+      <ul class="mt-4 flex flex-wrap gap-2" aria-label="使用技術">
+        {
+          techs.map((t: string) => (
+            <li class="rounded bg-[color:var(--color-tag-bg)] px-2 py-1 text-xs">{t}</li>
+          ))
+        }
+      </ul>
+    </header>
+
+    <section class="mt-8" aria-labelledby="summary-heading">
+      <h2 id="summary-heading" class="text-xl font-semibold">概要</h2>
+      <p class="mt-2 leading-relaxed">{work.data.summary}</p>
+    </section>
+
+    <section class="prose mt-8 max-w-none" data-testid="work-content">
+      <Content />
+    </section>
+
+    {
+      (work.data.repo || work.data.demo) && (
+        <section class="mt-8" aria-label="外部リンク">
+          <ul class="flex flex-wrap gap-3">
+            {work.data.repo && (
+              <li>
+                <a
+                  href={work.data.repo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1 rounded border border-[color:var(--color-border)] px-3 py-2 text-sm no-underline transition hover:border-[color:var(--color-accent)]"
+                >
+                  GitHub Repo
+                  <span aria-hidden="true">↗</span>
+                  <span class="sr-only">（新しいタブで開く）</span>
+                </a>
+              </li>
+            )}
+            {work.data.demo && (
+              <li>
+                <a
+                  href={work.data.demo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1 rounded border border-[color:var(--color-border)] px-3 py-2 text-sm no-underline transition hover:border-[color:var(--color-accent)]"
+                >
+                  Live Demo
+                  <span aria-hidden="true">↗</span>
+                  <span class="sr-only">（新しいタブで開く）</span>
+                </a>
+              </li>
+            )}
+          </ul>
+        </section>
+      )
+    }
+
+    <p class="mt-10">
+      <a href="/works/" class="text-[color:var(--color-accent)] hover:underline"> ← 一覧に戻る </a>
+    </p>
+  </article>
+
+  <style is:global>
+    /* prose クラスの最低限スタイル（Tailwind Typography 未導入のため軽量実装） */
+    .prose h2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+    }
+    .prose h3 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .prose p,
+    .prose ul,
+    .prose ol,
+    .prose table {
+      margin-top: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+    .prose ul,
+    .prose ol {
+      padding-left: 1.5rem;
+    }
+    .prose ul {
+      list-style: disc;
+    }
+    .prose ol {
+      list-style: decimal;
+    }
+    .prose table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .prose th,
+    .prose td {
+      border: 1px solid var(--color-border);
+      padding: 0.5rem 0.75rem;
+      text-align: left;
+    }
+    .prose th {
+      background: var(--color-tag-bg);
+      font-weight: 600;
+    }
+  </style>
+</BaseLayout>

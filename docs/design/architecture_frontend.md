@@ -80,23 +80,55 @@ apps/web/
 `src/content/` で Astro Content Collections を利用し、Markdown のフロントマターをスキーマ検証する。これにより、未入力フィールドや型違いをビルド時に検出できる。
 
 ```ts
-// src/content/config.ts（イメージ）
+// src/content/config.ts（IT-4 で確定した実装）
 import { defineCollection, z } from "astro:content";
 
 const works = defineCollection({
+  type: "content",
   schema: z.object({
     title: z.string(),
-    summary: z.string(),
+    summary: z.string().max(200),
     role: z.string(),
-    period: z.object({ from: z.string(), to: z.string().optional() }),
-    tech: z.array(z.string()),
+    period: z.object({
+      from: z.string(),
+      to: z.string().optional(),
+    }),
+    tech: z.array(z.string()).min(1),
+    domain: z.string().optional(),
+    category: z.string().optional(),
+    team_size: z.number().int().positive().optional(),
+    position: z.string().optional(),
+    involvement: z.enum(["lead", "core", "member", "advisor"]).optional(),
     repo: z.string().url().optional(),
+    demo: z.string().url().optional(),
     cover: z.string().optional(),
+    featured: z.boolean().default(false),
   }),
 });
 
 export const collections = { works };
 ```
+
+スキーマ拡張の根拠：
+
+- `summary.max(200)` / `tech.min(1)`: 入力品質を機械的に担保
+- `domain` / `category` / `team_size` / `position` / `involvement`: US-03 の AC-03-2〜7 とレビュー指摘 [M02](../review/design_review_20260430.md) を反映
+- `demo`: ライブデモ URL（GitHub repo に加えて提供する場合）
+- `featured`: ホームの Featured Works に表示するかのフラグ。レビュー指摘 [L06](../review/design_review_20260430.md) を反映
+
+### Featured Work の選定基準
+
+ホームトップ「Featured Works」に表示する Work（最大 3 件、[UI 設計](./ui_design.md#トップページの最終調整)）の選定方針を明文化する。
+
+1. **多様性**: `domain`（業務領域）/ `category`（技術領域）/ `involvement`（関与の深さ）でなるべく重複しない 3 件を選ぶ
+2. **公開可能性**: 守秘により詳細を書けない受託案件より、公開可能な OSS / 教材 / 自社プロダクトを優先する
+3. **完成度**: `context` / `challenge` / `solution` / `outcome` の 4 ブロックが充実している Work を優先する
+4. **直近性**: `period.to` が直近 3 年以内の Work を優先する（古いものは降格）
+5. **見直しタイミング**: Work 追加時 / 四半期に 1 回 / リリース時に評価する
+
+#### 表記の対応関係
+
+[リリース計画](../development/release_plan.md) v0.2 リリース基準で記載される `Profile.featured_works[]` という表現は概念上のものであり、実装上は **`Work.featured: boolean`**（本セクションのスキーマ）で同等の機能を実現している。Profile 型に Work への逆参照配列を持たせる代わりに、Work 側にフラグを置くことでスキーマの単純化と Astro Content Collections との親和性を優先した。
 
 ## アクセシビリティ・SEO
 

@@ -16,4 +16,31 @@ test.describe("アクセシビリティ（axe-core）", () => {
 
     expect(accessibilityScanResults.violations).toEqual([]);
   });
+
+  test("Works 一覧（/works/）に WCAG 2.1 A / AA 違反がない", async ({ page }) => {
+    await page.goto("/works/");
+
+    const accessibilityScanResults = await new AxeBuilder({ page })
+      .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+      .analyze();
+
+    expect(accessibilityScanResults.violations).toEqual([]);
+  });
+
+  test("Works 詳細（/works/[slug]/）に WCAG 2.1 A / AA 違反がない", async ({ page }) => {
+    await page.goto("/works/");
+    const firstDetailLink = page
+      .locator('[data-testid="work-card"]')
+      .first()
+      .getByRole("link", {
+        name: /詳細を見る/,
+      });
+    await firstDetailLink.click();
+
+    const accessibilityScanResults = await new AxeBuilder({ page })
+      .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+      .analyze();
+
+    expect(accessibilityScanResults.violations).toEqual([]);
+  });
 });
