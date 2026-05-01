@@ -20,7 +20,9 @@
 | IT-4 | [iteration_plan-4.md](./iteration_plan-4.md) | [retrospective-4.md](./retrospective-4.md) | [iteration_report-4.md](./iteration_report-4.md) | 完了（7/7 SP・100%・v0.2-α / Works 一覧 + Content Collections） |
 | IT-5 | [iteration_plan-5.md](./iteration_plan-5.md) | [retrospective-5.md](./retrospective-5.md) | [iteration_report-5.md](./iteration_report-5.md) | 完了（6/6 SP・100%・v0.2 RC / Works 詳細 + サンプル 5 件揃え） |
 | IT-6 | [iteration_plan-6.md](./iteration_plan-6.md) | [retrospective-6.md](./retrospective-6.md) | [iteration_report-6.md](./iteration_report-6.md) | 完了（7/7 SP・100%・v0.3-α / Skills + ダークモード） |
-| IT-7 | [iteration_plan-7.md](./iteration_plan-7.md) | - | - | 計画中（目標 7 SP・v0.3 リリース / Contact + モバイル仕上げ） |
+| IT-7 | [iteration_plan-7.md](./iteration_plan-7.md) | [retrospective-7.md](./retrospective-7.md) | [iteration_report-7.md](./iteration_report-7.md) | 完了（7/7 SP・100%・v0.3 リリース / Contact + モバイル仕上げ） |
+| IT-8 | [iteration_plan-8.md](./iteration_plan-8.md) | [retrospective-8.md](./retrospective-8.md) | [iteration_report-8.md](./iteration_report-8.md) | 完了（5/5 SP・100%・v1.0-α / US-10 A11y 強化）|
+| IT-9 | [iteration_plan-9.md](./iteration_plan-9.md) | - | - | 計画中（目標 5 SP・v1.0 リリース / Tech Notes + OGP）|
 
 イテレーション開始時に行を追加します。
 
@@ -34,8 +36,10 @@
 | IT-4 | 7 | 7 | 100% |
 | IT-5 | 6 | 6 | 100% |
 | IT-6 | 7 | 7 | 100% |
-| IT-7 | 7 | - | 計画中 |
-| **累計（実績）** | **36** | **36** | **100%** |
+| IT-7 | 7 | 7 | 100% |
+| IT-8 | 5 | 5 | 100% |
+| IT-9 | 5 | - | 計画中 |
+| **累計（実績）** | **48** | **48** | **100%** |
 
 ### フェーズ進捗
 
@@ -43,9 +47,9 @@
 |---------|------|-----|---------|------|
 | v0.1 | Walking Skeleton（ホームのみ） | 16 | 16 | **リリース完了（v0.1.0 タグ付与・2026-04-30）** |
 | v0.2 | Works 一覧・詳細 | 13 | 13 | **リリース完了（v0.2.0 タグ付与・2026-05-01）** |
-| v0.3 | Skills / Contact / Dark | 13 | 7 | IT-6 完了（US-04 + US-07 / 7 SP）/ IT-7 計画中（US-05 + US-06 + US-08 / 7 SP）|
-| v1.0 | A11y / Tech Notes / OGP | 10 | 0 | 未着手 |
-| **合計** | | **52** | **36** | **69%** |
+| v0.3 | Skills / Contact / Dark | 14 | 14 | **リリース完了（v0.3.0 タグ付与・2026-05-01）** |
+| v1.0 | A11y / Tech Notes / OGP | 10 | 5 | IT-8 完了（v1.0-α / US-10）/ IT-9 計画中（US-11 + US-12 / 5 SP）|
+| **合計** | | **53** | **48** | **91%** |
 
 ### イテレーション完了報告書
 
@@ -57,6 +61,8 @@
 | IT-4 | [iteration_report-4.md](./iteration_report-4.md) | 公開 |
 | IT-5 | [iteration_report-5.md](./iteration_report-5.md) | 公開 |
 | IT-6 | [iteration_report-6.md](./iteration_report-6.md) | 公開 |
+| IT-7 | [iteration_report-7.md](./iteration_report-7.md) | 公開 |
+| IT-8 | [iteration_report-8.md](./iteration_report-8.md) | 公開 |
 
 ### リリース完了報告書
 
@@ -64,6 +70,7 @@
 |---------|--------|------|
 | v0.1（Walking Skeleton） | [release_report-0_1_0.md](./release_report-0_1_0.md) | 公開（2026-04-30） |
 | v0.2（Works） | [release_report-0_2_0.md](./release_report-0_2_0.md) | 公開（2026-05-01） |
+| v0.3（Skills + Contact + Dark） | [release_report-0_3_0.md](./release_report-0_3_0.md) | 公開（2026-05-01） |
 
 ## 補足
 
