@@ -64,6 +64,32 @@ test.describe("アクセシビリティ（axe-core）", () => {
     expect(accessibilityScanResults.violations).toEqual([]);
   });
 
+  test("Contact（/contact/）に WCAG 2.1 A / AA 違反がない", async ({ page }) => {
+    await page.goto("/contact/");
+
+    const accessibilityScanResults = await new AxeBuilder({ page })
+      .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+      .analyze();
+
+    expect(accessibilityScanResults.violations).toEqual([]);
+  });
+
+  test("ダークモード適用時の Contact（/contact/）に WCAG 2.1 A / AA 違反がない", async ({
+    browser,
+  }) => {
+    const context = await browser.newContext({ colorScheme: "dark" });
+    const page = await context.newPage();
+    await page.goto("/contact/");
+    await expect(page.locator("html.dark")).toBeAttached();
+
+    const accessibilityScanResults = await new AxeBuilder({ page })
+      .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+      .analyze();
+
+    expect(accessibilityScanResults.violations).toEqual([]);
+    await context.close();
+  });
+
   test("ダークモード適用時のホーム（/）に WCAG 2.1 A / AA 違反がない", async ({ page }) => {
     await page.addInitScript(() => {
       window.localStorage.setItem("theme", "dark");

@@ -1,0 +1,79 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { AVAILABILITY, CONTACT_CHANNELS, type ContactChannel } from "../../data/contact";
+
+const isExternal = (channel: ContactChannel): boolean => !channel.href.startsWith("mailto:");
+---
+
+<BaseLayout
+  title="Contact | Portfolio"
+  description="お仕事のご相談・採用・取材は以下のチャネルからご連絡ください。稼働可否と返信目標を冒頭に明示しています。"
+>
+  <section>
+    <h1 class="text-2xl font-bold sm:text-3xl">Contact</h1>
+
+    <section class="mt-6" aria-labelledby="availability-heading">
+      <h2 id="availability-heading" class="text-xl font-bold">現在の状況</h2>
+      <dl
+        class="mt-3 grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 rounded border border-[color:var(--color-border)] p-4"
+        aria-label="稼働可否"
+        data-testid="availability"
+      >
+        <dt class="font-semibold">ステータス</dt>
+        <dd class="m-0">{AVAILABILITY.status}</dd>
+        {
+          AVAILABILITY.scope && (
+            <>
+              <dt class="font-semibold">相談可能な案件規模</dt>
+              <dd class="m-0">{AVAILABILITY.scope}</dd>
+            </>
+          )
+        }
+      </dl>
+    </section>
+
+    <section class="mt-8" aria-labelledby="response-heading">
+      <h2 id="response-heading" class="text-xl font-bold">問い合わせ案内</h2>
+      <p class="mt-2">
+        お仕事のご相談・採用・取材は以下からご連絡ください。
+        <br />
+        <strong>{AVAILABILITY.responseTime}</strong>に返信します。
+      </p>
+    </section>
+
+    <section class="mt-8" aria-labelledby="channels-heading">
+      <h2 id="channels-heading" class="text-xl font-bold">連絡チャネル</h2>
+      <ul
+        class="mt-3 grid gap-3 sm:grid-cols-2"
+        aria-label="連絡チャネル"
+        data-testid="contact-channels"
+      >
+        {
+          CONTACT_CHANNELS.map((channel: ContactChannel) => {
+            const external = isExternal(channel);
+            return (
+              <li>
+                <a
+                  href={channel.href}
+                  aria-label={channel.ariaLabel}
+                  data-testid="contact-link"
+                  data-kind={channel.kind}
+                  {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                  class="inline-flex min-h-[44px] min-w-[44px] w-full items-center justify-between gap-3 rounded border border-[color:var(--color-border)] px-4 py-3 no-underline transition hover:border-[color:var(--color-accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--color-accent)]"
+                >
+                  <span class="font-semibold">{channel.label}</span>
+                  <span aria-hidden="true" class="text-[color:var(--color-muted)]">
+                    {external ? "↗" : "✉"}
+                  </span>
+                </a>
+              </li>
+            );
+          })
+        }
+      </ul>
+      <p class="mt-3 text-sm text-[color:var(--color-muted)]">
+        外部チャネルへのリンクは別タブで開きます（target=_blank rel=noopener noreferrer）。
+      </p>
+    </section>
+  </section>
+</BaseLayout>
