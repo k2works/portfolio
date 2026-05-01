@@ -58,6 +58,7 @@
 | リリース | 報告書 | 状態 |
 |---------|--------|------|
 | v0.1（Walking Skeleton） | [release_report-0_1_0.md](./release_report-0_1_0.md) | 公開（2026-04-30） |
+| v0.2（Works） | [release_report-0_2_0.md](./release_report-0_2_0.md) | 公開（2026-05-01） |
 
 ## 補足
 
