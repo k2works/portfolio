@@ -57,6 +57,7 @@ if (basicAuthUser && basicAuthPass) {
 // セキュリティヘッダ
 // - HSTS は Cloudflare 側で付与するため Express 側は無効化
 // - CSP は Astro Islands の inline script を許可
+// - frame-src: ALU 公式コマ埋め込み（https://alu.jp）を許可
 app.use(
   helmet({
     strictTransportSecurity: false,
@@ -68,6 +69,7 @@ app.use(
         "img-src": ["'self'", "data:", "https:"],
         "font-src": ["'self'"],
         "connect-src": ["'self'"],
+        "frame-src": ["'self'", "https://alu.jp"],
         "frame-ancestors": ["'none'"],
         "base-uri": ["'self'"],
         "form-action": ["'self'"],
@@ -117,14 +119,14 @@ app.use((_req, res) => {
 });
 
 const server = app.listen(port, () => {
-  // eslint-disable-next-line no-console
+   
   console.log(`listening on ${port}`);
 });
 
 // Graceful shutdown
 /** @param {NodeJS.Signals} signal */
 const shutdown = (signal) => {
-  // eslint-disable-next-line no-console
+   
   console.log(`${signal} received, shutting down`);
   server.close(() => {
     process.exit(0);
