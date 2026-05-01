@@ -60,7 +60,12 @@ test.describe("ナビゲーション・アクセシビリティ基本", () => {
 
   test("外部リンクが target=_blank と rel=noopener noreferrer を持つ", async ({ page }) => {
     await page.goto("/");
-    const externalLinks = page.locator('a[target="_blank"]');
+    // body 直下の header / main / footer に限定（Astro Dev Toolbar の shadow DOM 内
+    // <header> 配下の a[target=_blank] を除外。Playwright Locator は shadow DOM を
+    // 貫通するため、子コンビネータで明示的に Light DOM の構造に縛る）
+    const externalLinks = page.locator(
+      'body > header a[target="_blank"], body > main a[target="_blank"], body > footer a[target="_blank"]'
+    );
     const count = await externalLinks.count();
     expect(count).toBeGreaterThanOrEqual(1);
     for (let i = 0; i < count; i++) {

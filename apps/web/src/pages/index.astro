@@ -8,9 +8,13 @@ type Skill = CollectionEntry<"skills">;
 const profile = {
   name: "k2works",
   role: "Software Engineer",
-  catchCopy: "ドメインを段階的に解きほぐすバックエンド主軸のエンジニア",
-  specialties: ["Backend", "DDD", "TDD", "AWS", "Java", "TypeScript", "Astro"],
-  highlight: "経験 10 年 / 受託・自社プロダクトで 12 案件",
+  catchCopy: "内製開発 10 数年、よいソフトウェアを探求せし \n絶滅危惧種 XP おじさん",
+  catchLink: {
+    href: "https://alu.jp/series/%E3%83%99%E3%83%AB%E3%82%BB%E3%83%AB%E3%82%AF/crop/0bTcJtFIwaKRapCLxFHY",
+    label: "ブログで使えるベルセルクのコマ（ALU）",
+  },
+  specialties: ["Backend", "DDD", "TDD", "AWS", "Java", "TypeScript", "Ruby on Rails", "XP"],
+  highlight: "経験 20 年 / 社内開発 15 年",
 };
 
 // Featured Works: Content Collections から featured: true を取得（最大 3 件）
@@ -53,12 +57,36 @@ const skillsHighlights = HIGHLIGHT_CATEGORIES.map((category) => ({
 
 <BaseLayout
   title={`${profile.name} | ${profile.role}`}
-  description={`${profile.catchCopy} ${profile.highlight}`}
+  description={`${profile.catchCopy.replace(/\n/g, " ")} ${profile.highlight}`}
 >
   <section class="mb-12">
     <h1 class="m-0 text-4xl font-bold tracking-tight sm:text-5xl">{profile.name}</h1>
     <p class="mt-1 text-lg text-[color:var(--color-muted)]">{profile.role}</p>
-    <p class="mt-3 text-xl"><strong>{profile.catchCopy}</strong></p>
+    <figure class="mt-4 max-w-full">
+      <iframe
+        src="https://alu.jp/series/%E3%83%99%E3%83%AB%E3%82%BB%E3%83%AB%E3%82%AF/crop/embed/0bTcJtFIwaKRapCLxFHY/0?referer=oembed"
+        width="600"
+        height="281.6"
+        scrolling="no"
+        loading="lazy"
+        title="ブログで使えるベルセルクのコマ（ALU 公式埋め込み）"
+        referrerpolicy="no-referrer-when-downgrade"
+        style="margin: auto; display: block; border-width: 0px; max-width: 100%; aspect-ratio: 600 / 281.6;"
+        data-testid="catch-embed"></iframe>
+      <figcaption class="mt-1 text-center text-xs text-[color:var(--color-muted)]">
+        出典:
+        <a
+          href={profile.catchLink.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--color-accent)]"
+          data-testid="catch-link"
+        >
+          {profile.catchLink.label} ↗
+        </a>
+      </figcaption>
+    </figure>
+    <p class="mt-4 text-xl whitespace-pre-line"><strong>{profile.catchCopy}</strong></p>
     <ul class="mt-3 flex flex-wrap gap-2" aria-label="得意領域">
       {
         profile.specialties.map((s) => (
