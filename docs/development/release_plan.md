@@ -206,7 +206,7 @@ v1_0 --> [*]
 | -（実施済み） | IT-6 後の追加コンテンツ + 品質改善: クローズド Work 2 件（business-saas-aws-iac / multi-gen-aws-iac）+ Skills 逆参照 + Books ページ（読書リスト 77 冊）+ 軸 × カテゴリフィルタ + pre-commit hook（husky + lint-staged）+ CI 緑化 | -（追加作業）| 40 | 開発活動継続 |
 | 7（実施済み） | US-05 Contact 稼働可否 + US-06 外部チャネル + US-08 モバイル仕上げ + ui_design 反映 + .gitattributes 拡張（IT-7）| 7 | 47 | **v0.3 リリース ✅（2026-05-01 / v0.3.0 タグ / c0bde49）**（v0.3 = 14 SP / IT-7 で 7 SP）|
 | 8（実施済み） | US-10 A11y 強化（キーボード網羅 16 シナリオ + フォーカストラップ + Lighthouse v1.0 予算 A11y≥0.95 + ホーム Content Collections 連動）（IT-8）| 5 | 48 | v1.0-α ✅ |
-| 9 | US-11 Tech Notes 同居（noindex / 戻り動線）+ US-12 OGP（@astrojs/og）（IT-9） | 5 | 56 | **v1.0 リリース**（v1.0 = 10 SP） |
+| 9 | US-11 Tech Notes 同居（MkDocs overrides + 戻り動線 + 配色共通化）+ US-12 OGP 動的生成 + Lighthouse v1.0 最終予算 + main マージ + v1.0.0 タグ（IT-9） | 5 | 53 | **v1.0 リリース**（v1.0 = 10 SP） |
 
 > 再校正後は **9 週間** で v1.0 完了見込み（IT-1+IT-2 が同日に完了したため、暦上は更に短縮可能）。
 

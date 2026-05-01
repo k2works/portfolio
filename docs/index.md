@@ -56,6 +56,7 @@
 - [IT-7 完了報告書](./development/iteration_report-7.md) — v0.3 リリース / Contact + モバイル仕上げ（IT-7 / 7 SP / 100%・99.4% 工期短縮）
 - [v0.3 リリース完了報告書](./development/release_report-0_3_0.md) — Skills + Contact + Dark（IT-6〜IT-7 / 14 SP / 108%・99.3% 工期短縮）
 - [IT-8 完了報告書](./development/iteration_report-8.md) — v1.0-α / US-10 A11y 強化（IT-8 / 5 SP / 100%・10.00 SP/h ピーク）
+- [IT-9 計画](./development/iteration_plan-9.md) — v1.0 リリース / Tech Notes 同居 + OGP 自動生成（目標 5 SP）
 
 ### ADR（7 件）
 
