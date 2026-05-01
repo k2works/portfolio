@@ -561,6 +561,10 @@ contact -> mail : mailto: で起動
 - セクション間に余白を取りすぎない（縦パディング 32px〜48px）
 - 「Featured Works」「Skills Highlights」は最大 3 件まで、それ以上は各専用ページで提供
 
+### Featured Works の選定方針
+
+ホーム「Featured Works」に表示する Work の選定基準は [フロントエンドアーキテクチャ - Featured Work の選定基準](./architecture_frontend.md#featured-work-の選定基準) に記載する（多様性 / 公開可能性 / 完成度 / 直近性 / 見直しタイミングの 5 観点）。実装は Content Collection の `Work.featured: boolean` フィールドで表現する。
+
 ## 計測・改善指針
 
 | 指標 | 想定計測手段 |

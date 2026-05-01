@@ -116,6 +116,20 @@ export const collections = { works };
 - `demo`: ライブデモ URL（GitHub repo に加えて提供する場合）
 - `featured`: ホームの Featured Works に表示するかのフラグ。レビュー指摘 [L06](../review/design_review_20260430.md) を反映
 
+### Featured Work の選定基準
+
+ホームトップ「Featured Works」に表示する Work（最大 3 件、[UI 設計](./ui_design.md#トップページの最終調整)）の選定方針を明文化する。
+
+1. **多様性**: `domain`（業務領域）/ `category`（技術領域）/ `involvement`（関与の深さ）でなるべく重複しない 3 件を選ぶ
+2. **公開可能性**: 守秘により詳細を書けない受託案件より、公開可能な OSS / 教材 / 自社プロダクトを優先する
+3. **完成度**: `context` / `challenge` / `solution` / `outcome` の 4 ブロックが充実している Work を優先する
+4. **直近性**: `period.to` が直近 3 年以内の Work を優先する（古いものは降格）
+5. **見直しタイミング**: Work 追加時 / 四半期に 1 回 / リリース時に評価する
+
+#### 表記の対応関係
+
+[リリース計画](../development/release_plan.md) v0.2 リリース基準で記載される `Profile.featured_works[]` という表現は概念上のものであり、実装上は **`Work.featured: boolean`**（本セクションのスキーマ）で同等の機能を実現している。Profile 型に Work への逆参照配列を持たせる代わりに、Work 側にフラグを置くことでスキーマの単純化と Astro Content Collections との親和性を優先した。
+
 ## アクセシビリティ・SEO
 
 | 項目 | 方針 |
