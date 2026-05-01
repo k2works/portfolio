@@ -235,6 +235,16 @@ docs/operation/runbooks/
 |-----|---------|-----------|
 | - | （新規 ADR は不要。既存 ADR の範囲内で実装） | - |
 
+### ui_design.md / 既存設計ドキュメントとの整合性
+
+整合性検証スキル（[validating-iteration-plan](../../.claude/skills/validating-iteration-plan)）の結果、IT-8 は **新規画面なし・既存仕様の検証強化のみ** のため設計ドキュメントへの反映は不要：
+
+- フォーカストラップは [ui_design.md ヘッダー解説](../design/ui_design.md#共通レイアウト)（行 114）に既記載（「モバイル: 768px 未満でハンバーガーメニュー（48×48 px）、フォーカストラップ + Esc で閉じる」）
+- `focus-visible` リング表示は [ui_design.md インタラクション設計](../design/ui_design.md#インタラクション設計)（行 449）に既記載（「キーボード Tab: フォーカス可視化（`focus-visible` リング）、論理的なタブ順序」）
+- スキップリンク + ランドマークは v0.1 から `BaseLayout.astro` に実装済み
+
+→ 本イテレーションは「既存実装をテストで担保する」位置付け。ui_design.md / architecture_frontend.md への変更は発生しない。
+
 ---
 
 ## リスクと対策
@@ -245,6 +255,7 @@ docs/operation/runbooks/
 | フォーカストラップ実装で既存ハンバーガーメニュー挙動に影響 | 中 | mobile.spec.ts の既存 5 シナリオ（iPhone SE + Android Chromium）を回帰確認 |
 | NVDA / VoiceOver 手動検証は環境依存（Mac / Windows） | 低 | 手順書（runbook）に「環境ごとの推奨操作」を明文化、自動化は v1.0 後の改善とする |
 | キーボード操作 E2E が flaky になる（フォーカス順序がブラウザ実装依存） | 低 | `page.keyboard.press("Tab")` の auto-retry を Playwright の標準機能で吸収。失敗時はトラッキング |
+| design_review レビュー指摘の漏れ（[M07 XSS / Markdown サニタイズ](../review/design_review_20260430.md) と [M08 JavaScript 無効環境 E2E](../review/design_review_20260430.md)） | 中 | **IT-8 のスコープ外**。M07 は IT-9（OGP 実装時に `set:html` の lint + サニタイズ E2E を併せて）、M08 は v1.0 リリース後の改善タスク（運用フェーズで Astro Zero JS の検証が必要になった時点で対応）と位置付ける |
 
 ---
 
