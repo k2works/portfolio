@@ -112,7 +112,7 @@
 | # | タスク | 見積もり | 担当 | 状態 |
 |---|--------|---------|------|------|
 | 3.1 | ui_design.md の更新（4 件まとめて反映）: (1) 画面遷移図に `S04_Skills ↔ S03_WorkDetail` を追加（[IT-6 計画](./iteration_plan-6.md) で約束）/ (2) 画面一覧テーブルに `S06 / Books / /books/` を追加（IT-6 後の Books 追加と整合）/ (3) ヘッダーナビ記述に「Books」を追加 / (4) 画面遷移図に `S06_Books` の state と遷移を追加 | 1.0h | self | [ ] |
-| 3.2 | `.gitattributes` 拡張（`*.astro` `*.ts` `*.json` `*.md` `*.css` `*.html` に `text eol=lf` を指定）でローカル CRLF 衝突を恒久解消 | 0.5h | self | [ ] |
+| 3.2 | `.gitattributes` 拡張（`*.astro` `*.ts` `*.json` `*.md` `*.css` `*.html` に `text eol=lf` を指定）でローカル CRLF 衝突を git 側でも恒久解消（pre-commit hook（`7d5caf9` 導入済み）と併用）| 0.5h | self | [ ] |
 | 3.3 | Card.astro 共通化の判断（home Featured / /works/ 一覧 / /skills/ Work 逆参照 / /books/ で Rule of Three 達成）— 抽出するか見送るかを記録 | 0.5h | self | [ ] |
 | 3.4 | v0.3 リリース実行（main マージ + Lighthouse v0.3 予算確認 + v0.3.0 タグ + リリース完了報告書） | 1.5h | self | [ ] |
 | 3.5 | ふりかえり（retrospective-7.md）+ 完了報告書（iteration_report-7.md） | 1.0h | self | [ ] |
@@ -265,6 +265,8 @@ docs/design/ui_design.md      # 画面遷移図に S04↔S03 追記
 3. **画面遷移図（行 124-170）**: `S06_Books` の state（URL `/books/`、説明「読書リスト + 軸 / カテゴリフィルタ」）と他画面との遷移（Books タブ ⇔ Home / Works / Skills / Contact）を追加
 4. **画面遷移図（IT-6 約束）**: `S04_Skills ↔ S03_WorkDetail`（関連 Work 逆参照リンク）の遷移を追加
 
+> **Books は IT-6 後の追加機能として既に実装済み**（`49b5366` + `3e6c8df`）。`apps/web/src/data/books.ts`（77 冊）+ `apps/web/src/pages/books/index.astro`（軸 × カテゴリフィルタ）+ E2E 9 シナリオ + axe-core 検証済み。本タスクではドキュメント側を実装に追従させる。
+
 ---
 
 ## リスクと対策
@@ -276,6 +278,7 @@ docs/design/ui_design.md      # 画面遷移図に S04↔S03 追記
 | Lighthouse v0.3 予算（A11y ≥ 92）が画像追加で割り込む | 低 | `astro:assets` で AVIF/WebP 出力 + alt 属性必須化 + axe-core の `image-alt` で機械検証 |
 | Playwright の Firefox / Safari の有効化に時間がかかる | 中 | IT-7 内では Chromium のみで継続、Firefox/Safari は手動検証 + v1.0 で自動化 |
 | Email 公開可否が未決のため Contact 実装が遅延 | 低 | 暫定で「お問い合わせは GitHub Issue 経由」とする逃げ道を用意（[ADR](../adr/)化はしない簡易判断）|
+| ローカル `format:check` 環境問題で CI が連続失敗（IT-6 〜 Books 追加期間で 4 回再発） | （解消済み） | **pre-commit hook（`7d5caf9`）で先行解消**。commit 時に `npx lint-staged` が `apps/web` 配下の staged ファイルに prettier --write + eslint --fix を自動適用するため、push 前に整形違反が混入しない |
 
 ---
 

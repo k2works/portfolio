@@ -201,6 +201,7 @@ v1_0 --> [*]
 | 5（実施済み） | US-03 詳細 + 5 件のサンプル Works 投入 + Works フィルタ（IT-5） | 6 | 29 | v0.2 RC ✅ |
 | -（実施済み） | クローズド Work + 教材 URL 反映 + Featured 選定基準明文化 + 404 補完 + main マージ + v0.2.0 タグ + リリース完了報告書 | 4 | 33 | **v0.2 リリース ✅（2026-05-01）** |
 | 6（実施済み） | US-04 Skills + US-07 ダークモード切替（IT-6） | 7 | 40 | v0.3-α ✅ |
+| -（実施済み） | IT-6 後の追加コンテンツ + 品質改善: クローズド Work 2 件（business-saas-aws-iac / multi-gen-aws-iac）+ Skills 逆参照 + Books ページ（読書リスト 77 冊）+ 軸 × カテゴリフィルタ + pre-commit hook（husky + lint-staged）+ CI 緑化 | -（追加作業）| 40 | 開発活動継続 |
 | 7 | US-05 Contact 稼働可否 + US-06 外部チャネル + US-08 モバイル仕上げ（IT-7）| 7 | 47 | **v0.3 リリース**（v0.3 = 13 SP / IT-7 で 7 SP）|
 | 8 | US-10 A11y 強化（NVDA / VoiceOver 手動検証 + axe-core 全画面）（IT-8） | 5 | 51 | v1.0-α |
 | 9 | US-11 Tech Notes 同居（noindex / 戻り動線）+ US-12 OGP（@astrojs/og）（IT-9） | 5 | 56 | **v1.0 リリース**（v1.0 = 10 SP） |
@@ -290,6 +291,7 @@ stop
 | 採用面接前後の停止 | 機会損失 | pre-interview-freeze ルール、Cloudflare Always Online、GitHub Pages 常時ミラー |
 | Lighthouse 予算未達でリリース停止 | コンテンツ更新の停止 | 段階導入 + コンテンツ変更時の警告モード |
 | Heroku 課金超過 | コスト増 | UptimeRobot のスパイク警告、Cloudflare キャッシュで吸収 |
+| Windows ローカルでの `format:check` 環境問題（`core.autocrlf=true` × `endOfLine: "lf"` の衝突） | ローカル品質ゲート機能不全 → CI で初めて発覚 | pre-commit hook（husky + lint-staged）を `7d5caf9` で導入、commit 時に prettier --write + eslint --fix を staged ファイルに自動適用。`.gitattributes` 拡張は IT-7 横断タスク 3.2 で恒久対応 |
 
 ## 関連ドキュメント
 
