@@ -77,15 +77,15 @@ test.describe("/works/[slug]/ - Works 詳細", () => {
     await expect(page).toHaveURL(/\/works\/?$/);
   });
 
-  test("AC-03-10: 存在しない slug は 404", async ({ page }) => {
+  test("AC-03-10: 存在しない slug は 404 ページを返す", async ({ page }) => {
     const response = await page.goto("/works/non-existent-work/", { waitUntil: "load" });
-    // Astro SSG では未生成の slug は 404.html を返すか、Express の 404 fallback で 200 (404 ページ HTML)
-    // Express server.js の挙動に依存するが、少なくともコンテンツが「存在しない work」のページではないこと
-    expect(response?.status() ?? 0).toBeGreaterThanOrEqual(200);
-    // 主タイトルが Work のものではないことを確認（404 ページか、リダイレクト）
-    const heading = page.getByRole("heading", { level: 1 });
-    const headingText = await heading.textContent().catch(() => null);
-    expect(headingText?.includes("非存在") ?? false).toBe(false);
+    expect(response?.status()).toBe(404);
+    await expect(
+      page.getByRole("heading", { level: 1, name: /ページが見つかりません/ })
+    ).toBeVisible();
+    const fallbackNav = page.getByRole("navigation", { name: "戻り動線" });
+    await expect(fallbackNav.getByRole("link", { name: "ホームに戻る" })).toBeVisible();
+    await expect(fallbackNav.getByRole("link", { name: "Works 一覧に戻る" })).toBeVisible();
   });
 
   test("外部リンク: GitHub Repo / Live Demo は target=_blank rel=noopener noreferrer（リンクがある場合のみ）", async ({
