@@ -52,6 +52,7 @@
 - [v0.1 リリース完了報告書](./development/release_report-0_1_0.md) — Walking Skeleton（IT-1〜IT-3 / 16 SP / 100%・98.6% 工期短縮）
 - [v0.2 リリース完了報告書](./development/release_report-0_2_0.md) — Works（IT-4〜IT-5 / 13 SP / 130%・98.9% 工期短縮）
 - [IT-1〜IT-5 完了報告書](./development/index.md) — 各イテレーションの達成 SP / 品質メトリクス / 振り返り
+- [IT-6 計画](./development/iteration_plan-6.md) — v0.3-α / US-04 Skills + US-07 ダークモード（目標 7 SP）
 
 ### ADR（7 件）
 

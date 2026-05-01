@@ -19,6 +19,7 @@
 | IT-3 | [iteration_plan-3.md](./iteration_plan-3.md) | [retrospective-3.md](./retrospective-3.md) | [iteration_report-3.md](./iteration_report-3.md) | 完了（4/4 SP・100%・v0.1 リリース完了） |
 | IT-4 | [iteration_plan-4.md](./iteration_plan-4.md) | [retrospective-4.md](./retrospective-4.md) | [iteration_report-4.md](./iteration_report-4.md) | 完了（7/7 SP・100%・v0.2-α / Works 一覧 + Content Collections） |
 | IT-5 | [iteration_plan-5.md](./iteration_plan-5.md) | [retrospective-5.md](./retrospective-5.md) | [iteration_report-5.md](./iteration_report-5.md) | 完了（6/6 SP・100%・v0.2 RC / Works 詳細 + サンプル 5 件揃え） |
+| IT-6 | [iteration_plan-6.md](./iteration_plan-6.md) | - | - | 計画中（目標 7 SP・v0.3-α / Skills + ダークモード） |
 
 イテレーション開始時に行を追加します。
 
@@ -31,17 +32,18 @@
 | IT-3 | 4 | 4 | 100% |
 | IT-4 | 7 | 7 | 100% |
 | IT-5 | 6 | 6 | 100% |
-| **累計** | **29** | **29** | **100%** |
+| IT-6 | 7 | - | 計画中 |
+| **累計（実績）** | **29** | **29** | **100%** |
 
 ### フェーズ進捗
 
 | フェーズ | 内容 | SP | 完了 SP | 状態 |
 |---------|------|-----|---------|------|
-| v0.1 | Walking Skeleton（ホームのみ） | 16 | 16 | **リリース完了（staging 自動デプロイ成立）** |
-| v0.2 | Works 一覧・詳細 | 10 | 10 | **IT-5 完了 = v0.2 コード完成** / main マージ + v0.2.0 タグ + リリース完了報告書 残 |
-| v0.3 | Skills / Contact / Dark | 13 | 0 | 未着手 |
+| v0.1 | Walking Skeleton（ホームのみ） | 16 | 16 | **リリース完了（v0.1.0 タグ付与・2026-04-30）** |
+| v0.2 | Works 一覧・詳細 | 13 | 13 | **リリース完了（v0.2.0 タグ付与・2026-05-01）** |
+| v0.3 | Skills / Contact / Dark | 13 | 0 | IT-6 計画中（US-04 + US-07 / 7 SP） |
 | v1.0 | A11y / Tech Notes / OGP | 10 | 0 | 未着手 |
-| **合計** | | **49** | **26** | **53%** |
+| **合計** | | **52** | **29** | **56%** |
 
 ### イテレーション完了報告書
 
