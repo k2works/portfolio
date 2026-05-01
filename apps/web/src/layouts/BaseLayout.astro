@@ -21,13 +21,19 @@ const finalOgImage = ogImage ?? "/og.svg";
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
 
-const navItems = [
+interface NavItem {
+  href: string;
+  label: string;
+  external?: boolean;
+}
+
+const navItems: NavItem[] = [
   { href: "/", label: "Home" },
   { href: "/works/", label: "Works" },
   { href: "/skills/", label: "Skills" },
   { href: "/books/", label: "Books" },
   { href: "/contact/", label: "Contact" },
-  { href: "/docs/", label: "Tech Notes ↗" },
+  { href: "https://k2works.github.io/portfolio/", label: "Tech Notes ↗", external: true },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -137,13 +143,17 @@ const year = new Date().getFullYear();
           <ul class="flex flex-col gap-3 py-3 md:flex-row md:gap-4 md:py-0">
             {
               navItems.map((item) => {
-                const isCurrent =
-                  item.href === "/" ? currentPath === "/" : currentPath.startsWith(item.href);
+                const isCurrent = item.external
+                  ? false
+                  : item.href === "/"
+                    ? currentPath === "/"
+                    : currentPath.startsWith(item.href);
                 return (
                   <li>
                     <a
                       href={item.href}
                       aria-current={isCurrent ? "page" : undefined}
+                      {...(item.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                       class={
                         "block py-1 no-underline transition-opacity hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent" +
                         (isCurrent ? " font-bold underline" : "")
