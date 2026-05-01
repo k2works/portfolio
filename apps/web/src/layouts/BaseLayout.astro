@@ -55,13 +55,13 @@ const year = new Date().getFullYear();
       // ダークモード初期化（FOUC 回避のため <head> で実行）
       (function () {
         try {
-          var stored = localStorage.getItem("theme");
-          var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-          var theme = stored ? stored : prefersDark ? "dark" : "light";
+          const stored = localStorage.getItem("theme");
+          const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          const theme = stored ? stored : prefersDark ? "dark" : "light";
           if (theme === "dark") {
             document.documentElement.classList.add("dark");
           }
-        } catch (e) {
+        } catch {
           /* localStorage が使えない環境はライトモードで継続 */
         }
       })();

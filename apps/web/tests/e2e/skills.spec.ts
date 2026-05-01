@@ -24,7 +24,6 @@ test.describe("/skills/ - Skills 一覧", () => {
 
   test("AC-04-3: 凡例（★1〜5）が画面に明示されている", async ({ page }) => {
     await page.goto("/skills/");
-    const legend = page.getByRole("region", { name: "" }).filter({ hasText: "凡例" });
     await expect(page.getByRole("heading", { level: 2, name: "凡例" })).toBeVisible();
     const legendList = page.locator("section[aria-labelledby='legend-heading'] li");
     await expect(legendList).toHaveCount(5);
