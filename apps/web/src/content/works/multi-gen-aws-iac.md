@@ -1,6 +1,6 @@
 ---
-title: "業務システム向け世代別 AWS インフラ導入支援（クローズド）"
-summary: "Rails 系の業務システムについて、第 1 世代（手作業 + OpsWorks 時代の Terraform 雛形）から第 2 世代（Terraform module 整理 + App Runner + Packer + 拠点間 VPN + SSM Parameter Store）へ段階的にモダナイズする世代別インフラ導入支援。アプリケーションは対象外。組織内クローズド運用のため詳細は非公開。"
+title: "社内システム向け世代別 AWS インフラ導入支援（クローズド）"
+summary: "Rails 系の社内システムについて、第 1 世代（手作業 + OpsWorks 時代の Terraform 雛形）から第 2 世代（Terraform module 整理 + App Runner + Packer + 拠点間 VPN + SSM Parameter Store）へ段階的にモダナイズする世代別インフラ導入支援。アプリケーションは対象外。組織内クローズド運用のため詳細は非公開。"
 role: "インフラ IaC 担当 / 世代別マイグレーション"
 period:
   from: "2018-10"
@@ -15,7 +15,7 @@ tech:
   - App Runner
   - Elastic Beanstalk
   - Site-to-Site VPN
-domain: "業務システム（業界特定情報は非公開）"
+domain: "社内システム（業界特定情報は非公開）"
 category: "AWS インフラ IaC 世代別マイグレーション"
 team_size: 1
 position: "インフラ IaC 担当 / 世代別マイグレーション"
@@ -25,7 +25,7 @@ featured: false
 
 ## 課題
 
-長期運用される業務システムの AWS インフラは、運用開始から年月を重ねるなかで、**手作業構築・旧 OpsWorks・古い Terraform 構造・Chef ベースの構成管理** といった「第 1 世代の負債」を抱えていた。AWS の新サービス（App Runner / SSM Parameter Store 等）を取り込みたい一方で、稼働中の本番影響リスクを最小化しながら段階的に置き換える必要があった。**アプリケーション本体（Rails）は対象外**、本案件はインフラ導入支援に限定。
+長期運用される社内システムの AWS インフラは、運用開始から年月を重ねるなかで、**手作業構築・旧 OpsWorks・古い Terraform 構造・Chef ベースの構成管理** といった「第 1 世代の負債」を抱えていた。AWS の新サービス（App Runner / SSM Parameter Store 等）を取り込みたい一方で、稼働中の本番影響リスクを最小化しながら段階的に置き換える必要があった。**アプリケーション本体（Rails）は対象外**、本案件はインフラ導入支援に限定。
 
 ## 挑戦
 
