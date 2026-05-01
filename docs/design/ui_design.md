@@ -85,6 +85,7 @@ Skill "*" --> "*" Work : 逆参照
 | S03 | 成果物詳細 | `/works/{slug}/` | シングルビュー | 個別案件の深掘り、外部リンク提供 |
 | S04 | スキル | `/skills/` | カテゴリ別リスト | 技術領域の網羅と深さの提示 |
 | S05 | 連絡先 | `/contact/` | リンク集 | 採用・営業の問い合わせ動線 |
+| S06 | Books | `/books/` | リスト + 軸 × カテゴリフィルタ | 知識バックグラウンドの可視化（IT-6 後の追加） |
 
 ### 補助画面
 
@@ -100,7 +101,7 @@ Skill "*" --> "*" Work : 逆参照
 ```plantuml
 @startsalt
 {+
-  {* Home | Works | Skills | Contact | Tech Notes ↗ }
+  {* Home | Works | Skills | Books | Contact | Tech Notes ↗ }
 }
 @endsalt
 ```
@@ -108,7 +109,7 @@ Skill "*" --> "*" Work : 逆参照
 | 要素 | 仕様 |
 |---|---|
 | ロゴ / 氏名 | 左上配置、クリックで `/` へ |
-| ナビゲーション | Home / Works / Skills / Contact / **Tech Notes ↗**（[ADR-0003](../adr/0003-mkdocs-coexistence-strategy.md)） |
+| ナビゲーション | Home / Works / Skills / **Books** / Contact / **Tech Notes ↗**（[ADR-0003](../adr/0003-mkdocs-coexistence-strategy.md)） |
 | Tech Notes | アイコン `↗` で別レイアウトを予告、**同一タブ**で `/docs/` へ遷移 |
 | ダークモード切替 | 右端にトグル、`localStorage` に永続化、`prefers-color-scheme` を初回尊重 |
 | モバイル | 768px 未満でハンバーガーメニュー（48×48 px）、フォーカストラップ + Esc で閉じる |
@@ -134,6 +135,7 @@ state S02_WorksList : 成果物一覧\nカード形式・タグフィルタ
 state S03_WorkDetail : 成果物詳細\n概要・技術・成果・外部リンク
 state S04_Skills : スキル\nカテゴリ別リスト
 state S05_Contact : 連絡先\nリンク集
+state S06_Books : Books\n読書リスト + 軸 / カテゴリフィルタ
 state S90_NotFound : 404\nリカバリ動線
 state TechNotes : /docs/ (Tech Notes / MkDocs)\n同一タブ・同一ホスト
 state ExternalLink : 外部 URL\n(GitHub / LinkedIn / Demo)
@@ -141,22 +143,30 @@ state ExternalLink : 外部 URL\n(GitHub / LinkedIn / Demo)
 ' ヘッダーナビゲーション（全画面から）
 S01_Home --> S02_WorksList : Worksタブ
 S01_Home --> S04_Skills : Skillsタブ
+S01_Home --> S06_Books : Booksタブ
 S01_Home --> S05_Contact : Contactタブ
 S01_Home --> TechNotes : Tech Notesタブ
 
 S02_WorksList --> S01_Home : Homeタブ / ロゴ
 S02_WorksList --> S03_WorkDetail : カード選択
 S02_WorksList --> S04_Skills : Skillsタブ
+S02_WorksList --> S06_Books : Booksタブ
 S02_WorksList --> S05_Contact : Contactタブ
 
 S03_WorkDetail --> S02_WorksList : パンくず / 戻る
+S03_WorkDetail --> S04_Skills : Skillsタブ
 S03_WorkDetail --> ExternalLink : repo / demo リンク
 
 S04_Skills --> S01_Home : Homeタブ
+S04_Skills --> S03_WorkDetail : 関連 Work リンク（IT-6 追加）
 S04_Skills --> S05_Contact : Contactタブ
 
 S05_Contact --> ExternalLink : 連絡手段選択
 S05_Contact --> S01_Home : Homeタブ
+
+S06_Books --> S01_Home : Homeタブ
+S06_Books --> S02_WorksList : Worksタブ
+S06_Books --> S04_Skills : Skillsタブ
 
 S90_NotFound --> S01_Home : ホームに戻る
 
