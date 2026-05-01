@@ -955,6 +955,40 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="コンテンツ管理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#featured-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Featured Work の選定基準
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Featured Work の選定基準">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        表記の対応関係
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -969,7 +1003,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_10" class="md-nav__link">
+  <a href="#_11" class="md-nav__link">
     <span class="md-ellipsis">
       
         パフォーマンス指標
@@ -980,7 +1014,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_11" class="md-nav__link">
+  <a href="#_12" class="md-nav__link">
     <span class="md-ellipsis">
       
         テスト戦略
@@ -991,7 +1025,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_12" class="md-nav__link">
+  <a href="#_13" class="md-nav__link">
     <span class="md-ellipsis">
       
         開発フロー
@@ -1013,7 +1047,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_13" class="md-nav__link">
+  <a href="#_14" class="md-nav__link">
     <span class="md-ellipsis">
       
         関連ドキュメント
@@ -1582,6 +1616,174 @@
     
   
     v0.1 リリース完了報告書
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/iteration_plan-4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    イテレーション 4 計画
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/retrospective-4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    イテレーション 4 ふりかえり
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/iteration_report-4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    イテレーション 4 完了報告書
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/iteration_plan-5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    イテレーション 5 計画
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/retrospective-5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    イテレーション 5 ふりかえり
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../development/iteration_report-5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    イテレーション 5 完了報告書
   
 
     
@@ -4052,23 +4254,52 @@
 </table>
 <h2 id="_9">コンテンツ管理<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <p><code>src/content/</code> で Astro Content Collections を利用し、Markdown のフロントマターをスキーマ検証する。これにより、未入力フィールドや型違いをビルド時に検出できる。</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// src/content/config.ts（イメージ）</span>
+<div class="highlight"><pre><span></span><code><span class="c1">// src/content/config.ts（IT-4 で確定した実装）</span>
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">defineCollection</span><span class="p">,</span><span class="w"> </span><span class="nx">z</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;astro:content&quot;</span><span class="p">;</span>
 
 <span class="kd">const</span><span class="w"> </span><span class="nx">works</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">defineCollection</span><span class="p">({</span>
+<span class="w">  </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;content&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nx">schema</span><span class="o">:</span><span class="w"> </span><span class="kt">z.object</span><span class="p">({</span>
 <span class="w">    </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="kt">z.string</span><span class="p">(),</span>
-<span class="w">    </span><span class="nx">summary</span><span class="o">:</span><span class="w"> </span><span class="kt">z.string</span><span class="p">(),</span>
+<span class="w">    </span><span class="nx">summary</span><span class="o">:</span><span class="w"> </span><span class="kt">z.string</span><span class="p">().</span><span class="nx">max</span><span class="p">(</span><span class="mf">200</span><span class="p">),</span>
 <span class="w">    </span><span class="nx">role</span><span class="o">:</span><span class="w"> </span><span class="kt">z.string</span><span class="p">(),</span>
-<span class="w">    </span><span class="nx">period</span><span class="o">:</span><span class="w"> </span><span class="kt">z.object</span><span class="p">({</span><span class="w"> </span><span class="nx">from</span><span class="o">:</span><span class="w"> </span><span class="kt">z.string</span><span class="p">(),</span><span class="w"> </span><span class="nx">to</span><span class="o">:</span><span class="w"> </span><span class="kt">z.string</span><span class="p">().</span><span class="nx">optional</span><span class="p">()</span><span class="w"> </span><span class="p">}),</span>
-<span class="w">    </span><span class="nx">tech</span><span class="o">:</span><span class="w"> </span><span class="kt">z.array</span><span class="p">(</span><span class="nx">z</span><span class="p">.</span><span class="kt">string</span><span class="p">()),</span>
+<span class="w">    </span><span class="nx">period</span><span class="o">:</span><span class="w"> </span><span class="kt">z.object</span><span class="p">({</span>
+<span class="w">      </span><span class="nx">from</span><span class="o">:</span><span class="w"> </span><span class="kt">z.string</span><span class="p">(),</span>
+<span class="w">      </span><span class="nx">to</span><span class="o">:</span><span class="w"> </span><span class="kt">z.string</span><span class="p">().</span><span class="nx">optional</span><span class="p">(),</span>
+<span class="w">    </span><span class="p">}),</span>
+<span class="w">    </span><span class="nx">tech</span><span class="o">:</span><span class="w"> </span><span class="kt">z.array</span><span class="p">(</span><span class="nx">z</span><span class="p">.</span><span class="kt">string</span><span class="p">()).</span><span class="nx">min</span><span class="p">(</span><span class="mf">1</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">domain</span><span class="o">:</span><span class="w"> </span><span class="kt">z.string</span><span class="p">().</span><span class="nx">optional</span><span class="p">(),</span>
+<span class="w">    </span><span class="nx">category</span><span class="o">:</span><span class="w"> </span><span class="kt">z.string</span><span class="p">().</span><span class="nx">optional</span><span class="p">(),</span>
+<span class="w">    </span><span class="nx">team_size</span><span class="o">:</span><span class="w"> </span><span class="kt">z.number</span><span class="p">().</span><span class="kr">int</span><span class="p">().</span><span class="nx">positive</span><span class="p">().</span><span class="nx">optional</span><span class="p">(),</span>
+<span class="w">    </span><span class="nx">position</span><span class="o">:</span><span class="w"> </span><span class="kt">z.string</span><span class="p">().</span><span class="nx">optional</span><span class="p">(),</span>
+<span class="w">    </span><span class="nx">involvement</span><span class="o">:</span><span class="w"> </span><span class="kt">z.enum</span><span class="p">([</span><span class="s2">&quot;lead&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;core&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;member&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;advisor&quot;</span><span class="p">]).</span><span class="nx">optional</span><span class="p">(),</span>
 <span class="w">    </span><span class="nx">repo</span><span class="o">:</span><span class="w"> </span><span class="kt">z.string</span><span class="p">().</span><span class="nx">url</span><span class="p">().</span><span class="nx">optional</span><span class="p">(),</span>
+<span class="w">    </span><span class="nx">demo</span><span class="o">:</span><span class="w"> </span><span class="kt">z.string</span><span class="p">().</span><span class="nx">url</span><span class="p">().</span><span class="nx">optional</span><span class="p">(),</span>
 <span class="w">    </span><span class="nx">cover</span><span class="o">:</span><span class="w"> </span><span class="kt">z.string</span><span class="p">().</span><span class="nx">optional</span><span class="p">(),</span>
+<span class="w">    </span><span class="nx">featured</span><span class="o">:</span><span class="w"> </span><span class="kt">z.boolean</span><span class="p">().</span><span class="k">default</span><span class="p">(</span><span class="kc">false</span><span class="p">),</span>
 <span class="w">  </span><span class="p">}),</span>
 <span class="p">});</span>
 
 <span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">collections</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">works</span><span class="w"> </span><span class="p">};</span>
 </code></pre></div>
+<p>スキーマ拡張の根拠：</p>
+<ul>
+<li><code>summary.max(200)</code> / <code>tech.min(1)</code>: 入力品質を機械的に担保</li>
+<li><code>domain</code> / <code>category</code> / <code>team_size</code> / <code>position</code> / <code>involvement</code>: US-03 の AC-03-2〜7 とレビュー指摘 <a href="../../review/design_review_20260430/">M02</a> を反映</li>
+<li><code>demo</code>: ライブデモ URL（GitHub repo に加えて提供する場合）</li>
+<li><code>featured</code>: ホームの Featured Works に表示するかのフラグ。レビュー指摘 <a href="../../review/design_review_20260430/">L06</a> を反映</li>
+</ul>
+<h3 id="featured-work">Featured Work の選定基準<a class="headerlink" href="#featured-work" title="Permanent link">&para;</a></h3>
+<p>ホームトップ「Featured Works」に表示する Work（最大 3 件、<a href="../ui_design/#トップページの最終調整">UI 設計</a>）の選定方針を明文化する。</p>
+<ol>
+<li><strong>多様性</strong>: <code>domain</code>（業務領域）/ <code>category</code>（技術領域）/ <code>involvement</code>（関与の深さ）でなるべく重複しない 3 件を選ぶ</li>
+<li><strong>公開可能性</strong>: 守秘により詳細を書けない受託案件より、公開可能な OSS / 教材 / 自社プロダクトを優先する</li>
+<li><strong>完成度</strong>: <code>context</code> / <code>challenge</code> / <code>solution</code> / <code>outcome</code> の 4 ブロックが充実している Work を優先する</li>
+<li><strong>直近性</strong>: <code>period.to</code> が直近 3 年以内の Work を優先する（古いものは降格）</li>
+<li><strong>見直しタイミング</strong>: Work 追加時 / 四半期に 1 回 / リリース時に評価する</li>
+</ol>
+<h4 id="_10">表記の対応関係<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h4>
+<p><a href="../../development/release_plan/">リリース計画</a> v0.2 リリース基準で記載される <code>Profile.featured_works[]</code> という表現は概念上のものであり、実装上は <strong><code>Work.featured: boolean</code></strong>（本セクションのスキーマ）で同等の機能を実現している。Profile 型に Work への逆参照配列を持たせる代わりに、Work 側にフラグを置くことでスキーマの単純化と Astro Content Collections との親和性を優先した。</p>
 <h2 id="seo">アクセシビリティ・SEO<a class="headerlink" href="#seo" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -4108,7 +4339,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="_10">パフォーマンス指標<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<h2 id="_11">パフォーマンス指標<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -4139,7 +4370,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="_11">テスト戦略<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
+<h2 id="_12">テスト戦略<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -4176,7 +4407,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="_12">開発フロー<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
+<h2 id="_13">開発フロー<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
 <ol>
 <li><code>apps/web/</code> を npm workspace として <code>package.json</code> に登録</li>
 <li><code>npm run dev</code>: Astro dev server（port 4321）</li>
@@ -4212,7 +4443,7 @@
 </tbody>
 </table>
 <p>詳細は <a href="../architecture_infrastructure/">インフラストラクチャアーキテクチャ</a> 参照。</p>
-<h2 id="_13">関連ドキュメント<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
+<h2 id="_14">関連ドキュメント<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="../architecture_backend/">バックエンドアーキテクチャ</a></li>
 <li><a href="../architecture_infrastructure/">インフラストラクチャアーキテクチャ</a></li>
