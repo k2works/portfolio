@@ -232,6 +232,33 @@ const year = new Date().getFullYear();
         }
       });
 
+      // フォーカストラップ: モバイルメニュー展開時、Tab を nav 内でループさせる
+      // （US-10 AC-10-5 / ui_design.md ヘッダー解説）
+      const getFocusables = (): HTMLElement[] => {
+        if (!nav) return [];
+        return Array.from(
+          nav.querySelectorAll<HTMLElement>('a[href], button, [tabindex]:not([tabindex="-1"])')
+        ).filter((el) => !el.hasAttribute("disabled") && el.offsetParent !== null);
+      };
+
+      nav?.addEventListener("keydown", (event) => {
+        if (event.key !== "Tab") return;
+        if (toggle?.getAttribute("aria-expanded") !== "true") return;
+        if (!isMobile()) return;
+        const focusables = getFocusables();
+        if (focusables.length === 0) return;
+        const first = focusables[0]!;
+        const last = focusables[focusables.length - 1]!;
+        const active = document.activeElement;
+        if (event.shiftKey && active === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && active === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      });
+
       // 768px 以上に拡大した場合は body スクロール抑止を解除
       window.matchMedia("(min-width: 768px)").addEventListener("change", (event) => {
         if (event.matches) {
