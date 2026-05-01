@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import ThemeToggle from "../components/ThemeToggle.astro";
 
 interface Props {
   title: string;
@@ -48,6 +49,22 @@ const year = new Date().getFullYear();
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={finalDescription} />
+
+    <script is:inline>
+      // ダークモード初期化（FOUC 回避のため <head> で実行）
+      (function () {
+        try {
+          var stored = localStorage.getItem("theme");
+          var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          var theme = stored ? stored : prefersDark ? "dark" : "light";
+          if (theme === "dark") {
+            document.documentElement.classList.add("dark");
+          }
+        } catch (e) {
+          /* localStorage が使えない環境はライトモードで継続 */
+        }
+      })();
+    </script>
   </head>
   <body>
     <a href="#main" class="skip-link">メインコンテンツへ移動</a>
@@ -58,11 +75,15 @@ const year = new Date().getFullYear();
       <div class="mx-auto flex max-w-prose flex-wrap items-center gap-4 px-4 py-3">
         <a href="/" class="font-bold no-underline" aria-label="ホームへ">{siteName}</a>
 
+        <div class="ml-auto flex items-center gap-2 md:ml-0 md:order-last">
+          <ThemeToggle />
+        </div>
+
         <!-- モバイルナビトリガー（< 768px で表示） -->
         <button
           id="mobile-nav-toggle"
           type="button"
-          class="ml-auto inline-flex h-12 w-12 items-center justify-center rounded border border-[color:var(--color-border)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:hidden"
+          class="inline-flex h-12 w-12 items-center justify-center rounded border border-[color:var(--color-border)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:hidden"
           aria-expanded="false"
           aria-controls="primary-navigation"
           aria-label="メニューを開く"

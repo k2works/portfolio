@@ -43,4 +43,44 @@ test.describe("アクセシビリティ（axe-core）", () => {
 
     expect(accessibilityScanResults.violations).toEqual([]);
   });
+
+  test("Skills（/skills/）に WCAG 2.1 A / AA 違反がない", async ({ page }) => {
+    await page.goto("/skills/");
+
+    const accessibilityScanResults = await new AxeBuilder({ page })
+      .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+      .analyze();
+
+    expect(accessibilityScanResults.violations).toEqual([]);
+  });
+
+  test("ダークモード適用時のホーム（/）に WCAG 2.1 A / AA 違反がない", async ({ page }) => {
+    await page.addInitScript(() => {
+      window.localStorage.setItem("theme", "dark");
+    });
+    await page.goto("/");
+    await expect(page.locator("html.dark")).toBeAttached();
+
+    const accessibilityScanResults = await new AxeBuilder({ page })
+      .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+      .analyze();
+
+    expect(accessibilityScanResults.violations).toEqual([]);
+  });
+
+  test("ダークモード適用時の Skills（/skills/）に WCAG 2.1 A / AA 違反がない", async ({
+    page,
+  }) => {
+    await page.addInitScript(() => {
+      window.localStorage.setItem("theme", "dark");
+    });
+    await page.goto("/skills/");
+    await expect(page.locator("html.dark")).toBeAttached();
+
+    const accessibilityScanResults = await new AxeBuilder({ page })
+      .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+      .analyze();
+
+    expect(accessibilityScanResults.violations).toEqual([]);
+  });
 });
