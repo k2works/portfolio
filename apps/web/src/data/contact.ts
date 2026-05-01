@@ -15,7 +15,7 @@ export interface AvailabilityInfo {
   readonly responseTime: string;
 }
 
-export type ContactChannelKind = "email" | "github" | "linkedin" | "x";
+export type ContactChannelKind = "x";
 
 export interface ContactChannel {
   readonly kind: ContactChannelKind;
@@ -26,34 +26,15 @@ export interface ContactChannel {
 }
 
 export const AVAILABILITY: AvailabilityInfo = {
-  status: "副業のみ可（週 2 日 / 完全リモート）",
-  scope: "50 万円〜 / 月、3 ヶ月〜",
+  status: "新規案件の受注は停止中（採用・取材・交流のみ受付）",
   responseTime: "原則 2 営業日以内",
 };
 
 export const CONTACT_CHANNELS: ReadonlyArray<ContactChannel> = [
   {
-    kind: "email",
-    label: "Email",
-    href: "mailto:contact@example.com",
-    ariaLabel: "メールで連絡する（メールクライアントが起動します）",
-  },
-  {
-    kind: "github",
-    label: "GitHub",
-    href: "https://github.com/k2works",
-    ariaLabel: "GitHub のプロフィールへ移動（外部サイト）",
-  },
-  {
-    kind: "linkedin",
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/",
-    ariaLabel: "LinkedIn のプロフィールへ移動（外部サイト）",
-  },
-  {
     kind: "x",
-    label: "X",
-    href: "https://x.com/",
-    ariaLabel: "X（旧 Twitter）のプロフィールへ移動（外部サイト）",
+    label: "X (@k2works)",
+    href: "https://x.com/k2works",
+    ariaLabel: "X (@k2works) のプロフィールへ移動（外部サイト）",
   },
 ];
