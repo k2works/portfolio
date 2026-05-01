@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+<!--
+  IT-9 で導入した MkDocs カスタマイズ。
+
+  ADR-0003（MkDocs 共存戦略）に従い、Tech Notes として補足リンクに留める：
+  - noindex で検索流入を抑制（採用ノイズを避ける）
+  - ガイダンスバナーで「これは個人の学習・設計メモです」と明示
+  - 「← ポートフォリオに戻る」リンクをヘッダーに配置
+  - ファビコン / 配色トークンを Astro と共通化
+
+  受入条件: AC-11-3 / AC-11-4 / AC-11-5（user_story.md US-11）
+-->
+
+{% block extrahead %}
+  {{ super() }}
+  <meta name="robots" content="noindex,nofollow" />
+{% endblock %}
+
+{% block announce %}
+  <div class="md-banner md-banner--portfolio" role="region" aria-label="ガイダンスバナー">
+    <div class="md-banner__inner md-grid md-typeset">
+      これは個人の学習・設計メモです（採用評価対象ではありません）。
+      <a href="/" class="md-banner__link">← ポートフォリオに戻る</a>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="k2works | Software Engineer ポートフォリオ">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f1115" />
+      <stop offset="100%" stop-color="#1e1b4b" />
+    </linearGradient>
+    <linearGradient id="accentLine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#a5b4fc" />
+      <stop offset="100%" stop-color="#4f46e5" />
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)" />
+
+  <!-- 上部アクセントライン -->
+  <rect x="80" y="80" width="1040" height="6" fill="url(#accentLine)" rx="3" />
+
+  <!-- ロール / サイト名 -->
+  <text x="80" y="160" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="32" fill="#a5b4fc" font-weight="600">
+    Software Engineer
+  </text>
+
+  <!-- 氏名（メイン） -->
+  <text x="80" y="280" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="120" font-weight="800" fill="#ffffff">
+    k2works
+  </text>
+
+  <!-- キャッチコピー -->
+  <text x="80" y="360" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="36" fill="#f5f5f5" font-weight="600">
+    ドメインを段階的に解きほぐす
+  </text>
+  <text x="80" y="410" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="36" fill="#f5f5f5" font-weight="600">
+    バックエンド主軸のエンジニア
+  </text>
+
+  <!-- 得意領域タグ -->
+  <g transform="translate(80, 470)">
+    <g>
+      <rect x="0" y="0" width="120" height="48" rx="24" fill="rgba(165, 180, 252, 0.18)" stroke="#a5b4fc" stroke-width="1.5" />
+      <text x="60" y="32" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="22" fill="#ffffff" font-weight="500">Backend</text>
+    </g>
+    <g transform="translate(140, 0)">
+      <rect x="0" y="0" width="80" height="48" rx="24" fill="rgba(165, 180, 252, 0.18)" stroke="#a5b4fc" stroke-width="1.5" />
+      <text x="40" y="32" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="22" fill="#ffffff" font-weight="500">DDD</text>
+    </g>
+    <g transform="translate(240, 0)">
+      <rect x="0" y="0" width="80" height="48" rx="24" fill="rgba(165, 180, 252, 0.18)" stroke="#a5b4fc" stroke-width="1.5" />
+      <text x="40" y="32" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="22" fill="#ffffff" font-weight="500">TDD</text>
+    </g>
+    <g transform="translate(340, 0)">
+      <rect x="0" y="0" width="90" height="48" rx="24" fill="rgba(165, 180, 252, 0.18)" stroke="#a5b4fc" stroke-width="1.5" />
+      <text x="45" y="32" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="22" fill="#ffffff" font-weight="500">AWS</text>
+    </g>
+    <g transform="translate(450, 0)">
+      <rect x="0" y="0" width="90" height="48" rx="24" fill="rgba(165, 180, 252, 0.18)" stroke="#a5b4fc" stroke-width="1.5" />
+      <text x="45" y="32" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="22" fill="#ffffff" font-weight="500">Java</text>
+    </g>
+    <g transform="translate(560, 0)">
+      <rect x="0" y="0" width="180" height="48" rx="24" fill="rgba(165, 180, 252, 0.18)" stroke="#a5b4fc" stroke-width="1.5" />
+      <text x="90" y="32" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="22" fill="#ffffff" font-weight="500">TypeScript</text>
+    </g>
+  </g>
+
+  <!-- 下部実績ハイライト -->
+  <text x="80" y="580" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="24" fill="#d1d5db" font-weight="500">
+    経験 10 年 / 受託・自社プロダクトで 12 案件
+  </text>
+
+  <!-- 下部 URL -->
+  <text x="1120" y="580" text-anchor="end" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="20" fill="#9ca3af" font-weight="400">
+    portfolio
+  </text>
+</svg>

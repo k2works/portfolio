@@ -6,6 +6,7 @@ repo_name: k2works/portfolio
 
 theme:
   name: material
+  custom_dir: docs/overrides
   palette:
     primary: indigo
     accent: indigo
