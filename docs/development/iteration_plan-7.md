@@ -86,7 +86,7 @@
 
 | # | タスク | 見積もり | 担当 | 状態 |
 |---|--------|---------|------|------|
-| 1.1 | `apps/web/src/pages/contact/index.astro` 新規（稼働可否 + 返信目標 + 案件規模 + 外部リンク 4 種） | 1.5h | self | [ ] |
+| 1.1 | `apps/web/src/pages/contact/index.astro` 新規（[ui_design.md S05](../design/ui_design.md#s05-連絡先) salt 図の順序に従い、**稼働可否（ステータス + 案件規模）→ 返信目標 → 外部リンク 4 種** で配置） | 1.5h | self | [ ] |
 | 1.2 | 稼働可否ステータスのデータ管理（src/data/contact.ts または直接記述） | 0.5h | self | [ ] |
 | 1.3 | 外部リンクボタンを 44×44 px 以上、間隔 8px 以上で実装（WCAG 2.5.5） | 0.5h | self | [ ] |
 | 1.4 | `mailto:` リンクの動作確認 + Email 公開可否の確認（隠す場合は obfuscate） | 0.5h | self | [ ] |
@@ -111,7 +111,7 @@
 
 | # | タスク | 見積もり | 担当 | 状態 |
 |---|--------|---------|------|------|
-| 3.1 | ui_design.md の画面遷移図に `S04_Skills ↔ S03_WorkDetail` を追加（[IT-6 計画](./iteration_plan-6.md) で約束した反映点） | 0.5h | self | [ ] |
+| 3.1 | ui_design.md の更新（4 件まとめて反映）: (1) 画面遷移図に `S04_Skills ↔ S03_WorkDetail` を追加（[IT-6 計画](./iteration_plan-6.md) で約束）/ (2) 画面一覧テーブルに `S06 / Books / /books/` を追加（IT-6 後の Books 追加と整合）/ (3) ヘッダーナビ記述に「Books」を追加 / (4) 画面遷移図に `S06_Books` の state と遷移を追加 | 1.0h | self | [ ] |
 | 3.2 | `.gitattributes` 拡張（`*.astro` `*.ts` `*.json` `*.md` `*.css` `*.html` に `text eol=lf` を指定）でローカル CRLF 衝突を恒久解消 | 0.5h | self | [ ] |
 | 3.3 | Card.astro 共通化の判断（home Featured / /works/ 一覧 / /skills/ Work 逆参照 / /books/ で Rule of Three 達成）— 抽出するか見送るかを記録 | 0.5h | self | [ ] |
 | 3.4 | v0.3 リリース実行（main マージ + Lighthouse v0.3 予算確認 + v0.3.0 タグ + リリース完了報告書） | 1.5h | self | [ ] |
@@ -125,8 +125,8 @@
 |---------|----|----|------|
 | Contact 画面実装（US-05 + US-06） | 4 | 4.5h | [ ] |
 | モバイル仕上げ（US-08） | 3 | 4.5h | [ ] |
-| 横断（リリース確定 + ドキュメント整合） | 0 | 4.0h | [ ] |
-| **合計** | **7** | **13.0h** | |
+| 横断（リリース確定 + ドキュメント整合） | 0 | 4.5h | [ ] |
+| **合計** | **7** | **13.5h** | |
 
 > 横断は SP=0（ストーリーに対応しない開発外作業）として計上し、実績ベロシティに加算しない。リリース確定作業を含むため工数は 4.0h 確保。
 
@@ -189,7 +189,13 @@ export const CONTACT_CHANNELS = [
 ] as const;
 ```
 
-実装は `apps/web/src/pages/contact/index.astro` で稼働可否（冒頭）→ 案件規模 / 返信目標 → 外部リンク 4 種の順に配置。各リンクは `min-h-[44px] min-w-[44px]` + `gap-2` 以上で WCAG 2.5.5 を満たす。
+実装の配置順序は [ui_design.md S05](../design/ui_design.md#s05-連絡先) salt 図に従う：
+
+1. **現在の状況（稼働可否）**: ステータス（status）+ 案件規模（scope）
+2. **問い合わせ案内**: 返信目標時間（"原則 2 営業日以内"）+ 1 行の案内文
+3. **外部リンク 4 種**: Email / GitHub / LinkedIn / X
+
+各リンクは `min-h-[44px] min-w-[44px]` + `gap-2` 以上で WCAG 2.5.5 を満たす。
 
 ### モバイル要件のチェックリスト
 
@@ -249,6 +255,15 @@ docs/design/ui_design.md      # 画面遷移図に S04↔S03 追記
 | ADR | タイトル | ステータス |
 |-----|---------|-----------|
 | - | （新規 ADR は不要。Card 共通化を見送る場合のみ判断記録を retrospective に残す） | - |
+
+### ui_design.md への反映が必要な変更点（IT-7 タスク 3.1 で対応）
+
+整合性検証スキル（[validating-iteration-plan](../../.claude/skills/validating-iteration-plan)）で検出された ui_design.md の更新項目をまとめる：
+
+1. **画面一覧テーブル（[ui_design.md 行 81-87](../design/ui_design.md#画面一覧)）**: `S06 / Books / /books/ / リスト + フィルタ / 知識バックグラウンドの可視化` を追加
+2. **ヘッダーナビ記述（行 103, 111）**: ナビゲーション項目に「Books」を含めて `Home / Works / Skills / Books / Contact / Tech Notes ↗` の順に書き換え
+3. **画面遷移図（行 124-170）**: `S06_Books` の state（URL `/books/`、説明「読書リスト + 軸 / カテゴリフィルタ」）と他画面との遷移（Books タブ ⇔ Home / Works / Skills / Contact）を追加
+4. **画面遷移図（IT-6 約束）**: `S04_Skills ↔ S03_WorkDetail`（関連 Work 逆参照リンク）の遷移を追加
 
 ---
 
