@@ -119,14 +119,12 @@ app.use((_req, res) => {
 });
 
 const server = app.listen(port, () => {
-   
   console.log(`listening on ${port}`);
 });
 
 // Graceful shutdown
 /** @param {NodeJS.Signals} signal */
 const shutdown = (signal) => {
-   
   console.log(`${signal} received, shutting down`);
   server.close(() => {
     process.exit(0);
