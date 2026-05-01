@@ -51,7 +51,7 @@
   },
   "homepage": "https://github.com/k2works/portfolio#readme",
   "dependencies": {
-    "dotenv": "^17.2.3",
+    "dotenv": "^17.4.2",
     "gulp": "^5.0.0"
   },
   "devDependencies": {
