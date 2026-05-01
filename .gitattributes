@@ -1,4 +1,36 @@
+# 全テキストファイルを LF で正規化（Windows ローカルでの autocrlf 衝突を防ぐ）
+* text=auto eol=lf
+
+# 既存の明示指定（後方互換）
 *.nix text eol=lf
 *.sh text eol=lf
 Dockerfile text eol=lf
 .vimrc text eol=lf
+
+# Node / Web プロジェクトの主要ソース（IT-7 で追加）
+*.astro text eol=lf
+*.ts text eol=lf
+*.tsx text eol=lf
+*.js text eol=lf
+*.mjs text eol=lf
+*.cjs text eol=lf
+*.json text eol=lf
+*.jsonc text eol=lf
+*.md text eol=lf
+*.mdx text eol=lf
+*.css text eol=lf
+*.html text eol=lf
+*.svg text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# バイナリ
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.avif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.pdf binary

@@ -1,0 +1,93 @@
+---
+/**
+ * ダークモード切替トグル。
+ * クリックで `<html class="dark">` を付与/削除し、`localStorage.theme` に保存する。
+ * 初回ロード時は BaseLayout の inline script で `prefers-color-scheme` を尊重して初期化する。
+ *
+ * 受入条件: AC-07-1〜AC-07-5（[user_story.md](../../../docs/requirements/user_story.md)）
+ * UI 設計: docs/design/ui_design.md ダークモード切替セクション
+ */
+---
+
+<button
+  id="theme-toggle"
+  type="button"
+  class="inline-flex h-12 w-12 items-center justify-center rounded border border-[color:var(--color-border)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--color-accent)]"
+  aria-label="ダークモードに切り替え"
+  aria-pressed="false"
+>
+  <svg
+    class="h-6 w-6 dark:hidden"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+    data-icon="moon"
+  >
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+  </svg>
+  <svg
+    class="hidden h-6 w-6 dark:inline-block"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+    data-icon="sun"
+  >
+    <circle cx="12" cy="12" r="4"></circle>
+    <path d="M12 2v2"></path>
+    <path d="M12 20v2"></path>
+    <path d="M4.93 4.93l1.41 1.41"></path>
+    <path d="M17.66 17.66l1.41 1.41"></path>
+    <path d="M2 12h2"></path>
+    <path d="M20 12h2"></path>
+    <path d="M6.34 17.66l-1.41 1.41"></path>
+    <path d="M19.07 4.93l-1.41 1.41"></path>
+  </svg>
+</button>
+
+<script>
+  const toggle = document.getElementById("theme-toggle");
+  const html = document.documentElement;
+
+  const updateButton = (isDark: boolean): void => {
+    if (!toggle) return;
+    toggle.setAttribute("aria-pressed", String(isDark));
+    toggle.setAttribute("aria-label", isDark ? "ライトモードに切り替え" : "ダークモードに切り替え");
+  };
+
+  updateButton(html.classList.contains("dark"));
+
+  const apply = (isDark: boolean): void => {
+    if (isDark) {
+      html.classList.add("dark");
+    } else {
+      html.classList.remove("dark");
+    }
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+    updateButton(isDark);
+  };
+
+  toggle?.addEventListener("click", () => {
+    const next = !html.classList.contains("dark");
+    const supportsViewTransitions =
+      "startViewTransition" in document &&
+      typeof (document as unknown as { startViewTransition: unknown }).startViewTransition ===
+        "function";
+    if (supportsViewTransitions) {
+      (
+        document as unknown as { startViewTransition: (callback: () => void) => void }
+      ).startViewTransition(() => apply(next));
+    } else {
+      apply(next);
+    }
+  });
+</script>

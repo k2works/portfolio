@@ -1,0 +1,186 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import {
+  calculateExperienceYears,
+  SKILL_CATEGORIES,
+  SKILL_LEVEL_LEGEND,
+  type SkillCategory,
+} from "../../lib/experience";
+
+type Skill = CollectionEntry<"skills">;
+type Work = CollectionEntry<"works">;
+
+const allSkills = await getCollection("skills");
+const allWorks = await getCollection("works");
+const workTitleBySlug = new Map<string, string>();
+allWorks.forEach((w: Work) => {
+  workTitleBySlug.set(w.slug, w.data.title);
+});
+
+const skillsByCategory = new Map<SkillCategory, Skill[]>();
+SKILL_CATEGORIES.forEach((c) => skillsByCategory.set(c, []));
+allSkills.forEach((s: Skill) => {
+  const list = skillsByCategory.get(s.data.category as SkillCategory);
+  if (list) list.push(s);
+});
+skillsByCategory.forEach((list) => {
+  list.sort((a: Skill, b: Skill) => {
+    const ao = a.data.order ?? 999;
+    const bo = b.data.order ?? 999;
+    if (ao !== bo) return ao - bo;
+    return a.data.name.localeCompare(b.data.name);
+  });
+});
+
+const slugFromName = (name: string): string =>
+  name
+    .toLowerCase()
+    .replace(/[\s/]+/g, "-")
+    .replace(/[^a-z0-9-]/g, "");
+---
+
+<BaseLayout
+  title="Skills | Portfolio"
+  description="技術領域の網羅性をカテゴリ別に確認できます。経験年数 / 現役・過去 / 関連 Works を提示します。"
+>
+  <section>
+    <h1 class="text-2xl font-bold sm:text-3xl">Skills</h1>
+    <p class="mt-2 text-[color:var(--color-muted)]">
+      Backend / Frontend / Infrastructure / Practice の各カテゴリで、経験年数 ・ 現役/過去 ・ 関連
+      Works を確認できます。
+    </p>
+
+    <section class="mt-6" aria-labelledby="legend-heading">
+      <h2 id="legend-heading" class="text-base font-semibold">凡例</h2>
+      <ul
+        class="mt-2 grid gap-1 text-sm text-[color:var(--color-muted)] sm:grid-cols-2 lg:grid-cols-5"
+      >
+        {
+          [5, 4, 3, 2, 1].map((lv) => (
+            <li>
+              <span aria-hidden="true">{"★".repeat(lv)}</span>
+              <span class="ml-2">{SKILL_LEVEL_LEGEND[lv]}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    {
+      SKILL_CATEGORIES.map((category) => {
+        const skills = skillsByCategory.get(category) ?? [];
+        if (skills.length === 0) return null;
+
+        if (category === "Practice") {
+          return (
+            <section
+              class="mt-10 scroll-mt-24"
+              aria-labelledby={`category-${category.toLowerCase()}`}
+            >
+              <h2 id={`category-${category.toLowerCase()}`} class="text-xl font-bold">
+                {category}
+              </h2>
+              <ul class="mt-3 flex flex-wrap gap-2" aria-label={`${category} スキル一覧`}>
+                {skills.map((s: Skill) => {
+                  const id = slugFromName(s.data.name);
+                  return (
+                    <li
+                      id={id}
+                      class="scroll-mt-24 rounded border border-[color:var(--color-border)] bg-[color:var(--color-tag-bg)] px-3 py-1 text-sm"
+                      data-status={s.data.status}
+                    >
+                      <span class="font-semibold">{s.data.name}</span>
+                      {s.data.level !== undefined && (
+                        <span class="ml-2" aria-label={`レベル ${s.data.level}`}>
+                          {"★".repeat(s.data.level)}
+                        </span>
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+            </section>
+          );
+        }
+
+        return (
+          <section
+            class="mt-10 scroll-mt-24"
+            aria-labelledby={`category-${category.toLowerCase()}`}
+          >
+            <h2 id={`category-${category.toLowerCase()}`} class="text-xl font-bold">
+              {category}
+            </h2>
+            <ul class="mt-3 grid gap-3 sm:grid-cols-2" aria-label={`${category} スキル一覧`}>
+              {skills.map((s: Skill) => {
+                const id = slugFromName(s.data.name);
+                const years = calculateExperienceYears(s.data.since);
+                const statusLabel = s.data.status === "current" ? "現役" : "過去";
+                const relatedWorks = (s.data.works ?? []) as string[];
+                return (
+                  <li
+                    id={id}
+                    class="scroll-mt-24 rounded border border-[color:var(--color-border)] p-4"
+                    data-status={s.data.status}
+                    data-testid="skill-card"
+                  >
+                    <div class="flex items-baseline justify-between gap-2">
+                      <h3 class="text-base font-semibold m-0">
+                        <a href={`#${id}`} class="no-underline hover:underline">
+                          {s.data.name}
+                        </a>
+                      </h3>
+                      {s.data.level !== undefined && (
+                        <span aria-label={`レベル ${s.data.level}`}>
+                          {"★".repeat(s.data.level)}
+                        </span>
+                      )}
+                    </div>
+                    <dl
+                      class="mt-2 grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-sm"
+                      aria-label={`${s.data.name} のメタ情報`}
+                    >
+                      <dt class="text-[color:var(--color-muted)]">経験</dt>
+                      <dd class="m-0">
+                        {years} 年（since {s.data.since}）
+                      </dd>
+                      <dt class="text-[color:var(--color-muted)]">状態</dt>
+                      <dd class="m-0">
+                        <span
+                          class={
+                            s.data.status === "current"
+                              ? "rounded bg-[color:var(--color-tag-bg)] px-2 py-0.5 text-xs"
+                              : "rounded border border-[color:var(--color-border)] bg-transparent px-2 py-0.5 text-xs italic"
+                          }
+                        >
+                          {statusLabel}
+                        </span>
+                      </dd>
+                    </dl>
+                    {relatedWorks.length > 0 && (
+                      <p class="mt-3 text-sm">
+                        <span class="text-[color:var(--color-muted)]">関連 Works:</span>
+                        {relatedWorks.map((slug, i) => {
+                          const title = workTitleBySlug.get(slug) ?? slug;
+                          return (
+                            <span>
+                              {i > 0 && <span aria-hidden="true">, </span>}
+                              <a href={`/works/${slug}/`} class="ml-1">
+                                {title}
+                              </a>
+                            </span>
+                          );
+                        })}
+                      </p>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          </section>
+        );
+      })
+    }
+  </section>
+</BaseLayout>

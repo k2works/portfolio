@@ -6,6 +6,7 @@ import type { Config } from "tailwindcss";
  */
 export default {
   content: ["./src/**/*.{astro,html,js,ts,md,mdx}"],
+  darkMode: "class",
   theme: {
     extend: {
       colors: {

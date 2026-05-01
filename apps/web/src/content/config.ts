@@ -23,4 +23,17 @@ const works = defineCollection({
   }),
 });
 
-export const collections = { works };
+const skills = defineCollection({
+  type: "content",
+  schema: z.object({
+    category: z.enum(["Backend", "Frontend", "Infrastructure", "Practice"]),
+    name: z.string(),
+    since: z.number().int().min(1990).max(2100),
+    status: z.enum(["current", "past"]).default("current"),
+    level: z.number().int().min(1).max(5).optional(),
+    works: z.array(z.string()).optional(),
+    order: z.number().int().optional(),
+  }),
+});
+
+export const collections = { works, skills };
