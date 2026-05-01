@@ -87,7 +87,7 @@
 
 | # | タスク | 見積もり | 担当 | 状態 |
 |---|--------|---------|------|------|
-| 2.1 | `@astrojs/og` または自前 SVG → PNG 変換で OGP 画像エンドポイント（`src/pages/og/[...slug].png.ts`）を実装。1200×630 で氏名 / Work タイトル / 期間 / 技術タグを描画 | 1.5h | self | [ ] |
+| 2.1 | `@astrojs/og` または自前 SVG → PNG 変換で OGP 画像エンドポイント（`src/pages/og/[...slug].png.ts`）を実装。1200×630 で氏名 / Work タイトル / 期間 / 技術タグを描画。対象は **ホーム / Works 一覧 / Works 詳細 / Skills / Books / Contact / 404** の 7 種類（[ui_design OGP 指針](../design/ui_design.md#ogp--sns-シェア指針) + IT-7 で追加された Books も含める）| 1.5h | self | [ ] |
 | 2.2 | `BaseLayout.astro` の `og:image` を動的生成エンドポイントへ向ける（Works 詳細では Work 固有画像、その他は共通画像） | 0.5h | self | [ ] |
 | 2.3 | `tests/e2e/seo.spec.ts`（または smoke 拡張）で OGP 画像 URL の HEAD レスポンスが 200 + Content-Type が image/png であることを確認（AC-12-2） | 0.5h | self | [ ] |
 | 2.4 | Works 詳細で `og:title = "Work タイトル｜期間"` の動的出力を確認する E2E（AC-12-3）| 0.5h | self | [ ] |
@@ -267,6 +267,14 @@ docs/operation/
 
 → 本イテレーションでは設計ドキュメントへの追記は不要。
 
+### ui_design.md への反映が必要な変更点（IT-9 タスク 3.4 で対応）
+
+整合性検証スキル（[validating-iteration-plan](../../.claude/skills/validating-iteration-plan)）で検出された ui_design.md の更新項目：
+
+- **OGP / SNS シェア指針テーブル**: IT-7 で追加された Books（S06）の OGP 構成（例: 「Books」+ カテゴリ別冊数 / `og:title = "Books | 氏名"`）を追記。Books は IT-7 でナビと画面一覧には反映済みだが、OGP 表は未更新だった
+
+→ 本不整合は計画書段階で発見されたため、IT-9 リリース時の `release_report-1_0_0.md` 作成時か、`docs/development/` ドキュメント整合フェーズ（タスク 3.4）でまとめて反映する。
+
 ---
 
 ## リスクと対策
@@ -278,6 +286,7 @@ docs/operation/
 | Lighthouse Performance ≥ 0.90 達成困難（OGP 画像追加で LCP 悪化リスク） | 中 | OGP 画像は **キャッシュ可能 + 遅延読み込み** で配信、LCP に影響しないよう設計 |
 | NVDA / VoiceOver 手動検証で意外な不整合が見つかる | 低 | runbook の MA-1〜9 に沿って実施、見つかった不整合は v1.1 で対応 |
 | v1.0.0 リリース時の本番動作確認の漏れ | 中 | main マージ後、Heroku staging で全画面の目視確認 + Lighthouse 実測 |
+| design_review M07（XSS / Markdown サニタイズ）が IT-8 計画で「IT-9 で対応」と約束済みだが、OGP 実装方針（SVG / PNG 描画）では XSS リスクが低い | 低 | OGP 動的生成は **構造化された data から SVG/PNG を生成する** 形のため、ユーザー入力を直接埋め込まず、`set:html` も使わない。タスク 2.1 で実装する OGP エンドポイントは XSS リスクなしで設計し、M07 の対応を **「OGP の実装方針として XSS リスクを設計上排除」** という形で完了とする（フィクスチャ E2E は v1.1 以降で必要なら追加）|
 
 ---
 
