@@ -61,10 +61,7 @@
   const updateButton = (isDark: boolean): void => {
     if (!toggle) return;
     toggle.setAttribute("aria-pressed", String(isDark));
-    toggle.setAttribute(
-      "aria-label",
-      isDark ? "ライトモードに切り替え" : "ダークモードに切り替え"
-    );
+    toggle.setAttribute("aria-label", isDark ? "ライトモードに切り替え" : "ダークモードに切り替え");
   };
 
   updateButton(html.classList.contains("dark"));

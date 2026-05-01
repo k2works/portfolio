@@ -53,7 +53,9 @@ const slugFromName = (name: string): string =>
 
     <section class="mt-6" aria-labelledby="legend-heading">
       <h2 id="legend-heading" class="text-base font-semibold">凡例</h2>
-      <ul class="mt-2 grid gap-1 text-sm text-[color:var(--color-muted)] sm:grid-cols-2 lg:grid-cols-5">
+      <ul
+        class="mt-2 grid gap-1 text-sm text-[color:var(--color-muted)] sm:grid-cols-2 lg:grid-cols-5"
+      >
         {
           [5, 4, 3, 2, 1].map((lv) => (
             <li>
@@ -72,7 +74,10 @@ const slugFromName = (name: string): string =>
 
         if (category === "Practice") {
           return (
-            <section class="mt-10 scroll-mt-24" aria-labelledby={`category-${category.toLowerCase()}`}>
+            <section
+              class="mt-10 scroll-mt-24"
+              aria-labelledby={`category-${category.toLowerCase()}`}
+            >
               <h2 id={`category-${category.toLowerCase()}`} class="text-xl font-bold">
                 {category}
               </h2>
@@ -100,7 +105,10 @@ const slugFromName = (name: string): string =>
         }
 
         return (
-          <section class="mt-10 scroll-mt-24" aria-labelledby={`category-${category.toLowerCase()}`}>
+          <section
+            class="mt-10 scroll-mt-24"
+            aria-labelledby={`category-${category.toLowerCase()}`}
+          >
             <h2 id={`category-${category.toLowerCase()}`} class="text-xl font-bold">
               {category}
             </h2>
@@ -129,9 +137,14 @@ const slugFromName = (name: string): string =>
                         </span>
                       )}
                     </div>
-                    <dl class="mt-2 grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-sm" aria-label={`${s.data.name} のメタ情報`}>
+                    <dl
+                      class="mt-2 grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-sm"
+                      aria-label={`${s.data.name} のメタ情報`}
+                    >
                       <dt class="text-[color:var(--color-muted)]">経験</dt>
-                      <dd class="m-0">{years} 年（since {s.data.since}）</dd>
+                      <dd class="m-0">
+                        {years} 年（since {s.data.since}）
+                      </dd>
                       <dt class="text-[color:var(--color-muted)]">状態</dt>
                       <dd class="m-0">
                         <span

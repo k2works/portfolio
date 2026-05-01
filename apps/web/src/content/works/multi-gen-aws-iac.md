@@ -37,16 +37,16 @@ featured: false
 
 ## 成果
 
-| 指標 | 1G（移行前） | 2G（移行後） |
-|---|---|---|
-| Terraform 構造 | 単一ディレクトリ + 雛形的 module | live/{global, mgmt, prod, stage} + 6 系統 modules |
-| Compute 選択肢 | EC2 + Elastic Beanstalk + 旧 OpsWorks | EC2 + Elastic Beanstalk + App Runner |
-| AMI 管理 | Chef cookbook（手元ビルド） | Packer + Ansible（再現可能 AMI） |
-| シークレット管理 | 環境変数直書き | SSM Parameter Store（暗号化） |
-| 拠点間接続 | 単一 VPN connection | 複数拠点間 Site-to-Site VPN |
-| Container | なし | ECR + multicontainer Docker（EB）|
-| リソース可視化 | なし | Resource Group `ApplicationGroup` |
-| 開発者ローカル環境 | 手作業（Vagrant / Chef） | Packer + Ansible で AMI 共有 |
+| 指標               | 1G（移行前）                          | 2G（移行後）                                      |
+| ------------------ | ------------------------------------- | ------------------------------------------------- |
+| Terraform 構造     | 単一ディレクトリ + 雛形的 module      | live/{global, mgmt, prod, stage} + 6 系統 modules |
+| Compute 選択肢     | EC2 + Elastic Beanstalk + 旧 OpsWorks | EC2 + Elastic Beanstalk + App Runner              |
+| AMI 管理           | Chef cookbook（手元ビルド）           | Packer + Ansible（再現可能 AMI）                  |
+| シークレット管理   | 環境変数直書き                        | SSM Parameter Store（暗号化）                     |
+| 拠点間接続         | 単一 VPN connection                   | 複数拠点間 Site-to-Site VPN                       |
+| Container          | なし                                  | ECR + multicontainer Docker（EB）                 |
+| リソース可視化     | なし                                  | Resource Group `ApplicationGroup`                 |
+| 開発者ローカル環境 | 手作業（Vagrant / Chef）              | Packer + Ansible で AMI 共有                      |
 
 主要数値の要約：
 

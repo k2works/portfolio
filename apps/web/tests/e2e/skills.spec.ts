@@ -32,9 +32,7 @@ test.describe("/skills/ - Skills 一覧", () => {
 
   test("AC-04-4: 関連 Work へのリンク（Work 逆参照）が 1 つ以上表示", async ({ page }) => {
     await page.goto("/skills/");
-    const workLinks = page
-      .getByTestId("skill-card")
-      .locator("a[href^='/works/']");
+    const workLinks = page.getByTestId("skill-card").locator("a[href^='/works/']");
     const count = await workLinks.count();
     expect(count).toBeGreaterThan(0);
     const href = await workLinks.first().getAttribute("href");

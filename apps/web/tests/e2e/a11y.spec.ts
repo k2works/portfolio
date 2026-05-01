@@ -78,9 +78,7 @@ test.describe("アクセシビリティ（axe-core）", () => {
     expect(accessibilityScanResults.violations).toEqual([]);
   });
 
-  test("ダークモード適用時の Skills（/skills/）に WCAG 2.1 A / AA 違反がない", async ({
-    page,
-  }) => {
+  test("ダークモード適用時の Skills（/skills/）に WCAG 2.1 A / AA 違反がない", async ({ page }) => {
     await page.addInitScript(() => {
       window.localStorage.setItem("theme", "dark");
     });

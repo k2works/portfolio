@@ -1,9 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("ダークモード切替（US-07）", () => {
-  test("AC-07-1: 初回訪問時は prefers-color-scheme を尊重（dark の場合）", async ({
-    browser,
-  }) => {
+  test("AC-07-1: 初回訪問時は prefers-color-scheme を尊重（dark の場合）", async ({ browser }) => {
     const context = await browser.newContext({ colorScheme: "dark" });
     const page = await context.newPage();
     await page.goto("/");
@@ -11,9 +9,7 @@ test.describe("ダークモード切替（US-07）", () => {
     await context.close();
   });
 
-  test("AC-07-1: 初回訪問時は prefers-color-scheme を尊重（light の場合）", async ({
-    browser,
-  }) => {
+  test("AC-07-1: 初回訪問時は prefers-color-scheme を尊重（light の場合）", async ({ browser }) => {
     const context = await browser.newContext({ colorScheme: "light" });
     const page = await context.newPage();
     await page.goto("/");

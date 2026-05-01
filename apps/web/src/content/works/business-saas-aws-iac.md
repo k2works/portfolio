@@ -35,15 +35,15 @@ featured: false
 
 ## 成果
 
-| 指標 | Before | After |
-|---|---|---|
-| AWS インフラ構築 | 手作業（数日〜週） | Terraform で再現可能（数十分） |
-| 環境差分 | 手作業ばらつき | dev / stg / prd を共通 module で揃え |
-| 構成ドリフト検知 | なし | `terraform plan` で差分可視化 |
-| EC2 ベースイメージ | 都度手作業 | Chef cookbook で再現可能 |
-| 開発者ローカル環境 | 各人手作業 | Vagrant / WSL を Ansible で自動化 |
-| tfstate 管理 | ローカル散在 | S3（暗号化 + バックエンドロック） |
-| CI/CD | なし | Bitbucket Pipelines で apply ゲート |
+| 指標               | Before             | After                                |
+| ------------------ | ------------------ | ------------------------------------ |
+| AWS インフラ構築   | 手作業（数日〜週） | Terraform で再現可能（数十分）       |
+| 環境差分           | 手作業ばらつき     | dev / stg / prd を共通 module で揃え |
+| 構成ドリフト検知   | なし               | `terraform plan` で差分可視化        |
+| EC2 ベースイメージ | 都度手作業         | Chef cookbook で再現可能             |
+| 開発者ローカル環境 | 各人手作業         | Vagrant / WSL を Ansible で自動化    |
+| tfstate 管理       | ローカル散在       | S3（暗号化 + バックエンドロック）    |
+| CI/CD              | なし               | Bitbucket Pipelines で apply ゲート  |
 
 主要数値の要約：
 

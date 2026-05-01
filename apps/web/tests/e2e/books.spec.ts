@@ -4,9 +4,7 @@ test.describe("/books/ - Books 一覧", () => {
   test("ページが表示され、77 冊の総件数と 3 軸の集計が見える", async ({ page }) => {
     await page.goto("/books/");
     await expect(page.getByRole("heading", { level: 1, name: "Books" })).toBeVisible();
-    await expect(
-      page.getByRole("heading", { level: 2, name: /軸別の内訳/ })
-    ).toBeVisible();
+    await expect(page.getByRole("heading", { level: 2, name: /軸別の内訳/ })).toBeVisible();
     await expect(page.getByText(/書籍 77 冊/)).toBeVisible();
   });
 
@@ -46,9 +44,7 @@ test.describe("/books/ - Books 一覧", () => {
     await expect(rows).toHaveCount(77);
   });
 
-  test("初期表示では軸 All とカテゴリ All が aria-pressed=true、件数は 77/77", async ({
-    page,
-  }) => {
+  test("初期表示では軸 All とカテゴリ All が aria-pressed=true、件数は 77/77", async ({ page }) => {
     await page.goto("/books/");
     await expect(
       page.getByTestId("axis-filter").locator('[data-filter-axis="all"]')
@@ -63,10 +59,7 @@ test.describe("/books/ - Books 一覧", () => {
     page,
   }) => {
     await page.goto("/books/");
-    await page
-      .getByTestId("axis-filter")
-      .getByRole("button", { name: "ビジネス" })
-      .click();
+    await page.getByTestId("axis-filter").getByRole("button", { name: "ビジネス" }).click();
     await expect(page).toHaveURL(/\?axis=business$/);
     await expect(page.locator("#books-count")).toContainText("77 冊中 16 冊を表示");
     await expect(
@@ -78,10 +71,7 @@ test.describe("/books/ - Books 一覧", () => {
     page,
   }) => {
     await page.goto("/books/");
-    await page
-      .getByTestId("category-filter")
-      .getByRole("button", { name: "設計" })
-      .click();
+    await page.getByTestId("category-filter").getByRole("button", { name: "設計" }).click();
     await expect(page).toHaveURL(/\?category=design$/);
     // 設計セクションは表示、他カテゴリのセクションは非表示
     await expect(page.locator("#category-design")).toBeVisible();

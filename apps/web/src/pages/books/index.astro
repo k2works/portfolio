@@ -56,7 +56,9 @@ const FILTER_BTN =
   <section>
     <h1 class="text-2xl font-bold sm:text-3xl">Books</h1>
     <p class="mt-2 text-[color:var(--color-muted)]">
-      これまでに読んできた書籍 {totalCount} 冊。<strong>3 軸</strong>（ビジネス / チーム / 技術）と <strong>6 カテゴリ</strong>（哲学 / 分析 / 要件 / 設計 / 実装 / 運用）で知識構造を可視化します。
+      これまでに読んできた書籍 {totalCount} 冊。<strong>3 軸</strong>（ビジネス / チーム / 技術）と <strong
+        >6 カテゴリ</strong
+      >（哲学 / 分析 / 要件 / 設計 / 実装 / 運用）で知識構造を可視化します。
     </p>
 
     <section class="mt-8" aria-labelledby="axis-summary-heading">
@@ -85,7 +87,9 @@ const FILTER_BTN =
               <a href={`#category-${category}`} class="font-semibold no-underline hover:underline">
                 {CATEGORY_LABEL[category]}
               </a>
-              <span class="text-sm text-[color:var(--color-muted)]">{categoryCounts[category]} 冊</span>
+              <span class="text-sm text-[color:var(--color-muted)]">
+                {categoryCounts[category]} 冊
+              </span>
             </li>
           ))
         }
@@ -201,7 +205,10 @@ const FILTER_BTN =
                 {list.length} 冊
               </span>
             </h2>
-            <ul class="mt-3 grid gap-2" aria-label={`${CATEGORY_LABEL[category]} カテゴリの書籍一覧`}>
+            <ul
+              class="mt-3 grid gap-2"
+              aria-label={`${CATEGORY_LABEL[category]} カテゴリの書籍一覧`}
+            >
               {list.map((b: Book) => (
                 <li
                   class="rounded border border-[color:var(--color-border)] p-3"
@@ -320,10 +327,7 @@ const FILTER_BTN =
     const emptyEl = document.getElementById("books-empty");
     const total = Number(countEl?.dataset.total ?? "0");
 
-    const matches = (
-      itemAxis: string | undefined,
-      itemCategory: string | undefined
-    ): boolean => {
+    const matches = (itemAxis: string | undefined, itemCategory: string | undefined): boolean => {
       if (activeAxis !== null && itemAxis !== activeAxis) return false;
       if (activeCategory !== null && itemCategory !== activeCategory) return false;
       return true;
@@ -359,23 +363,17 @@ const FILTER_BTN =
       section.style.display = "";
     });
 
-    document
-      .querySelectorAll<HTMLAnchorElement>("[data-filter-axis]")
-      .forEach((btn) => {
-        const value = btn.dataset.filterAxis;
-        const isActive =
-          (activeAxis === null && value === "all") || activeAxis === value;
-        btn.setAttribute("aria-pressed", String(isActive));
-      });
+    document.querySelectorAll<HTMLAnchorElement>("[data-filter-axis]").forEach((btn) => {
+      const value = btn.dataset.filterAxis;
+      const isActive = (activeAxis === null && value === "all") || activeAxis === value;
+      btn.setAttribute("aria-pressed", String(isActive));
+    });
 
-    document
-      .querySelectorAll<HTMLAnchorElement>("[data-filter-category]")
-      .forEach((btn) => {
-        const value = btn.dataset.filterCategory;
-        const isActive =
-          (activeCategory === null && value === "all") || activeCategory === value;
-        btn.setAttribute("aria-pressed", String(isActive));
-      });
+    document.querySelectorAll<HTMLAnchorElement>("[data-filter-category]").forEach((btn) => {
+      const value = btn.dataset.filterCategory;
+      const isActive = (activeCategory === null && value === "all") || activeCategory === value;
+      btn.setAttribute("aria-pressed", String(isActive));
+    });
 
     if (countEl) {
       countEl.textContent = `${total} 冊中 ${visibleCount} 冊を表示`;
