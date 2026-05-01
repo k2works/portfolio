@@ -28,10 +28,10 @@
 
   <!-- キャッチコピー -->
   <text x="80" y="360" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="36" fill="#f5f5f5" font-weight="600">
-    内製開発で 10 年以上よいソフトウェアを探求し続けている
+    内製開発 10 数年、よいソフトウェアを探求せし
   </text>
   <text x="80" y="410" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="36" fill="#f5f5f5" font-weight="600">
-    絶滅危惧種 XPer
+    達人プログラマーになりたかった絶滅危惧種 XP おじさん
   </text>
 
   <!-- 得意領域タグ -->
