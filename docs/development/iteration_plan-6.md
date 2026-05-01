@@ -253,6 +253,13 @@ apps/web/tests/e2e/
 
 > ダークモード切替方式（class-based vs CSS variables）は ADR 化の余地あり。実装後に必要なら IT-6 後半で起票する。
 
+### ui_design.md への反映が必要な変更点
+
+IT-6 完了時に [ui_design.md](../design/ui_design.md) 側へ以下の更新を反映する：
+
+- **画面遷移図への追加遷移**: `S04_Skills --> S03_WorkDetail`（関連 Work リンク）と `S03_WorkDetail --> S04_Skills`（Skills タブ）。現状の画面遷移図では `S04_Skills` から `S03_WorkDetail` への遷移が未定義（[整合性検証スキル](../../.claude/skills/validating-iteration-plan)で検出）
+- **S04 salt 図への補足**: Practice カテゴリの表示は他カテゴリ（表形式）と異なる横並びリスト形式（TDD | DDD | XP | CI/CD | アジャイル）であることを実装方針として明記
+
 ---
 
 ## リスクと対策
@@ -263,6 +270,7 @@ apps/web/tests/e2e/
 | View Transitions API のブラウザサポート差（Chrome 111+ / Safari 18+ / Firefox 未対応） | 低 | feature detection で対応ブラウザのみ適用、非対応は即時切替に fallback |
 | Skills サンプルデータ作成の時間（IT-5 の Works コンテンツ作成と同じパターン） | 中 | 12〜15 件中、Backend / Frontend / Infrastructure / Practice 各 3〜4 件で網羅性を確保し、内容は ui_design S04 のサンプルを下敷きに作る |
 | ハッシュ URL スクロールがモバイル sticky ヘッダーで隠れる | 低 | `scroll-margin-top` を CSS で指定して、ヘッダー分のオフセットを確保 |
+| ThemeToggle のタッチターゲットがモバイルで小さすぎる（[L08](../review/design_review_20260430.md) WCAG 2.5.5 / Apple HIG） | 低 | 44×44 px 以上の hit area を確保。アイコンを `inline-flex h-12 w-12 items-center justify-center` 等で囲み、隣接要素との間隔は 8 px 以上 |
 
 ---
 
@@ -275,6 +283,7 @@ apps/web/tests/e2e/
 - [ ] `npm run build` 成功（`/skills/` + 既存ページが生成、dist 内に `.html` ファイル群）
 - [ ] Playwright E2E 全シナリオ緑（既存 39 + skills 5 + theme 5 = 約 49）
 - [ ] axe-core で `/skills/` + ダークモード適用時の WCAG 2.1 A/AA violations が 0
+- [ ] ThemeToggle のタッチターゲットが 44×44 px 以上（WCAG 2.5.5 / [L08](../review/design_review_20260430.md) 反映）
 - [ ] Lighthouse v0.3 予算（Performance ≥ 85 / SEO ≥ 95 / A11y ≥ 92 / BP ≥ 92）達成
 - [ ] ふりかえり（retrospective-6.md）作成
 - [ ] 完了報告書（iteration_report-6.md）作成
