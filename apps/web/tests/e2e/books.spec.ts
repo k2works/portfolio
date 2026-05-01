@@ -45,4 +45,55 @@ test.describe("/books/ - Books 一覧", () => {
     const rows = page.getByTestId("books-table").locator("tbody tr");
     await expect(rows).toHaveCount(77);
   });
+
+  test("初期表示では軸 All とカテゴリ All が aria-pressed=true、件数は 77/77", async ({
+    page,
+  }) => {
+    await page.goto("/books/");
+    await expect(
+      page.getByTestId("axis-filter").locator('[data-filter-axis="all"]')
+    ).toHaveAttribute("aria-pressed", "true");
+    await expect(
+      page.getByTestId("category-filter").locator('[data-filter-category="all"]')
+    ).toHaveAttribute("aria-pressed", "true");
+    await expect(page.locator("#books-count")).toContainText("77 冊中 77 冊を表示");
+  });
+
+  test("軸を「ビジネス」でフィルタすると URL に ?axis=business、件数 16/77、ボタン状態更新", async ({
+    page,
+  }) => {
+    await page.goto("/books/");
+    await page
+      .getByTestId("axis-filter")
+      .getByRole("button", { name: "ビジネス" })
+      .click();
+    await expect(page).toHaveURL(/\?axis=business$/);
+    await expect(page.locator("#books-count")).toContainText("77 冊中 16 冊を表示");
+    await expect(
+      page.getByTestId("axis-filter").locator('[data-filter-axis="business"]')
+    ).toHaveAttribute("aria-pressed", "true");
+  });
+
+  test("カテゴリを「設計」でフィルタすると URL に ?category=design、該当セクションのみ表示", async ({
+    page,
+  }) => {
+    await page.goto("/books/");
+    await page
+      .getByTestId("category-filter")
+      .getByRole("button", { name: "設計" })
+      .click();
+    await expect(page).toHaveURL(/\?category=design$/);
+    // 設計セクションは表示、他カテゴリのセクションは非表示
+    await expect(page.locator("#category-design")).toBeVisible();
+    await expect(page.locator("#category-philosophy")).toBeHidden();
+    await expect(page.locator("#category-implementation")).toBeHidden();
+  });
+
+  test("AC-Books-F4: 不明な axis 値は無効化されて URL が正規化され、All 状態で全件表示される", async ({
+    page,
+  }) => {
+    await page.goto("/books/?axis=invalid");
+    await expect(page).toHaveURL("/books/");
+    await expect(page.locator("#books-count")).toContainText("77 冊中 77 冊を表示");
+  });
 });

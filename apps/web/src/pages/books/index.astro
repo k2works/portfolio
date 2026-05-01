@@ -44,6 +44,9 @@ booksByCategory.forEach((list) => {
 });
 
 const sortedAll = [...BOOKS].sort((a: Book, b: Book) => a.no - b.no);
+
+const FILTER_BTN =
+  "inline-flex items-center rounded border border-[color:var(--color-border)] px-3 py-1 text-sm no-underline transition hover:border-[color:var(--color-accent)] aria-[pressed=true]:border-[color:var(--color-accent)] aria-[pressed=true]:bg-[color:var(--color-accent)] aria-[pressed=true]:text-white";
 ---
 
 <BaseLayout
@@ -103,6 +106,83 @@ const sortedAll = [...BOOKS].sort((a: Book, b: Book) => a.no - b.no);
       </ul>
     </section>
 
+    <section class="mt-10" aria-labelledby="filter-heading">
+      <h2 id="filter-heading" class="text-xl font-bold">フィルタ</h2>
+
+      <div class="mt-3" data-testid="axis-filter">
+        <p class="text-sm font-semibold">軸</p>
+        <nav class="mt-2 flex flex-wrap gap-2" aria-label="軸でフィルタ">
+          <a
+            href="/books/"
+            role="button"
+            data-filter-axis="all"
+            aria-pressed="true"
+            class={FILTER_BTN}
+          >
+            All
+          </a>
+          {
+            AXIS_ORDER.map((axis) => (
+              <a
+                href={`/books/?axis=${axis}`}
+                role="button"
+                data-filter-axis={axis}
+                aria-pressed="false"
+                class={FILTER_BTN}
+              >
+                {AXIS_LABEL[axis]}
+              </a>
+            ))
+          }
+        </nav>
+      </div>
+
+      <div class="mt-4" data-testid="category-filter">
+        <p class="text-sm font-semibold">カテゴリ</p>
+        <nav class="mt-2 flex flex-wrap gap-2" aria-label="カテゴリでフィルタ">
+          <a
+            href="/books/"
+            role="button"
+            data-filter-category="all"
+            aria-pressed="true"
+            class={FILTER_BTN}
+          >
+            All
+          </a>
+          {
+            CATEGORY_ORDER.map((category) => (
+              <a
+                href={`/books/?category=${category}`}
+                role="button"
+                data-filter-category={category}
+                aria-pressed="false"
+                class={FILTER_BTN}
+              >
+                {CATEGORY_LABEL[category]}
+              </a>
+            ))
+          }
+        </nav>
+      </div>
+
+      <p
+        id="books-count"
+        class="mt-4 text-sm text-[color:var(--color-muted)]"
+        data-total={totalCount}
+      >
+        {totalCount} 冊中 {totalCount} 冊を表示
+      </p>
+
+      <p
+        id="books-empty"
+        class="mt-4 hidden rounded border border-dashed border-[color:var(--color-border)] p-6 text-center"
+        role="status"
+      >
+        該当する書籍がありません。
+        <a href="/books/" class="ml-2 text-[color:var(--color-accent)] underline">フィルタを解除</a>
+      </p>
+    </section>
+
     {
       CATEGORY_ORDER.map((category) => {
         const list = booksByCategory.get(category) ?? [];
@@ -112,6 +192,8 @@ const sortedAll = [...BOOKS].sort((a: Book, b: Book) => a.no - b.no);
             id={`category-${category}`}
             class="mt-12 scroll-mt-24"
             aria-labelledby={`heading-${category}`}
+            data-testid="category-section"
+            data-category={category}
           >
             <h2 id={`heading-${category}`} class="text-xl font-bold">
               {CATEGORY_LABEL[category]}
@@ -168,7 +250,12 @@ const sortedAll = [...BOOKS].sort((a: Book, b: Book) => a.no - b.no);
           <tbody>
             {
               sortedAll.map((b: Book) => (
-                <tr class="border-b border-[color:var(--color-border)]">
+                <tr
+                  class="border-b border-[color:var(--color-border)]"
+                  data-testid="book-row"
+                  data-axis={b.axis}
+                  data-category={b.category}
+                >
                   <td class="px-2 py-2">{b.no}</td>
                   <td class="px-2 py-2">{b.title}</td>
                   <td class="px-2 py-2 text-[color:var(--color-muted)]">{b.authors}</td>
@@ -182,4 +269,119 @@ const sortedAll = [...BOOKS].sort((a: Book, b: Book) => a.no - b.no);
       </div>
     </section>
   </section>
+
+  <script>
+    const ALL_AXES = ["business", "team", "tech"] as const;
+    const ALL_CATEGORIES = [
+      "philosophy",
+      "analysis",
+      "requirements",
+      "design",
+      "implementation",
+      "operation",
+    ] as const;
+
+    type AxisValue = (typeof ALL_AXES)[number] | null;
+    type CategoryValue = (typeof ALL_CATEGORIES)[number] | null;
+
+    const params = new URLSearchParams(window.location.search);
+    const requestedAxis = params.get("axis");
+    const requestedCategory = params.get("category");
+
+    const isValidAxis = (v: string | null): v is (typeof ALL_AXES)[number] =>
+      typeof v === "string" && (ALL_AXES as readonly string[]).includes(v);
+    const isValidCategory = (v: string | null): v is (typeof ALL_CATEGORIES)[number] =>
+      typeof v === "string" && (ALL_CATEGORIES as readonly string[]).includes(v);
+
+    const activeAxis: AxisValue = isValidAxis(requestedAxis) ? requestedAxis : null;
+    const activeCategory: CategoryValue = isValidCategory(requestedCategory)
+      ? requestedCategory
+      : null;
+
+    // 不明値が渡された場合は URL を正規化する
+    const url = new URL(window.location.href);
+    let normalized = false;
+    if (requestedAxis !== null && !isValidAxis(requestedAxis)) {
+      url.searchParams.delete("axis");
+      normalized = true;
+    }
+    if (requestedCategory !== null && !isValidCategory(requestedCategory)) {
+      url.searchParams.delete("category");
+      normalized = true;
+    }
+    if (normalized) {
+      window.history.replaceState({}, "", url.toString());
+    }
+
+    const cards = document.querySelectorAll<HTMLLIElement>('[data-testid="book-card"]');
+    const rows = document.querySelectorAll<HTMLTableRowElement>('[data-testid="book-row"]');
+    const sections = document.querySelectorAll<HTMLElement>('[data-testid="category-section"]');
+    const countEl = document.getElementById("books-count");
+    const emptyEl = document.getElementById("books-empty");
+    const total = Number(countEl?.dataset.total ?? "0");
+
+    const matches = (
+      itemAxis: string | undefined,
+      itemCategory: string | undefined
+    ): boolean => {
+      if (activeAxis !== null && itemAxis !== activeAxis) return false;
+      if (activeCategory !== null && itemCategory !== activeCategory) return false;
+      return true;
+    };
+
+    let visibleCount = 0;
+    cards.forEach((card) => {
+      const visible = matches(card.dataset.axis, card.dataset.category);
+      card.style.display = visible ? "" : "none";
+      if (visible) visibleCount++;
+    });
+
+    rows.forEach((row) => {
+      const visible = matches(row.dataset.axis, row.dataset.category);
+      row.style.display = visible ? "" : "none";
+    });
+
+    sections.forEach((section) => {
+      const sectionCategory = section.dataset.category;
+      // 軸フィルタが立っているとき、そのカテゴリ内に該当 axis のカードが
+      // ひとつもなければセクション全体を非表示にする
+      if (activeCategory !== null && sectionCategory !== activeCategory) {
+        section.style.display = "none";
+        return;
+      }
+      if (activeAxis !== null) {
+        const visibleInSection = section.querySelectorAll<HTMLLIElement>(
+          `[data-testid="book-card"][data-axis="${activeAxis}"]`
+        );
+        section.style.display = visibleInSection.length > 0 ? "" : "none";
+        return;
+      }
+      section.style.display = "";
+    });
+
+    document
+      .querySelectorAll<HTMLAnchorElement>("[data-filter-axis]")
+      .forEach((btn) => {
+        const value = btn.dataset.filterAxis;
+        const isActive =
+          (activeAxis === null && value === "all") || activeAxis === value;
+        btn.setAttribute("aria-pressed", String(isActive));
+      });
+
+    document
+      .querySelectorAll<HTMLAnchorElement>("[data-filter-category]")
+      .forEach((btn) => {
+        const value = btn.dataset.filterCategory;
+        const isActive =
+          (activeCategory === null && value === "all") || activeCategory === value;
+        btn.setAttribute("aria-pressed", String(isActive));
+      });
+
+    if (countEl) {
+      countEl.textContent = `${total} 冊中 ${visibleCount} 冊を表示`;
+    }
+    if (emptyEl) {
+      emptyEl.classList.toggle("hidden", visibleCount > 0);
+    }
+  </script>
 </BaseLayout>
