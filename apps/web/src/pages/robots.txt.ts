@@ -13,7 +13,7 @@ export const prerender = true;
 export const GET: APIRoute = ({ site }) => {
   const disallow = import.meta.env["PUBLIC_ROBOTS_DISALLOW"] === "true";
 
-  const fallbackOrigin = "https://portfolio.example.com";
+  const fallbackOrigin = import.meta.env["PUBLIC_SITE_ORIGIN"] ?? "https://portfolio.example.com";
   const sitemapURL = site
     ? new URL("sitemap-index.xml", site).toString()
     : `${fallbackOrigin}/sitemap-index.xml`;

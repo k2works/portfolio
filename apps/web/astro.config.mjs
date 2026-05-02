@@ -5,7 +5,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://portfolio.example.com",
+  site: process.env.PUBLIC_SITE_ORIGIN ?? "https://portfolio.example.com",
   trailingSlash: "always",
   build: {
     format: "directory",
