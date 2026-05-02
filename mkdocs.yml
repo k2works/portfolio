@@ -119,6 +119,7 @@ nav:
       - アプリケーション開発環境セットアップ手順書: operation/local_setup.md
       - Heroku staging 環境セットアップ手順書: operation/heroku_staging_setup.md
       - Heroku production 環境セットアップ手順書: operation/heroku_production_setup.md
+      - デプロイ手順: operation/deploy.md
       - アクセシビリティ手動検証手順: operation/a11y_manual_check.md
   - レビュー:
       - 概要: review/index.md
