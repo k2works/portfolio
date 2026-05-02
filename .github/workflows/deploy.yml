@@ -25,7 +25,7 @@ jobs:
     # main / develop への push、または workflow_dispatch（target=staging）で起動
     if: github.event_name == 'push' || github.event.inputs.target == 'staging'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0 # Heroku への git push に全履歴が必要
       - name: Setup Node.js
@@ -68,7 +68,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.inputs.target == 'production-promote'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Install Heroku CLI
         run: curl https://cli-assets.heroku.com/install.sh | sh
       - name: Promote staging to production
@@ -83,7 +83,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.inputs.target == 'production-deploy'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Setup Node.js

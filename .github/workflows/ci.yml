@@ -18,7 +18,7 @@ jobs:
     name: Lint + Test (Vitest)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -42,7 +42,7 @@ jobs:
     # で main push 時に GitHub Pages へ別経路でデプロイされるため、ここでは
     # Astro 本体のビルドのみを検証する（PlantUML 経由の遅延と外部依存を排除）。
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -65,7 +65,7 @@ jobs:
     needs: build
     if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: actions/download-artifact@v4
         with:
           name: web-dist
@@ -102,7 +102,7 @@ jobs:
     needs: build
     if: github.ref == 'refs/heads/main'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: actions/download-artifact@v4
         with:
           name: web-dist
@@ -121,7 +121,7 @@ jobs:
     name: Security (gitleaks + npm audit)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Run gitleaks
