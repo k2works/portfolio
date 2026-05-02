@@ -13,6 +13,7 @@ on:
         options:
           - staging
           - production-promote
+          - production-deploy
 
 permissions:
   contents: read
@@ -65,10 +66,7 @@ jobs:
   promote-to-production:
     name: Promote staging to production
     runs-on: ubuntu-latest
-    # secrets が設定されるまではスキップ。
-    # v0.1 リリース時に下記の if を以下に置き換え:
-    #   if: github.event.inputs.target == 'production-promote'
-    if: false
+    if: github.event.inputs.target == 'production-promote'
     steps:
       - uses: actions/checkout@v4
       - name: Install Heroku CLI
@@ -79,3 +77,42 @@ jobs:
         run: |
           heroku pipelines:promote -a ${{ secrets.HEROKU_APP_STAGING }} \
             --to ${{ secrets.HEROKU_APP_PRODUCTION }}
+
+  deploy-production:
+    name: Deploy to Heroku production
+    runs-on: ubuntu-latest
+    if: github.event.inputs.target == 'production-deploy'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Build Astro for production
+        run: npm run --workspace @portfolio/web build
+      - name: Install Heroku CLI
+        run: curl https://cli-assets.heroku.com/install.sh | sh
+      - name: Deploy to Heroku production via git push
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+          HEROKU_APP: ${{ secrets.HEROKU_APP_PRODUCTION }}
+          HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
+        run: |
+          git config --global user.email "$HEROKU_EMAIL"
+          git config --global user.name "GitHub Actions"
+          cat > "$HOME/.netrc" <<EOF
+          machine git.heroku.com
+            login $HEROKU_EMAIL
+            password $HEROKU_API_KEY
+          machine api.heroku.com
+            login $HEROKU_EMAIL
+            password $HEROKU_API_KEY
+          EOF
+          chmod 600 "$HOME/.netrc"
+          heroku git:remote -a "$HEROKU_APP"
+          git push heroku HEAD:main --force

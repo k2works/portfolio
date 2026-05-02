@@ -107,6 +107,7 @@ GitHub Secrets：
 |---|---|---|
 | `HEROKU_API_KEY` | `HRKU-...`（長期 Token） | Heroku CLI / git push 認証 |
 | `HEROKU_APP_STAGING` | `k2works-portfolio-stg` | デプロイ先アプリ名 |
+| `HEROKU_APP_PRODUCTION` | `k2works-portfolio-prd` | production デプロイ先アプリ名 |
 | `HEROKU_EMAIL` | `kakimomokuri@gmail.com` | netrc の login フィールド |
 
 ## 影響
