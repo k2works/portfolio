@@ -56,7 +56,7 @@
   },
   "devDependencies": {
     "husky": "^9.1.7",
-    "lint-staged": "^16.4.0"
+    "lint-staged": "^17.0.4"
   },
   "lint-staged": {
     "apps/web/**/*.{astro,ts,tsx,js,jsx,mjs,cjs}": [
